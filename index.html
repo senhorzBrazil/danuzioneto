@@ -20,38 +20,28 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        // PALETA NOIR (Carvão e Zinco)
                         charcoal: {
                             800: '#27272a', 
                             900: '#18181b', 
                             950: '#09090b', 
                         },
-                        // PALETA PLATINA (Substitui Dourado)
                         platinum: {
                             300: '#d1d5db',
                             400: '#9ca3af',
                             500: '#6b7280', 
                             600: '#4b5563',
                         },
-                        // ALERTA
                         alert: {
                             500: '#ef4444',
                             600: '#dc2626',
                             900: '#7f1d1d',
                         },
-                        // CORES ESPECÍFICAS DO TELEGRAM
                         tg: {
                             bg: '#0e1621',
-                            header: '#17212b',
-                            bubble: '#182533',
-                            blue: '#2b5278',
-                            text: '#e4ecf2',
-                            meta: '#6c7883'
                         }
                     },
                     boxShadow: {
                         'platinum-glow': '0 0 40px -10px rgba(209, 213, 219, 0.2)',
-                        'red-glow': '0 0 40px -10px rgba(239, 68, 68, 0.4)',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -336,7 +326,7 @@
                         </div>
                         <h3 class="text-3xl font-serif font-bold mb-4 text-white">Temas <br/> <span class="text-alert-500 italic">Proibidos</span></h3>
                         <p class="text-slate-400 text-base leading-relaxed mb-6">
-                            Assuntos que derrubariam minha conta no Instagram instantaneamente. Aqui não existe "politicamente correto", apenas a realidade crua dos bastidores do poder.
+                            Assuntos que derrubariam minha conta no Instagram instantaneamente. Aqui não existe "politicamente correto", apenas a realidade crua.
                         </p>
                     </div>
 
@@ -367,7 +357,7 @@
                                 <i data-lucide="globe" class="w-5 h-5"></i>
                             </div>
                         </div>
-                        <h3 class="text-lg font-bold mb-2 font-serif text-charcoal-900">Geopolítica</h3>
+                        <h3 class="text-lg font-bold mb-2 font-serif text-charcoal-900">Política e Geopolítica</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
                             Entenda os movimentos globais (China, EUA, Rússia) antes que afetem seu bolso.
                         </p>
@@ -603,34 +593,41 @@
                         
                         <div id="priceContent" class="price-hidden flex flex-col gap-6">
                             
-                            <div class="border-2 border-platinum-300 p-6 relative bg-charcoal-900/50">
-                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-platinum-300 text-charcoal-950 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
-                                    Plano Anual
+                            <div class="border border-slate-700 p-6 opacity-90 hover:opacity-100 transition-opacity bg-charcoal-900/30">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="text-white text-base font-bold uppercase tracking-wider">Danuzio Neto Sem Censura</h4>
+                                    <span class="bg-slate-700 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Básico</span>
                                 </div>
-                                <h4 class="text-platinum-300 text-sm font-bold uppercase tracking-widest mb-2 text-center">Membro Fundador</h4>
-                                <div class="flex items-end justify-center gap-2 mb-2">
-                                    <span class="text-4xl font-black text-white">R$ 197</span>
-                                    <span class="text-slate-500 text-sm mb-1 line-through">/ano</span>
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="text-sm text-slate-400">12x de</span>
+                                    <span class="text-3xl font-black text-white">R$ 23,23</span>
                                 </div>
-                                <p class="text-xs text-center text-slate-400 mb-6">Menos de R$ 0,60 por dia pela verdade.</p>
-                                <button class="w-full bg-platinum-300 hover:bg-white text-charcoal-950 py-3 text-sm font-bold uppercase tracking-widest transition-all shadow-lg shadow-platinum-500/20">
-                                    Quero Acesso Total
-                                </button>
+                                <p class="text-xs text-slate-500 mb-5">ou R$ 229,00 à vista</p>
+                                <a href="https://lastlink.com/p/C7E442417/checkout-payment/" class="block w-full text-center bg-transparent border border-white/20 hover:bg-white/10 text-white py-3 text-sm font-bold uppercase tracking-widest transition-all">
+                                    Assinar Agora
+                                </a>
                             </div>
 
-                            <div class="border border-slate-700 p-6 opacity-80 hover:opacity-100 transition-opacity">
-                                <h4 class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-2 text-center">Plano Mensal</h4>
-                                <div class="flex items-end justify-center gap-2 mb-4">
-                                    <span class="text-3xl font-black text-white">R$ 29,90</span>
-                                    <span class="text-slate-500 text-sm mb-1">/mês</span>
+                            <div class="border-2 border-platinum-300 p-6 relative bg-charcoal-900/80 shadow-lg shadow-platinum-500/5">
+                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-platinum-300 text-charcoal-950 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
+                                    Mais Completo
                                 </div>
-                                <button class="w-full bg-transparent border border-white/20 hover:bg-white/10 text-white py-3 text-sm font-bold uppercase tracking-widest transition-all">
-                                    Assinar Mensal
-                                </button>
+                                <h4 class="text-platinum-300 text-sm font-bold uppercase tracking-widest mb-2 text-center">Combo Completo</h4>
+                                <p class="text-xs text-center text-slate-400 mb-4 px-4 leading-relaxed">
+                                    Sem Censura + Geopolítica p/ Investidores + Monitor de Guerra
+                                </p>
+                                <div class="flex items-baseline justify-center gap-2 mb-2">
+                                    <span class="text-sm text-slate-400">12x de</span>
+                                    <span class="text-4xl font-black text-white">R$ 46,47</span>
+                                </div>
+                                <p class="text-xs text-center text-slate-500 mb-6">ou R$ 458,00 à vista</p>
+                                <a href="https://lastlink.com/p/C9622481A/checkout-payment/" class="block w-full text-center bg-platinum-300 hover:bg-white text-charcoal-950 py-3 text-sm font-bold uppercase tracking-widest transition-all shadow-lg shadow-platinum-500/20">
+                                    Quero o Combo
+                                </a>
                             </div>
                             
                             <p class="text-center text-xs text-slate-500 flex items-center justify-center gap-2 mt-2">
-                                <i data-lucide="lock" class="w-3 h-3"></i> Pagamento Seguro e Discreto
+                                <i data-lucide="lock" class="w-3 h-3"></i> Pagamento Seguro via Lastlink
                             </p>
                         </div>
                     </div>
@@ -668,7 +665,7 @@
         lucide.createIcons();
         
         // State management
-        let priceRevealed = localStorage.getItem('semcensura_price_revealed_v3') === 'true';
+        let priceRevealed = localStorage.getItem('semcensura_price_revealed_v4') === 'true';
         
         if (priceRevealed) {
             revealPrice();
@@ -699,7 +696,7 @@
         
         function revealPrice() {
             priceRevealed = true;
-            localStorage.setItem('semcensura_price_revealed_v3', 'true');
+            localStorage.setItem('semcensura_price_revealed_v4', 'true');
             
             const overlay = document.getElementById('priceLockOverlay');
             const priceContent = document.getElementById('priceContent');
