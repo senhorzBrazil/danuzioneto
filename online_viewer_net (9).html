@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sem Censura | Prof. Danuzio Neto</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        // PALETA NOIR (Carvão e Zinco)
+                        charcoal: {
+                            800: '#27272a', 
+                            900: '#18181b', 
+                            950: '#09090b', 
+                        },
+                        // PALETA PLATINA (Substitui Dourado)
+                        platinum: {
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280', 
+                            600: '#4b5563',
+                        },
+                        // ALERTA
+                        alert: {
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            900: '#7f1d1d',
+                        },
+                        // CORES ESPECÍFICAS DO TELEGRAM (NOVO)
+                        tg: {
+                            bg: '#0e1621',
+                            header: '#17212b',
+                            bubble: '#182533',
+                            blue: '#2b5278',
+                            text: '#e4ecf2',
+                            meta: '#6c7883'
+                        }
+                    },
+                    boxShadow: {
+                        'platinum-glow': '0 0 40px -10px rgba(209, 213, 219, 0.2)',
+                        'red-glow': '0 0 40px -10px rgba(239, 68, 68, 0.4)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        
+        /* Modal animations */
+        .modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: scale(0.9) translateY(20px); transition: all 0.3s ease; }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        
+        /* Price reveal */
+        .price-hidden { filter: blur(12px); user-select: none; pointer-events: none; opacity: 0.6; }
+        .price-revealed { filter: blur(0); opacity: 1; transition: all 0.6s ease; }
+        
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(156, 163, 175, 0.3);
+            border-top-color: #d1d5db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Gradientes */
+        .text-gradient-platinum {
+            background: linear-gradient(to right, #ffffff, #d1d5db, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .noise-bg {
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+        }
+
+        /* BACKGROUND PADRÃO TELEGRAM */
+        .telegram-bg {
+            background-color: #0e1621;
+            background-image: radial-gradient(#1e2c3a 15%, transparent 16%), radial-gradient(#1e2c3a 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+    </style>
+</head>
+<body class="bg-charcoal-950 text-slate-200 font-sans selection:bg-alert-500 selection:text-white">
+
+    <div id="leadModal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal-950/95 backdrop-blur-md">
+        <div class="modal-content bg-charcoal-900 border border-platinum-500/30 w-full max-w-md relative shadow-2xl shadow-platinum-500/10">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div id="formStep" class="p-8">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-alert-900/30 text-alert-500 text-[10px] font-bold uppercase tracking-widest mb-4 border border-alert-500/30">
+                        <i data-lucide="siren" class="w-3 h-3"></i> Canal Privado
+                    </div>
+                    <h3 class="text-2xl font-serif font-black text-white mb-2">Acesso ao Telegram</h3>
+                    <p class="text-slate-400 text-sm">Entre no canal antes que o link seja revogado.</p>
+                </div>
+                
+                <form id="leadForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">Nome Completo</label>
+                        <input type="text" id="leadName" required 
+                            class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
+                            placeholder="Seu nome">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">Seu melhor E-mail</label>
+                        <input type="email" id="leadEmail" required 
+                            class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
+                            placeholder="seu@email.com">
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-platinum-500 to-platinum-300 hover:from-white hover:to-platinum-300 text-charcoal-950 py-4 text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-platinum-500/20">
+                        <span id="btnText">Gerar Link de Acesso</span>
+                        <div id="btnLoader" class="loader hidden"></div>
+                    </button>
+                </form>
+                
+                <p class="text-center text-[10px] text-slate-500 mt-4">
+                    Link único e intransferível.
+                </p>
+            </div>
+            
+            <div id="successStep" class="p-8 hidden">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-[#229ED9]/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-[#229ED9]/30">
+                        <i data-lucide="send" class="w-8 h-8 text-[#229ED9] ml-1"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-black text-white mb-2">Link Gerado!</h3>
+                    <p class="text-slate-400 text-sm mb-6">Confira abaixo os planos para confirmar sua entrada.</p>
+                    <button onclick="closeModalAndReveal()" class="w-full bg-[#229ED9] hover:bg-[#1e8kb9] text-white py-4 text-sm font-bold uppercase tracking-widest transition-all">
+                        Ver Planos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-charcoal-950/90 backdrop-blur-md border-b border-white/5 py-4 transition-all">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <div class="w-10 h-10 flex items-center justify-center border border-alert-600 text-alert-600 rounded-sm">
+                    <i data-lucide="eye-off" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <span class="font-black text-xl tracking-widest block leading-none text-white font-serif">SEM CENSURA</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] font-medium block leading-none mt-1 text-platinum-400">Prof. Danuzio Neto</span>
+                </div>
+            </div>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#proposta" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors">A Realidade</a>
+                <a href="#entregaveis" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Conteúdo</a>
+                <a href="#mentor" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors">O Professor</a>
+            </nav>
+            
+            <div class="flex gap-4">
+                <button onclick="openModal()" class="bg-alert-900/20 hover:bg-alert-600 text-alert-500 hover:text-white border border-alert-900/50 hover:border-alert-600 py-2 px-6 text-xs font-bold uppercase tracking-widest transition-all hidden md:block">
+                    Acesso Restrito
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative min-h-screen flex items-center justify-center bg-charcoal-950 pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-charcoal-800 via-charcoal-950 to-charcoal-950 opacity-60"></div>
+        <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px;"></div>
+        <div class="absolute inset-0 noise-bg"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-alert-500/30 bg-alert-900/20 text-alert-500 backdrop-blur-md mb-8 uppercase tracking-[0.2em] text-[10px] font-bold rounded-full animate-pulse">
+                <i data-lucide="radio" class="w-3 h-3"></i> Sinal Livre de Interferência
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-[1.1] tracking-tight mb-8">
+                Onde o <span class="text-alert-500 line-through decoration-2 decoration-alert-600">algoritmo</span> <br />
+                não tem <span class="font-black text-gradient-platinum">poder.</span>
+            </h1>
+            
+            <p class="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                Você está cansado de ter sua voz calada pelas Big Techs? Existem assuntos que simplesmente 
+                <strong class="text-white font-bold">não podem ser discutidos</strong> nas redes sociais sem punição. 
+                Aqui, a conversa é outra.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+                <button onclick="openModal()" class="bg-[#229ED9] hover:bg-[#1e8kb9] text-white py-4 px-10 text-sm font-bold uppercase tracking-widest shadow-lg shadow-[#229ED9]/20 transition-all flex items-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i> Entrar no Canal
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-platinum-500/10 border border-platinum-500/10 max-w-5xl mx-auto">
+                <div class="text-center p-6 bg-charcoal-900/80 backdrop-blur-sm">
+                    <i data-lucide="mic" class="w-6 h-6 text-platinum-300 mx-auto mb-3"></i>
+                    <p class="text-slate-300 text-[10px] uppercase tracking-widest font-bold">Áudios Brutais</p>
+                </div>
+                <div class="text-center p-6 bg-charcoal-900/80 backdrop-blur-sm">
+                    <i data-lucide="globe-2" class="w-6 h-6 text-platinum-300 mx-auto mb-3"></i>
+                    <p class="text-slate-300 text-[10px] uppercase tracking-widest font-bold">Geopolítica Real</p>
+                </div>
+                <div class="text-center p-6 bg-charcoal-900/80 backdrop-blur-sm">
+                    <i data-lucide="shield-alert" class="w-6 h-6 text-alert-500 mx-auto mb-3"></i>
+                    <p class="text-alert-500 text-[10px] uppercase tracking-widest font-bold">Temas Proibidos</p>
+                </div>
+                <div class="text-center p-6 bg-charcoal-900/80 backdrop-blur-sm">
+                    <i data-lucide="zap" class="w-6 h-6 text-platinum-300 mx-auto mb-3"></i>
+                    <p class="text-slate-300 text-[10px] uppercase tracking-widest font-bold">Atualização Diária</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="manifesto" class="py-24 bg-charcoal-950 relative border-t border-white/5 overflow-hidden">
+        <div class="absolute inset-0 noise-bg pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vh] h-[80vh] bg-alert-900/10 blur-[100px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-3xl mx-auto px-6 relative z-10 text-center">
+            <div class="mb-10">
+                <div class="relative inline-block mb-6">
+                    <div class="absolute inset-0 bg-platinum-500/20 blur-xl rounded-full"></div>
+                    <i data-lucide="fingerprint" class="w-8 h-8 text-platinum-300 relative z-10"></i>
+                </div>
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-500 mb-2">A Missão</h2>
+                <h3 class="text-4xl md:text-5xl font-serif font-black text-white">Verdade Sem Maquiagem</h3>
+            </div>
+            
+            <div class="space-y-8 text-lg md:text-xl font-serif leading-relaxed text-slate-300">
+                <p>
+                    Shadowban. Alcance zerado. Posts removidos. <br />
+                    <span class="text-alert-500 italic font-bold">Eles não querem que você saiba.</span>
+                </p>
+                <p>
+                    Temas polêmicos, análise profunda de economia real, poder nos bastidores, história sem o filtro "politicamente correto"... tudo isso é automaticamente enterrado pelos algoritmos das redes sociais comuns.
+                </p>
+                <div class="relative py-4">
+                    <div class="absolute left-1/2 -translate-x-1/2 w-12 h-px bg-platinum-500/30"></div>
+                </div>
+                <p>
+                    Neste espaço exclusivo, eu falo <strong class="text-white border-b border-alert-500/50">TUDO</strong> o que penso.
+                </p>
+                <p>
+                    Sem medo. Sem amarras. Sem me preocupar com "cancelamento".
+                    <span class="text-white font-bold block mt-4">Bem-vindo à liberdade de verdade.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="proposta" class="py-32 bg-charcoal-900 border-t border-white/5 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <div class="inline-flex items-center gap-2 border border-alert-500/30 bg-alert-900/20 px-4 py-2 rounded-full mb-8">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 text-alert-500"></i>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-alert-200">O Risco</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif font-black text-white mb-6 leading-tight">
+                        A prisão invisível das <br /><span class="text-platinum-300 italic">Big Techs.</span>
+                    </h2>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                        Se você depende apenas do Instagram ou YouTube para se informar, você está recebendo uma versão higienizada e aprovada da realidade.
+                    </p>
+                    <p class="text-slate-300 text-base leading-relaxed mb-8 border-l-2 border-alert-600 pl-6">
+                        No meu Canal, quebramos essas correntes. Você terá acesso ao que acontece nos bastidores de Brasília e do mundo, com a crueza necessária para quem quer entender o jogo do poder.
+                    </p>
+                </div>
+                
+                <div class="lg:w-1/2 flex justify-center items-center">
+                    <div class="relative group cursor-default">
+                        <div class="w-72 h-72 md:w-96 md:h-96 rounded-full border border-platinum-500/30 flex flex-col items-center justify-center relative bg-gradient-to-br from-charcoal-950 to-charcoal-800 shadow-platinum-glow z-10 p-8 text-center group-hover:border-alert-500/60 transition-colors duration-500">
+                            <i data-lucide="send" class="w-20 h-20 text-platinum-300 mb-6 stroke-[1] group-hover:text-alert-500 transition-colors"></i>
+                            <h3 class="text-3xl font-black text-white font-serif uppercase tracking-widest leading-none mb-2">Canal Direto</h3>
+                            <p class="text-platinum-500/60 font-bold text-sm uppercase tracking-widest group-hover:text-alert-400">Telegram Oficial</p>
+                        </div>
+                        <div class="absolute inset-0 border border-platinum-500/10 rounded-full scale-110 animate-pulse"></div>
+                        <div class="absolute inset-0 border border-dashed border-alert-500/10 rounded-full scale-125 opacity-30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="entregaveis" class="py-24 bg-slate-100 text-charcoal-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-2xl mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 border bg-white border-slate-200 text-charcoal-900 mb-6 uppercase tracking-[0.2em] text-[10px] font-bold">
+                    <i data-lucide="package-open" class="w-3 h-3"></i> O Arsenal
+                </div>
+                <h2 class="text-4xl font-serif font-black tracking-tighter mb-4 text-charcoal-950">Munição Intelectual Diária</h2>
+                <p class="text-slate-600 text-lg">Conteúdo exclusivo desenhado para quem tem estômago forte.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
+                        <i data-lucide="mic-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Áudios Diários</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Minha voz no seu ouvido. Análises quentes e diretas, sem edição.
+                    </p>
+                </div>
+                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
+                        <i data-lucide="globe" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Geopolítica</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Entenda os movimentos globais antes que afetem seu bolso.
+                    </p>
+                </div>
+                <div class="group p-8 border border-slate-200 bg-white hover:border-alert-500 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 bg-charcoal-950 text-alert-500 flex items-center justify-center mb-6 rounded-sm">
+                        <i data-lucide="eye-off" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-alert-600">Temas Proibidos</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        O que derrubaria minha conta no Instagram é discutido aqui.
+                    </p>
+                </div>
+                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
+                        <i data-lucide="file-text" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Dossiês</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Documentos e pdfs que explicam a lei com profundidade.
+                    </p>
+                </div>
+                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
+                        <i data-lucide="clock" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Rapidez</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Notícias em tempo real, antes de virar manchete distorcida.
+                    </p>
+                </div>
+                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
+                        <i data-lucide="shield" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-serif">Criptografado</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        O Telegram oferece uma camada de segurança que outras redes não têm.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="analise-exclusiva" class="py-24 bg-charcoal-900 border-t border-charcoal-800 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+                
+                <div class="lg:w-5/12">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-platinum-500/30 bg-platinum-500/5 text-platinum-300 backdrop-blur-md mb-8 uppercase tracking-[0.2em] text-[10px] font-bold rounded-full">
+                        <i data-lucide="smartphone" class="w-3 h-3"></i> Notificação Criptografada
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-serif font-black text-white mb-6 leading-tight">
+                        A verdade chega <br />
+                        <span class="text-platinum-300 italic">primeiro aqui.</span>
+                    </h2>
+                    
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                        Enquanto a mídia prepara a narrativa, você já recebeu a análise crua e real dos fatos diretamente no seu Telegram.
+                    </p>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="bg-charcoal-950 p-1.5 rounded border border-platinum-500/30 mt-1">
+                                <i data-lucide="check" class="w-4 h-4 text-platinum-300"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block font-serif">Notificação Push</strong>
+                                <span class="text-sm text-slate-500">Sem algoritmo ocultando o post. Eu mando, você recebe.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="bg-charcoal-950 p-1.5 rounded border border-platinum-500/30 mt-1">
+                                <i data-lucide="check" class="w-4 h-4 text-platinum-300"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block font-serif">Histórico Completo</strong>
+                                <span class="text-sm text-slate-500">Acesse todo o conteúdo postado anteriormente assim que entrar.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:w-6/12 flex justify-center perspective-1000 mt-8 lg:mt-0">
+                    <div class="relative w-[320px] h-[640px] bg-charcoal-950 rounded-[3rem] border-4 border-slate-800 shadow-2xl animate-float overflow-hidden ring-4 ring-charcoal-950/50">
+                        
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-charcoal-900 rounded-b-2xl z-20 flex justify-center items-center">
+                            <div class="w-16 h-1 bg-charcoal-800 rounded-full"></div>
+                        </div>
+
+                        <div class="w-full h-full flex flex-col relative telegram-bg">
+                            
+                            <div class="px-6 py-3 flex justify-between items-center text-[11px] text-white font-medium bg-[#17212b]">
+                                <span>21:05</span>
+                                <div class="flex gap-1.5">
+                                    <i data-lucide="signal" class="w-3 h-3"></i>
+                                    <i data-lucide="wifi" class="w-3 h-3"></i>
+                                    <i data-lucide="battery" class="w-3 h-3"></i>
+                                </div>
+                            </div>
+
+                            <div class="px-4 py-2 flex items-center gap-3 bg-[#17212b] border-b border-black/20 shadow-sm z-10">
+                                <i data-lucide="arrow-left" class="w-5 h-5 text-slate-300"></i>
+                                <div class="flex items-center gap-3 flex-1">
+                                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-bold text-xs border border-white/10">
+                                        SC
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white text-sm font-bold leading-none">Sem Censura</span>
+                                        <span class="text-[11px] text-[#6c7883] mt-0.5">3.420 subscribers</span>
+                                    </div>
+                                </div>
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center">
+                                    <i data-lucide="more-vertical" class="w-5 h-5 text-slate-300"></i>
+                                </div>
+                            </div>
+
+                            <div class="px-3 py-4 flex flex-col gap-2 overflow-y-auto no-scrollbar flex-1">
+                                
+                                <div class="self-center bg-[#000000]/40 rounded-full px-3 py-1 mb-2">
+                                    <span class="text-white text-[11px] font-medium">Hoje</span>
+                                </div>
+
+                                <div class="self-start max-w-[90%] bg-[#182533] rounded-2xl rounded-tl-none p-3 shadow-sm border border-black/10 group">
+                                    <p class="text-[13px] text-[#e4ecf2] leading-snug">
+                                        Pessoal, o que a grande mídia está falando sobre o novo projeto de lei é <strong class="text-alert-400">MENTIRA</strong>. Eles estão escondendo o artigo 14.
+                                    </p>
+                                    <div class="flex justify-end items-center gap-1 mt-1">
+                                        <i data-lucide="eye" class="w-3 h-3 text-[#6c7883]"></i>
+                                        <span class="text-[10px] text-[#6c7883]">2.1K</span>
+                                        <span class="text-[10px] text-[#6c7883] ml-1">20:55</span>
+                                    </div>
+                                </div>
+
+                                <div class="self-start max-w-[90%] bg-[#182533] rounded-2xl rounded-tl-none p-3 shadow-sm border border-black/10">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-[#2b5278] flex items-center justify-center text-white shrink-0">
+                                            <i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-[140px]">
+                                            <div class="flex justify-between text-[13px] font-medium text-white mb-1">
+                                                <span>A verdade sobre a crise</span>
+                                            </div>
+                                            <div class="h-1 bg-[#2b5278]/30 rounded-full w-full relative overflow-hidden">
+                                                <div class="absolute left-0 top-0 bottom-0 w-1/3 bg-[#2b5278]"></div>
+                                            </div>
+                                            <div class="flex justify-between text-[10px] text-[#6c7883] mt-1">
+                                                <span>04:23</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end items-center gap-1 mt-2">
+                                        <i data-lucide="eye" class="w-3 h-3 text-[#6c7883]"></i>
+                                        <span class="text-[10px] text-[#6c7883]">3.5K</span>
+                                        <span class="text-[10px] text-[#6c7883] ml-1">20:58</span>
+                                    </div>
+                                </div>
+
+                                <div class="self-start max-w-[90%] bg-[#182533] rounded-2xl rounded-tl-none p-3 shadow-sm border border-black/10">
+                                    <p class="text-[13px] text-[#e4ecf2] leading-snug">
+                                        Preparem-se. O que vou soltar amanhã cedo vai derrubar narrativas.
+                                    </p>
+                                    <div class="flex justify-end items-center gap-1 mt-1">
+                                        <i data-lucide="eye" class="w-3 h-3 text-[#6c7883]"></i>
+                                        <span class="text-[10px] text-[#6c7883]">1.8K</span>
+                                        <span class="text-[10px] text-[#6c7883] ml-1">21:03</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="bg-[#17212b] p-2 border-t border-black/20">
+                                <div class="w-full py-2.5 flex items-center justify-center gap-2 uppercase text-[#6c7883] text-xs font-bold tracking-wide hover:bg-white/5 transition-colors rounded cursor-pointer">
+                                    SILENCIAR
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mentor" class="py-24 bg-charcoal-950 text-white border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-platinum-500/30 bg-platinum-500/5 text-platinum-300 backdrop-blur-md mb-8 uppercase tracking-[0.2em] text-[10px] font-bold rounded-full">
+                <i data-lucide="user" class="w-3 h-3"></i> Prof. Danuzio Neto
+            </div>
+            
+            <h2 class="text-4xl font-serif text-white mb-8">Mais que um professor, <br />um <span class="text-platinum-300 italic">aliado na trincheira.</span></h2>
+            
+            <p class="text-slate-400 text-lg leading-relaxed mb-12">
+                "Não criei este canal para ser politicamente correto. Criei para ser um refúgio de sanidade em um mundo dominado pela histeria e pela censura. Se você quer a verdade, doa a quem doer, este é o seu lugar."
+            </p>
+
+            <div class="w-24 h-1 bg-platinum-500 mx-auto"></div>
+        </div>
+    </section>
+
+    <section id="investimento" class="py-24 bg-charcoal-900 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 border bg-alert-600 border-alert-500 text-white mb-6 uppercase tracking-[0.2em] text-[10px] font-bold">
+                        <i data-lucide="siren" class="w-3 h-3"></i> Vagas Limitadas
+                    </div>
+                    <h2 class="text-5xl font-serif font-black text-white mb-6 tracking-tighter leading-tight">Pare de depender das <br>Big Techs.</h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        Quando o grupo atingir a capacidade técnica ou de segurança, a porta fecha. Garanta seu acesso vitalício à informação livre.
+                    </p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-platinum-300"></i>
+                            <span class="font-medium text-slate-300">Acesso imediato e sem censura</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-alert-500"></i>
+                            <span class="font-medium text-slate-300">Conteúdo que não vai para o Instagram</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-platinum-300"></i>
+                            <span class="font-medium text-slate-300">Garantia total de 7 dias</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="bg-charcoal-950 border border-platinum-500/30 p-8 md:p-12 relative z-10 shadow-2xl shadow-platinum-500/10">
+                        
+                        <div id="priceLockOverlay" class="absolute inset-0 bg-charcoal-950/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 border border-white/5">
+                            <div class="w-16 h-16 bg-platinum-300 text-charcoal-950 flex items-center justify-center mb-6 rounded-full shadow-lg shadow-platinum-500/50">
+                                <i data-lucide="lock" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center mb-2 text-white">Condição Exclusiva</h3>
+                            <p class="text-slate-400 text-sm text-center mb-6">Clique abaixo para liberar o valor especial de lançamento.</p>
+                            <button onclick="openModal()" class="bg-white hover:bg-slate-200 text-charcoal-950 py-4 px-8 text-sm font-bold uppercase tracking-widest transition-all">
+                                Liberar Acesso
+                            </button>
+                        </div>
+                        
+                        <div id="priceContent" class="price-hidden flex flex-col gap-6">
+                            
+                            <div class="border-2 border-platinum-300 p-6 relative bg-charcoal-900/50">
+                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-platinum-300 text-charcoal-950 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
+                                    Plano Anual
+                                </div>
+                                <h4 class="text-platinum-300 text-sm font-bold uppercase tracking-widest mb-2 text-center">Membro Fundador</h4>
+                                <div class="flex items-end justify-center gap-2 mb-2">
+                                    <span class="text-4xl font-black text-white">R$ 197</span>
+                                    <span class="text-slate-500 text-sm mb-1 line-through">/ano</span>
+                                </div>
+                                <p class="text-xs text-center text-slate-400 mb-6">Menos de R$ 0,60 por dia pela verdade.</p>
+                                <button class="w-full bg-platinum-300 hover:bg-white text-charcoal-950 py-3 text-sm font-bold uppercase tracking-widest transition-all shadow-lg shadow-platinum-500/20">
+                                    Quero Acesso Total
+                                </button>
+                            </div>
+
+                            <div class="border border-slate-700 p-6 opacity-80 hover:opacity-100 transition-opacity">
+                                <h4 class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-2 text-center">Plano Mensal</h4>
+                                <div class="flex items-end justify-center gap-2 mb-4">
+                                    <span class="text-3xl font-black text-white">R$ 29,90</span>
+                                    <span class="text-slate-500 text-sm mb-1">/mês</span>
+                                </div>
+                                <button class="w-full bg-transparent border border-white/20 hover:bg-white/10 text-white py-3 text-sm font-bold uppercase tracking-widest transition-all">
+                                    Assinar Mensal
+                                </button>
+                            </div>
+                            
+                            <p class="text-center text-xs text-slate-500 flex items-center justify-center gap-2 mt-2">
+                                <i data-lucide="lock" class="w-3 h-3"></i> Pagamento Seguro e Discreto
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-charcoal-950 text-slate-600 py-16 border-t border-charcoal-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 flex items-center justify-center border border-alert-900 text-alert-700 rounded-sm">
+                        <i data-lucide="eye-off" class="w-4 h-4"></i>
+                    </div>
+                    <span class="text-white font-serif font-bold text-xl tracking-wide">SEM CENSURA</span>
+                </div>
+                <div class="flex gap-8 text-xs font-bold uppercase tracking-widest">
+                    <a href="#" class="hover:text-platinum-300 transition-colors">Termos</a>
+                    <a href="#" class="hover:text-platinum-300 transition-colors">Privacidade</a>
+                    <a href="#" class="hover:text-platinum-300 transition-colors">Suporte</a>
+                </div>
+            </div>
+            
+            <div class="text-center md:text-left border-t border-charcoal-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+                <p>© 2024 Prof. Danuzio Neto. Todos os direitos reservados.</p>
+                <p class="opacity-60">
+                   Liberdade de expressão é inegociável.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // State management
+        let priceRevealed = localStorage.getItem('semcensura_price_revealed_v3') === 'true';
+        
+        if (priceRevealed) {
+            revealPrice();
+        }
+        
+        // Modal Logic
+        function openModal() {
+            if (priceRevealed) {
+                scrollToPrice();
+                return;
+            }
+            document.getElementById('leadModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('leadModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function closeModalAndReveal() {
+            closeModal();
+            revealPrice();
+            setTimeout(() => {
+                scrollToPrice();
+            }, 300);
+        }
+        
+        function revealPrice() {
+            priceRevealed = true;
+            localStorage.setItem('semcensura_price_revealed_v3', 'true');
+            
+            const overlay = document.getElementById('priceLockOverlay');
+            const priceContent = document.getElementById('priceContent');
+            
+            if (overlay) {
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+            }
+            
+            if (priceContent) {
+                priceContent.classList.remove('price-hidden');
+                priceContent.classList.add('price-revealed');
+            }
+        }
+        
+        function scrollToPrice() {
+            document.getElementById('investimento').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Form Handling
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('leadName').value;
+            const email = document.getElementById('leadEmail').value;
+            
+            // UI Loading State
+            document.getElementById('btnText').classList.add('hidden');
+            document.getElementById('btnLoader').classList.remove('hidden');
+            document.getElementById('submitBtn').disabled = true;
+            
+            // Simulate API delay
+            setTimeout(() => {
+                console.log('Lead captured:', { name, email });
+                
+                document.getElementById('formStep').classList.add('hidden');
+                document.getElementById('successStep').classList.remove('hidden');
+                
+                lucide.createIcons();
+            }, 1000);
+        });
+        
+        // Close on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // Close on Overlay Click
+        document.getElementById('leadModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+    
+</body>
+</html>
