@@ -39,7 +39,7 @@
                             600: '#dc2626',
                             900: '#7f1d1d',
                         },
-                        // CORES ESPECÍFICAS DO TELEGRAM (NOVO)
+                        // CORES ESPECÍFICAS DO TELEGRAM
                         tg: {
                             bg: '#0e1621',
                             header: '#17212b',
@@ -317,67 +317,86 @@
 
     <section id="entregaveis" class="py-24 bg-slate-100 text-charcoal-950">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-2xl mb-16">
+            <div class="max-w-2xl mb-12">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 border bg-white border-slate-200 text-charcoal-900 mb-6 uppercase tracking-[0.2em] text-[10px] font-bold">
-                    <i data-lucide="package-open" class="w-3 h-3"></i> O Arsenal
+                    <i data-lucide="briefcase" class="w-3 h-3"></i> O Arsenal
                 </div>
-                <h2 class="text-4xl font-serif font-black tracking-tighter mb-4 text-charcoal-950">Munição Intelectual Diária</h2>
+                <h2 class="text-4xl font-serif font-black tracking-tighter mb-4 text-charcoal-950">Munição Intelectual</h2>
                 <p class="text-slate-600 text-lg">Conteúdo exclusivo desenhado para quem tem estômago forte.</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
-                        <i data-lucide="mic-2" class="w-6 h-6"></i>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <div class="lg:col-span-4 lg:row-span-2 group relative overflow-hidden bg-charcoal-950 text-white p-8 flex flex-col justify-between shadow-2xl shadow-charcoal-950/20 border-t-4 border-alert-600">
+                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-alert-900/30 text-alert-500 flex items-center justify-center mb-6 rounded border border-alert-500/20">
+                            <i data-lucide="eye-off" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-bold mb-4 text-white">Temas <br/> <span class="text-alert-500 italic">Proibidos</span></h3>
+                        <p class="text-slate-400 text-base leading-relaxed mb-6">
+                            Assuntos que derrubariam minha conta no Instagram instantaneamente. Aqui não existe "politicamente correto", apenas a realidade crua dos bastidores do poder.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Áudios Diários</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Minha voz no seu ouvido. Análises quentes e diretas, sem edição.
-                    </p>
+
+                    <div class="relative z-10 mt-auto pt-6 border-t border-white/10">
+                        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-alert-500">
+                            <i data-lucide="lock-open" class="w-3 h-3"></i> Acesso Restrito
+                        </div>
+                    </div>
                 </div>
-                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
-                        <i data-lucide="globe" class="w-6 h-6"></i>
+
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-lg h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-slate-50 text-platinum-600 flex items-center justify-center rounded-sm">
+                                <i data-lucide="mic-2" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 font-serif text-charcoal-900">Áudios Diários</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Minha voz no seu ouvido. Análises quentes e diretas, sem edição ou filtro de mídia.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Geopolítica</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Entenda os movimentos globais antes que afetem seu bolso.
-                    </p>
-                </div>
-                <div class="group p-8 border border-slate-200 bg-white hover:border-alert-500 transition-all duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 bg-charcoal-950 text-alert-500 flex items-center justify-center mb-6 rounded-sm">
-                        <i data-lucide="eye-off" class="w-6 h-6"></i>
+
+                    <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-lg h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-slate-50 text-platinum-600 flex items-center justify-center rounded-sm">
+                                <i data-lucide="globe" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 font-serif text-charcoal-900">Geopolítica</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Entenda os movimentos globais (China, EUA, Rússia) antes que afetem seu bolso.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-alert-600">Temas Proibidos</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        O que derrubaria minha conta no Instagram é discutido aqui.
-                    </p>
-                </div>
-                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
-                        <i data-lucide="file-text" class="w-6 h-6"></i>
+
+                    <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-lg h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-slate-50 text-platinum-600 flex items-center justify-center rounded-sm">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 font-serif text-charcoal-900">Rapidez</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Notícias em tempo real. Você saberá a verdade antes de virar manchete distorcida.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Dossiês</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Documentos e pdfs que explicam a lei com profundidade.
-                    </p>
-                </div>
-                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
-                        <i data-lucide="clock" class="w-6 h-6"></i>
+
+                    <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-lg h-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-slate-50 text-platinum-600 flex items-center justify-center rounded-sm">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 font-serif text-charcoal-900">Criptografado</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            O Telegram oferece a camada de segurança necessária para falarmos livremente.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Rapidez</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Notícias em tempo real, antes de virar manchete distorcida.
-                    </p>
-                </div>
-                <div class="group p-8 border border-slate-200 bg-white hover:border-platinum-500 transition-all duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 bg-charcoal-950 text-platinum-300 flex items-center justify-center mb-6 rounded-sm">
-                        <i data-lucide="shield" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 font-serif">Criptografado</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        O Telegram oferece uma camada de segurança que outras redes não têm.
-                    </p>
+
                 </div>
             </div>
         </div>
