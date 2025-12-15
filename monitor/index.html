@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor 2026 | Sala de Guerra</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        war: {
+                            bg: '#050505',
+                            card: '#0A0A0A',
+                            red: '#FF1F1F',
+                            blue: '#2E5CFF',
+                            border: '#1F1F1F',
+                            green: '#00ED60'
+                        }
+                    },
+                    boxShadow: {
+                        'glow-red': '0 0 30px rgba(255, 31, 31, 0.15)',
+                        'glow-blue': '0 0 30px rgba(46, 92, 255, 0.15)',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #050505; color: #fff; overflow-x: hidden; }
+        
+        /* --- BACKGROUND MOTION --- */
+        .radar-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            animation: radar-scan 20s linear infinite;
+        }
+
+        @keyframes radar-scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        .bg-dot-pattern {
+            background-size: 24px 24px;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
+            animation: dots-float 30s linear infinite;
+        }
+
+        @keyframes dots-float {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- SCROLL REVEAL ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* --- UI ELEMENTS --- */
+        .btn-war {
+            background: linear-gradient(90deg, #CC0000 0%, #FF1F1F 100%);
+            color: white;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.3s ease;
+        }
+        .btn-war:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 30px rgba(255, 31, 31, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .card-tech {
+            background: #0A0A0A;
+            border: 1px solid #1F1F1F;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card-tech:hover { 
+            border-color: #333;
+            transform: translateY(-5px);
+        }
+
+        /* Ticker */
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: #FF1F1F;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #990000;
+        }
+        .ticker-content {
+            display: flex;
+            animation: marquee 40s linear infinite;
+        }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 12px;
+            color: black;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Video Decor */
+        .video-corner {
+            position: absolute; width: 20px; height: 20px; border-color: #FF1F1F; border-style: solid; pointer-events: none; z-index: 10;
+        }
+        .vc-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .vc-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+        .vc-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+        .vc-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .ticker-item {
+                padding: 0 1rem;
+                font-size: 10px;
+            }
+            
+            .btn-war {
+                clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+            }
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(500%); }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <div class="fixed top-0 w-full z-[60] ticker-container">
+        <div class="ticker-content">
+            <div class="ticker-item"><i data-lucide="zap" class="w-3 h-3 mr-2"></i> BREAKING: NOVA PESQUISA DIVULGADA</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">ALERTA: BASTIDORES DE BRASÍLIA ATUALIZADOS</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">MONITOR 2026: STATUS ATIVO</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">INTELIGÊNCIA ELEITORAL EM TEMPO REAL</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">ACESSO RESTRITO A MEMBROS</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item"><i data-lucide="zap" class="w-3 h-3 mr-2"></i> BREAKING: NOVA PESQUISA DIVULGADA</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">ALERTA: BASTIDORES DE BRASÍLIA ATUALIZADOS</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">MONITOR 2026: STATUS ATIVO</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">INTELIGÊNCIA ELEITORAL EM TEMPO REAL</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">ACESSO RESTRITO A MEMBROS</div>
+            <div class="ticker-item">///</div>
+        </div>
+    </div>
+
+    <header class="fixed top-[35px] left-0 right-0 z-50 bg-war-bg/95 backdrop-blur-md border-b border-white/10 h-16 md:h-20 flex items-center transition-all">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between">
+            <div class="flex items-center gap-2 md:gap-3">
+                <div class="w-2 h-2 md:w-3 md:h-3 bg-war-red rounded-full animate-pulse-fast shadow-[0_0_10px_#FF1F1F]"></div>
+                <span class="font-black text-base md:text-xl tracking-tighter text-white">MONITOR <span class="text-war-blue">2026</span></span>
+            </div>
+            
+            <button class="hidden md:flex items-center gap-2 text-xs font-mono text-gray-400 border border-white/10 px-4 py-2 hover:text-white hover:bg-white/5 hover:border-white/30 transition-all">
+                <i data-lucide="lock" class="w-3 h-3"></i> ÁREA DE MEMBROS
+            </button>
+        </div>
+    </header>
+
+    <section class="relative pt-32 md:pt-48 pb-8 md:pb-12 border-b border-white/5">
+        <div class="absolute inset-0 bg-dot-pattern opacity-40 pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 md:px-6 relative z-10 text-center">
+            <div class="reveal inline-flex items-center gap-2 md:gap-3 mb-6 md:mb-8">
+                <span class="px-2 py-0.5 bg-war-red/10 border border-war-red text-war-red text-[10px] font-bold uppercase tracking-widest font-mono">
+                    LIVE FEED
+                </span>
+                <span class="text-gray-500 text-[10px] md:text-xs font-mono">ATUALIZADO: 14:02</span>
+            </div>
+
+            <h1 class="reveal delay-100 text-3xl md:text-5xl lg:text-7xl font-black text-white uppercase leading-[0.95] tracking-tight mb-6 md:mb-8">
+                Acompanhe os <br/>
+                Bastidores <span class="text-war-red">Reais</span> <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Em Tempo Real.</span>
+            </h1>
+
+            <p class="reveal delay-200 text-sm md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10 font-light px-4">
+                A mídia tradicional te entrega a superfície. Nós entregamos <strong class="text-white">inteligência eleitoral</strong>. Direto, sem filtros e antes de virar manchete.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-8 md:py-12 bg-war-bg border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-4 md:px-6">
+            <div class="reveal delay-300 relative w-full aspect-video bg-black rounded-lg border border-white/10 shadow-[0_0_50px_-10px_rgba(255,31,31,0.1)] group overflow-hidden">
+                <div class="video-corner vc-tl"></div>
+                <div class="video-corner vc-tr"></div>
+                <div class="video-corner vc-bl"></div>
+                <div class="video-corner vc-br"></div>
+
+                <div class="absolute top-2 md:top-4 left-3 md:left-6 right-3 md:right-6 flex justify-between items-center z-20 pointer-events-none">
+                    <div class="flex items-center gap-1 md:gap-2">
+                        <div class="w-2 h-2 md:w-3 md:h-3 bg-war-red rounded-full animate-pulse shadow-[0_0_10px_#FF1F1F]"></div>
+                        <span class="text-white text-[8px] md:text-[10px] font-mono font-bold tracking-widest bg-black/50 px-1 md:px-2 py-0.5 md:py-1 backdrop-blur-sm">REC • LIVE</span>
+                    </div>
+                    <div class="text-[8px] md:text-[10px] font-mono text-gray-400 bg-black/50 px-1 md:px-2 py-0.5 md:py-1 backdrop-blur-sm hidden md:block">DANUZIO NETO // INTEL</div>
+                </div>
+
+                <div class="absolute inset-1 bg-war-card overflow-hidden flex items-center justify-center cursor-pointer">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://media.istockphoto.com/id/1320494666/vector/hud-futuristic-user-interface-screen-elements-set-high-tech-screens-for-video-game-sci-fi.jpg?s=612x612&w=0&k=20&c=N_yZ5wD5E5K4bWk6k8Vf5q6qZ9j1m8x7y0z2l4k3n2o=')] bg-cover bg-center transform transition-transform duration-1000 group-hover:scale-105"></div>
+                    
+                    <div class="relative z-10 flex flex-col items-center gap-3 md:gap-4 transition-transform duration-300 group-hover:scale-105">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-war-red flex items-center justify-center bg-war-red/10 backdrop-blur-sm shadow-[0_0_30px_rgba(255,31,31,0.3)]">
+                            <i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-white fill-white ml-1"></i>
+                        </div>
+                        <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white group-hover:text-war-red transition-colors">Assistir Briefing</span>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-2 md:bottom-4 left-3 md:left-6 right-3 md:right-6 flex justify-between items-center z-20 pointer-events-none opacity-60">
+                    <div class="w-full h-px bg-gradient-to-r from-transparent via-war-red to-transparent"></div>
+                </div>
+            </div>
+
+            <div class="reveal delay-300 mt-6 md:mt-8 text-center px-4">
+                <p class="text-gray-500 text-[10px] md:text-xs font-mono mb-4">[ ! ] ESTE VÍDEO CONTÉM INFORMAÇÕES SENSÍVEIS DE CENÁRIO</p>
+                <button onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})" class="btn-war px-8 md:px-12 py-4 md:py-5 text-xs md:text-sm inline-flex items-center justify-center gap-2 md:gap-3 shadow-glow-red w-full md:w-auto">
+                    <i data-lucide="lock-open" class="w-4 h-4"></i> Liberar Acesso ao Monitor
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-[#080808] border-b border-white/10 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-war-blue/5 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-war-red/50 to-transparent"></div>
+
+        <div class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
+                
+                <div class="lg:w-1/2 reveal">
+                    <div class="inline-flex items-center gap-2 mb-4 md:mb-6">
+                        <span class="w-2 h-2 bg-war-red rounded-full animate-pulse"></span>
+                        <span class="text-xs font-mono text-war-red font-bold tracking-widest uppercase">Contexto de Guerra</span>
+                    </div>
+
+                    <h2 class="text-2xl md:text-3xl lg:text-5xl font-black text-white uppercase leading-[1.1] mb-4 md:mb-6">
+                        A Mídia Tradicional <br/>
+                        <span class="text-gray-600">Perdeu o Controle.</span>
+                    </h2>
+
+                    <div class="space-y-4 md:space-y-6 text-sm md:text-lg text-gray-400 font-light leading-relaxed">
+                        <p>Em 2026, a eleição não será decidida na TV. Ela será decidida em grupos fechados, em movimentações de bastidor e em dados que a grande imprensa demora dias para processar.</p>
+                        <p>Enquanto o público geral consome notícias requentadas e filtradas por linhas editoriais, <strong class="text-white">um grupo seleto tem acesso à realidade.</strong></p>
+                        <p class="border-l-4 border-war-blue pl-4 text-white">
+                            O Monitor 2026 não é um jornal. É um serviço de inteligência. Nós não queremos te informar. Nós queremos te dar <span class="text-war-blue font-bold">vantagem competitiva</span>.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 md:mt-10 flex items-center gap-3 md:gap-4 font-mono text-xs">
+                        <div class="px-3 md:px-4 py-2 border border-white/10 bg-white/5 rounded text-gray-400">
+                            <span class="block text-white font-bold text-base md:text-lg">0%</span> FILTRO
+                        </div>
+                        <div class="px-3 md:px-4 py-2 border border-white/10 bg-white/5 rounded text-gray-400">
+                            <span class="block text-white font-bold text-base md:text-lg">100%</span> DADOS
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full reveal delay-200">
+                    <div class="relative bg-war-card border border-white/10 p-6 md:p-8 rounded-xl shadow-2xl hover:border-war-blue/30 transition-all duration-500">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-6">
+                            <span class="text-[10px] font-mono text-gray-500">FONTE DE DADOS: COMPARATIVO</span>
+                            <i data-lucide="activity" class="w-4 h-4 text-gray-500"></i>
+                        </div>
+
+                        <div class="mb-6 md:mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2 text-gray-400">
+                                <span>Mainstream Media</span>
+                                <span>Delay: +24h</span>
+                            </div>
+                            <div class="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gray-500 w-[40%]"></div>
+                            </div>
+                            <p class="text-[10px] text-gray-500 mt-2 font-mono">// Superficial • Lento • Enviesado</p>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-12 bg-war-blue"></div>
+                            <div class="flex justify-between text-xs font-bold uppercase mb-2 text-white">
+                                <span class="flex items-center gap-2"><i data-lucide="zap" class="w-3 h-3 text-war-blue"></i> Monitor 2026</span>
+                                <span class="text-war-blue animate-pulse">Tempo Real</span>
+                            </div>
+                            <div class="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-600 to-war-blue w-[95%] shadow-[0_0_10px_#2E5CFF]"></div>
+                            </div>
+                            <p class="text-[10px] text-blue-200 mt-2 font-mono">// Profundo • Imediato • Analítico</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-[#050505] relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            
+            <div class="flex items-center justify-between mb-8 md:mb-12 reveal">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-2 h-2 bg-war-red animate-pulse rounded-full"></span>
+                        <span class="text-[10px] font-mono font-bold text-war-red uppercase tracking-widest">Sistema Ativo</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase">Painel de Inteligência</h2>
+                </div>
+                <div class="hidden md:flex items-center gap-1 opacity-50">
+                    <div class="w-1 h-8 bg-war-blue"></div>
+                    <div class="w-1 h-6 bg-war-blue/80"></div>
+                    <div class="w-1 h-4 bg-war-blue/60"></div>
+                    <div class="w-1 h-2 bg-war-blue/40"></div>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-4 md:gap-6 h-auto">
+                
+                <div class="lg:w-1/3 flex flex-col gap-4 md:gap-6 reveal delay-100">
+                    <div class="flex-1 bg-war-card border border-war-red/30 p-4 md:p-6 relative overflow-hidden group hover:border-war-red/60 transition-colors min-h-[200px]">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i data-lucide="siren" class="w-16 h-16 md:w-24 md:h-24 text-war-red"></i>
+                        </div>
+                        <div class="flex items-center justify-between mb-4 md:mb-6">
+                            <h3 class="text-base md:text-lg font-black text-white uppercase flex items-center gap-2">
+                                <i data-lucide="zap" class="w-4 h-4 md:w-5 md:h-5 text-war-red"></i> Alertas
+                            </h3>
+                            <span class="text-[10px] font-mono text-war-red border border-war-red px-2 py-0.5 rounded">LIVE</span>
+                        </div>
+                        <div class="space-y-3 md:space-y-4">
+                            <div class="p-3 bg-red-950/20 border-l-2 border-war-red">
+                                <p class="text-xs text-red-200 font-bold mb-1">AGORA</p>
+                                <p class="text-xs md:text-sm text-gray-300">Nova pesquisa divulgada. Análise completa em 15min.</p>
+                            </div>
+                            <div class="p-3 bg-white/5 border-l-2 border-gray-600 opacity-60">
+                                <p class="text-xs text-gray-400 font-bold mb-1">Há 2h</p>
+                                <p class="text-xs md:text-sm text-gray-400">Decisão judicial impacta candidatura X.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-war-card border border-white/10 p-4 md:p-6 flex flex-col justify-center hover:border-white/30 transition-colors relative overflow-hidden min-h-[150px]">
+                        <h3 class="text-sm md:text-base font-bold text-white uppercase mb-3 flex items-center gap-2">
+                            <i data-lucide="mic" class="w-4 h-4 text-gray-400"></i> Áudios Vazados
+                        </h3>
+                        <div class="flex items-center gap-2 md:gap-3">
+                            <div class="h-6 md:h-8 w-1 bg-war-red animate-[pulse_0.5s_infinite]"></div>
+                            <div class="h-4 md:h-6 w-1 bg-war-red animate-[pulse_0.7s_infinite]"></div>
+                            <div class="h-8 md:h-10 w-1 bg-war-red animate-[pulse_0.4s_infinite]"></div>
+                            <div class="h-4 md:h-5 w-1 bg-war-red animate-[pulse_0.6s_infinite]"></div>
+                            <span class="ml-2 text-xs font-mono text-gray-400">REC • Bastidores</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-2/3 flex flex-col gap-4 md:gap-6 reveal delay-200">
+                    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+                        <div class="md:w-2/3 bg-war-card border border-war-blue/30 p-6 md:p-8 relative hover:border-war-blue/60 transition-colors">
+                            <div class="flex justify-between items-start mb-4 md:mb-6">
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-black text-white uppercase">Monitor de Pesquisas</h3>
+                                    <p class="text-xs text-war-blue font-mono mt-1">// ANÁLISE DE DADOS</p>
+                                </div>
+                                <i data-lucide="pie-chart" class="w-6 h-6 md:w-8 md:h-8 text-war-blue opacity-80"></i>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 md:gap-4 mt-6 md:mt-8">
+                                <div class="bg-blue-950/20 p-3 md:p-4 rounded border border-war-blue/20">
+                                    <span class="text-xl md:text-2xl font-black text-white block">+4.2%</span>
+                                    <span class="text-[10px] text-gray-400 uppercase">Crescimento Real</span>
+                                </div>
+                                <div class="bg-blue-950/20 p-3 md:p-4 rounded border border-war-blue/20">
+                                    <span class="text-xl md:text-2xl font-black text-white block">-1.8%</span>
+                                    <span class="text-[10px] text-gray-400 uppercase">Rejeição</span>
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-gray-400 mt-4 md:mt-6">
+                                <span class="text-white font-bold">Entregável:</span> Entenda o "porquê" dos números. Comparativos históricos e tendências futuras.
+                            </p>
+                        </div>
+
+                        <div class="md:w-1/3 bg-war-card border border-white/10 p-4 md:p-6 flex flex-col justify-between hover:border-white/30 transition-colors">
+                            <div>
+                                <i data-lucide="map" class="w-6 h-6 md:w-8 md:h-8 text-white mb-4"></i>
+                                <h3 class="text-base md:text-lg font-bold text-white uppercase">Mapa Semanal</h3>
+                            </div>
+                            <div class="space-y-2 mt-4">
+                                <div class="w-full h-1 bg-gray-800 rounded overflow-hidden">
+                                    <div class="w-3/4 h-full bg-white"></div>
+                                </div>
+                                <p class="text-xs text-gray-400">Rumo ao 2º Turno</p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-4 leading-relaxed">
+                                Drivers da semana, riscos e o "caminho da vitória".
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+                        <div class="md:w-1/2 bg-[#0A0A0A] border border-white/5 p-4 md:p-6 hover:bg-[#0f0f0f] transition-colors">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i data-lucide="key" class="w-4 h-4 md:w-5 md:h-5 text-gray-400"></i>
+                                <h3 class="text-base md:text-lg font-bold text-white uppercase">Bastidores</h3>
+                            </div>
+                            <p class="text-xs md:text-sm text-gray-400 mb-4 leading-relaxed">
+                                O que não sai no jornal. Tensões internas, rumores consistentes e movimentos de campanha.
+                            </p>
+                            <ul class="text-xs text-gray-500 font-mono space-y-1">
+                                <li>> Apurações preliminares</li>
+                                <li>> Teses jurídicas</li>
+                                <li>> Conflitos partidários</li>
+                            </ul>
+                        </div>
+
+                        <div class="md:w-1/2 bg-[#0A0A0A] border border-white/5 p-4 md:p-6 hover:bg-[#0f0f0f] transition-colors">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i data-lucide="thermometer" class="w-4 h-4 md:w-5 md:h-5 text-gray-400"></i>
+                                <h3 class="text-base md:text-lg font-bold text-white uppercase">Temperatura</h3>
+                            </div>
+                            <div class="flex items-end gap-3 md:gap-4 mb-4">
+                                <div class="flex flex-col items-center gap-1">
+                                    <div class="w-6 md:w-8 h-16 md:h-20 bg-gray-800 rounded-t relative">
+                                        <div class="absolute bottom-0 w-full h-[70%] bg-gradient-to-t from-war-blue to-cyan-400 rounded-t"></div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-500 font-mono">24H</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-gray-400 pb-2">
+                                    Quem subiu, quem caiu e o clima exato do debate público no dia de hoje.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SEÇÃO DO GRÁFICO - RESPONSIVA -->
+    <section class="py-16 md:py-24 bg-[#050505] border-t border-white/10 relative overflow-hidden font-sans">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+            
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-12 reveal">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-2 h-2 bg-war-green animate-pulse rounded-full shadow-[0_0_10px_#00ED60]"></span>
+                        <span class="text-[10px] font-mono font-bold text-war-green uppercase tracking-widest">Live Tracking</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase tracking-tight">Corrida Presidencial</h2>
+                    <p class="text-gray-400 text-xs md:text-sm mt-2 font-mono">// PROJEÇÃO DE CENÁRIOS EM TEMPO REAL</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                
+                <!-- GRÁFICO -->
+                <div class="relative w-full h-[300px] md:h-[400px] bg-[#0A0A0A] border border-white/10 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                    <div class="absolute inset-0 opacity-20" 
+                         style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 40px 40px;">
+                    </div>
+
+                    <svg id="election-chart" class="absolute inset-0 w-full h-full z-10" preserveAspectRatio="none">
+                        <defs>
+                            <filter id="glow-a"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2E5CFF"/></filter>
+                            <filter id="glow-b"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FF1F1F"/></filter>
+                            <filter id="glow-c"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00ED60"/></filter>
+                        </defs>
+
+                        <path id="line-a" stroke="#2E5CFF" stroke-width="3" fill="none" style="filter: url(#glow-a);" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path id="line-b" stroke="#FF1F1F" stroke-width="3" fill="none" style="filter: url(#glow-b);" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path id="line-c" stroke="#00ED60" stroke-width="3" fill="none" style="filter: url(#glow-c);" stroke-linecap="round" stroke-linejoin="round"></path>
+                        
+                        <g id="tip-a"><circle r="6" fill="#2E5CFF" stroke="white" stroke-width="2"></circle></g>
+                        <g id="tip-b"><circle r="6" fill="#FF1F1F" stroke="white" stroke-width="2"></circle></g>
+                        <g id="tip-c"><circle r="6" fill="#00ED60" stroke="white" stroke-width="2"></circle></g>
+                    </svg>
+
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-[20px] w-full animate-[scan_2s_linear_infinite] pointer-events-none z-20"></div>
+                    <div class="absolute inset-0 bg-[radial-gradient(transparent_0%,#000000_100%)] pointer-events-none z-20"></div>
+                    
+                    <div class="absolute bottom-2 md:bottom-4 left-3 md:left-6 right-3 md:right-6 flex justify-between text-[9px] md:text-[10px] font-mono text-gray-500 z-30">
+                        <span>T-24H</span><span>T-12H</span><span>T-6H</span><span class="text-white animate-pulse">AGORA</span>
+                    </div>
+                </div>
+
+                <!-- RANKING -->
+                <div class="flex flex-col h-[300px] md:h-[400px] bg-[#0A0A0A] border border-white/10 rounded-lg p-4 md:p-8 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white md:w-32 md:h-32"><line x1="10" x2="21" y1="6" y2="6"/><line x1="10" x2="21" y1="12" y2="12"/><line x1="10" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-2-1.5-2-1"/></svg>
+                    </div>
+                    
+                    <h3 class="text-xs md:text-sm font-mono text-gray-400 mb-4 md:mb-6 uppercase tracking-widest border-b border-white/10 pb-2 flex justify-between z-10">
+                        <span>Posição</span>
+                        <span>Intenção (%)</span>
+                    </h3>
+
+                    <div id="ranking-container" class="relative w-full flex-1">
+                        
+                        <div id="card-a" class="absolute w-full h-[60px] md:h-[72px] flex items-center justify-between p-3 md:p-4 bg-blue-900/10 border border-blue-500/30 rounded transition-transform duration-300 ease-out will-change-transform">
+                            <div class="flex items-center gap-2 md:gap-4">
+                                <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#2E5CFF] flex items-center justify-center font-bold text-white text-[10px] md:text-xs shadow-[0_0_10px_#2E5CFF]">A</div>
+                                <span class="font-bold text-white text-sm md:text-base">Candidato A</span>
+                            </div>
+                            <span id="val-a" class="font-mono text-[#2E5CFF] font-bold text-base md:text-lg">00.0%</span>
+                        </div>
+
+                        <div id="card-b" class="absolute w-full h-[60px] md:h-[72px] flex items-center justify-between p-3 md:p-4 bg-red-900/10 border border-red-500/30 rounded transition-transform duration-300 ease-out will-change-transform">
+                            <div class="flex items-center gap-2 md:gap-4">
+                                <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#FF1F1F] flex items-center justify-center font-bold text-white text-[10px] md:text-xs shadow-[0_0_10px_#FF1F1F]">B</div>
+                                <span class="font-bold text-white text-sm md:text-base">Candidato B</span>
+                            </div>
+                            <span id="val-b" class="font-mono text-[#FF1F1F] font-bold text-base md:text-lg">00.0%</span>
+                        </div>
+
+                        <div id="card-c" class="absolute w-full h-[60px] md:h-[72px] flex items-center justify-between p-3 md:p-4 bg-green-900/10 border border-green-500/30 rounded transition-transform duration-300 ease-out will-change-transform">
+                            <div class="flex items-center gap-2 md:gap-4">
+                                <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#00ED60] flex items-center justify-center font-bold text-black text-[10px] md:text-xs shadow-[0_0_10px_#00ED60]">C</div>
+                                <span class="font-bold text-white text-sm md:text-base">Candidato C</span>
+                            </div>
+                            <span id="val-c" class="font-mono text-[#00ED60] font-bold text-base md:text-lg">00.0%</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // --- CONFIGURAÇÃO RESPONSIVA ---
+            const CONFIG = {
+                points: 60,
+                lerpSpeed: 0.15,
+                get rankingRowHeight() {
+                    // Altura responsiva baseada na tela
+                    return window.innerWidth < 768 ? 68 : 88;
+                },
+                updateInterval: 1500
+            };
+
+            const state = {
+                candidates: {
+                    a: { id: 'a', val: 35, targetHistory: [], currentHistory: [], dom: {} },
+                    b: { id: 'b', val: 32, targetHistory: [], currentHistory: [], dom: {} },
+                    c: { id: 'c', val: 33, targetHistory: [], currentHistory: [], dom: {} }
+                }
+            };
+
+            const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
+
+            function init() {
+                Object.values(state.candidates).forEach(cand => {
+                    cand.dom.line = document.getElementById(`line-${cand.id}`);
+                    cand.dom.tip = document.getElementById(`tip-${cand.id}`);
+                    cand.dom.val = document.getElementById(`val-${cand.id}`);
+                    cand.dom.card = document.getElementById(`card-${cand.id}`);
+
+                    let v = cand.val;
+                    for(let i=0; i<CONFIG.points; i++) {
+                        v += (Math.random() - 0.5) * 4;
+                        v = Math.max(10, Math.min(60, v));
+                        cand.targetHistory.push(v);
+                        cand.currentHistory.push(v);
+                    }
+                });
+
+                requestAnimationFrame(animateLoop);
+                setInterval(updateTargets, CONFIG.updateInterval);
+            }
+
+            function animateLoop() {
+                updateMath();
+                renderGraph();
+                renderRanking();
+                requestAnimationFrame(animateLoop);
+            }
+
+            function updateMath() {
+                Object.values(state.candidates).forEach(cand => {
+                    cand.currentHistory = cand.currentHistory.map((curr, i) => {
+                        return lerp(curr, cand.targetHistory[i], CONFIG.lerpSpeed);
+                    });
+                    cand.val = cand.currentHistory[cand.currentHistory.length - 1];
+                });
+            }
+
+            function updateTargets() {
+                Object.values(state.candidates).forEach(cand => {
+                    cand.targetHistory.shift();
+                    const lastVal = cand.targetHistory[cand.targetHistory.length - 1];
+                    let nextVal = lastVal + (Math.random() - 0.5) * 20; 
+                    nextVal = Math.max(10, Math.min(60, nextVal));
+                    cand.targetHistory.push(nextVal);
+                });
+            }
+
+            function renderGraph() {
+                const svg = document.getElementById('election-chart');
+                if (!svg) return;
+                
+                const w = svg.clientWidth;
+                const h = svg.clientHeight;
+                const pad = window.innerWidth < 768 ? 15 : 20;
+                
+                Object.values(state.candidates).forEach(cand => {
+                    const data = cand.currentHistory;
+                    const len = data.length;
+                    
+                    const points = data.map((val, i) => {
+                        const x = pad + (i / (len - 1)) * (w - pad * 2);
+                        const y = h - pad - ((val / 70) * (h - pad * 2)); 
+                        return {x, y};
+                    });
+
+                    let d = `M ${points[0].x} ${points[0].y}`;
+                    for (let i = 0; i < points.length - 1; i++) {
+                        const curr = points[i];
+                        const next = points[i + 1];
+                        const mx = (curr.x + next.x) / 2;
+                        d += ` C ${mx} ${curr.y}, ${mx} ${next.y}, ${next.x} ${next.y}`;
+                    }
+                    
+                    if (cand.dom.line) cand.dom.line.setAttribute('d', d);
+
+                    const last = points[points.length - 1];
+                    if (cand.dom.tip) {
+                        cand.dom.tip.setAttribute('transform', `translate(${last.x}, ${last.y})`);
+                    }
+                    
+                    if (cand.dom.val) {
+                        cand.dom.val.innerText = cand.val.toFixed(1) + '%';
+                    }
+                });
+            }
+
+            function renderRanking() {
+                const sorted = Object.values(state.candidates).sort((a, b) => b.val - a.val);
+                
+                sorted.forEach((cand, index) => {
+                    if (cand.dom.card) {
+                        const yPos = index * CONFIG.rankingRowHeight;
+                        cand.dom.card.style.transform = `translateY(${yPos}px)`;
+                        
+                        if (index === 0) {
+                            cand.dom.card.style.borderColor = 'rgba(255,255,255,0.6)';
+                            cand.dom.card.style.zIndex = 10;
+                        } else {
+                            cand.dom.card.style.borderColor = '';
+                            cand.dom.card.style.zIndex = 1;
+                        }
+                    }
+                });
+            }
+
+            // Reinicializa ao redimensionar
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    renderRanking();
+                }, 250);
+            });
+
+            document.addEventListener('DOMContentLoaded', init);
+        </script>
+    </section>
+
+    <section class="py-12 md:py-20 border-t border-white/10 bg-[#020202]">
+        <div class="max-w-4xl mx-auto px-4 md:px-6 reveal">
+            <div class="flex items-center gap-3 md:gap-4 mb-8 md:mb-10">
+                <i data-lucide="activity" class="text-war-red w-5 h-5 md:w-6 md:h-6"></i>
+                <h2 class="text-xl md:text-2xl font-black text-white uppercase tracking-wider">Rotina Operacional</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row gap-4 p-4 md:p-6 border border-white/10 bg-war-card hover:border-war-red/50 transition-colors">
+                    <div class="md:w-32 flex-shrink-0">
+                        <span class="text-3xl md:text-4xl font-black text-white block">24h</span>
+                        <span class="text-war-red font-mono text-xs uppercase font-bold">Todo Dia</span>
+                    </div>
+                    <div class="flex-grow md:border-l border-white/10 md:pl-6 lg:pl-8 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2 h-2 bg-war-red rounded-full animate-pulse"></span>
+                            <span class="text-sm font-bold text-white">Breaking News (Imediato)</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-400 text-sm">
+                            <i data-lucide="check" class="w-3 h-3"></i> Análise da temperatura política
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-400 text-sm">
+                            <i data-lucide="check" class="w-3 h-3"></i> Conteúdo quente de bastidor
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos" class="py-16 md:py-24 relative overflow-hidden bg-war-red">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+        
+        <div class="max-w-3xl mx-auto px-4 md:px-6 text-center relative z-10 reveal">
+            <div class="w-12 h-12 md:w-16 md:h-16 bg-black text-white flex items-center justify-center mx-auto mb-6 border-2 border-white shadow-xl">
+                <i data-lucide="lock" class="w-6 h-6 md:w-8 md:h-8"></i>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase mb-6">
+                Acesso ao Monitor
+            </h2>
+            
+            <p class="text-white/80 font-mono text-xs md:text-sm mb-8 md:mb-10 max-w-lg mx-auto bg-black/20 p-3 md:p-4 border border-white/10">
+                // ACESSO LIBERADO ATÉ 26 DE OUTUBRO DE 2026.
+            </p>
+            
+            <button class="bg-black text-white hover:bg-gray-900 border-2 border-transparent hover:border-white w-full md:w-auto px-8 md:px-12 py-4 md:py-5 font-black uppercase tracking-widest text-xs md:text-sm transition-all shadow-2xl">
+                Garantir Minha Vaga
+            </button>
+        </div>
+    </section>
+
+    <footer class="bg-black text-gray-600 py-8 md:py-12 border-t border-white/10 font-mono text-xs">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-war-red"></div>
+                <span class="text-gray-400 text-center md:text-left">MONITOR 2026 INTELLIGENCE</span>
+            </div>
+            <div class="text-center md:text-right">
+                <p>&copy; 2024 TODOS OS DIREITOS RESERVADOS.</p>
+                <p class="mt-1">DADOS CRIPTOGRAFADOS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Scroll Animation Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
