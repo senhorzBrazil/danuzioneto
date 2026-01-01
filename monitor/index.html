@@ -211,68 +211,65 @@
         </div>
     </header>
 
-    <section class="relative pt-32 md:pt-48 pb-8 md:pb-12 border-b border-white/5">
+   <section class="relative pt-32 md:pt-48 pb-20 md:pb-32 border-b border-white/5 overflow-hidden">
         <div class="absolute inset-0 bg-dot-pattern opacity-40 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-war-red/5 blur-[120px] rounded-full pointer-events-none"></div>
         
         <div class="max-w-5xl mx-auto px-4 md:px-6 relative z-10 text-center">
             <div class="reveal inline-flex items-center gap-2 md:gap-3 mb-6 md:mb-8">
-                <span class="px-2 py-0.5 bg-war-red/10 border border-war-red text-war-red text-[10px] font-bold uppercase tracking-widest font-mono">
+                <span class="px-2 py-0.5 bg-war-red/10 border border-war-red text-war-red text-[10px] font-bold uppercase tracking-widest font-mono shadow-[0_0_15px_rgba(255,31,31,0.2)]">
                     LIVE FEED
                 </span>
-                <span class="text-gray-500 text-[10px] md:text-xs font-mono">ATUALIZADO: 14:02</span>
+                <span class="text-gray-500 text-[10px] md:text-xs font-mono flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                    SISTEMA ONLINE
+                </span>
             </div>
 
-            <h1 class="reveal delay-100 text-3xl md:text-5xl lg:text-7xl font-black text-white uppercase leading-[0.95] tracking-tight mb-6 md:mb-8">
+            <h1 class="reveal delay-100 text-3xl md:text-5xl lg:text-7xl font-black text-white uppercase leading-[0.95] tracking-tight mb-6 md:mb-8 drop-shadow-2xl">
                 Acompanhe os <br/>
-                Bastidores <span class="text-war-red">Reais</span> <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Em Tempo Real.</span>
+                Bastidores <span class="text-war-red relative inline-block">
+                    Reais
+                    <svg class="absolute w-full h-2 -bottom-1 left-0 text-war-red" viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+                    </svg>
+                </span> <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-600">Em Tempo Real.</span>
             </h1>
 
-            <p class="reveal delay-200 text-sm md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10 font-light px-4">
-                A mídia tradicional te entrega a superfície. Nós entregamos <strong class="text-white">inteligência eleitoral</strong>. Direto, sem filtros e antes de virar manchete.
+            <p class="reveal delay-200 text-sm md:text-lg text-gray-400 max-w-2xl mx-auto mb-10 md:mb-12 font-light px-4 leading-relaxed">
+                A mídia tradicional te entrega a superfície. Nós entregamos <strong class="text-white border-b border-war-red/30 pb-0.5">inteligência eleitoral</strong>. Direto, sem filtros e antes de virar manchete nos grandes portais.
             </p>
-        </div>
-    </section>
 
-    <section class="py-8 md:py-12 bg-war-bg border-b border-white/10">
-        <div class="max-w-5xl mx-auto px-4 md:px-6">
-            <div class="reveal delay-300 relative w-full aspect-video bg-black rounded-lg border border-white/10 shadow-[0_0_50px_-10px_rgba(255,31,31,0.1)] group overflow-hidden">
-                <div class="video-corner vc-tl"></div>
-                <div class="video-corner vc-tr"></div>
-                <div class="video-corner vc-bl"></div>
-                <div class="video-corner vc-br"></div>
-
-                <div class="absolute top-2 md:top-4 left-3 md:left-6 right-3 md:right-6 flex justify-between items-center z-20 pointer-events-none">
-                    <div class="flex items-center gap-1 md:gap-2">
-                        <div class="w-2 h-2 md:w-3 md:h-3 bg-war-red rounded-full animate-pulse shadow-[0_0_10px_#FF1F1F]"></div>
-                        <span class="text-white text-[8px] md:text-[10px] font-mono font-bold tracking-widest bg-black/50 px-1 md:px-2 py-0.5 md:py-1 backdrop-blur-sm">REC • LIVE</span>
-                    </div>
-                    <div class="text-[8px] md:text-[10px] font-mono text-gray-400 bg-black/50 px-1 md:px-2 py-0.5 md:py-1 backdrop-blur-sm hidden md:block">DANUZIO NETO // INTEL</div>
-                </div>
-
-                <div class="absolute inset-1 bg-war-card overflow-hidden flex items-center justify-center cursor-pointer">
-                    <div class="absolute inset-0 opacity-20 bg-[url('https://media.istockphoto.com/id/1320494666/vector/hud-futuristic-user-interface-screen-elements-set-high-tech-screens-for-video-game-sci-fi.jpg?s=612x612&w=0&k=20&c=N_yZ5wD5E5K4bWk6k8Vf5q6qZ9j1m8x7y0z2l4k3n2o=')] bg-cover bg-center transform transition-transform duration-1000 group-hover:scale-105"></div>
+            <div class="reveal delay-300 flex flex-col items-center gap-4">
+                <button onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})" 
+                        class="btn-war px-10 md:px-14 py-4 md:py-6 text-sm md:text-base inline-flex items-center justify-center gap-3 shadow-[0_0_25px_rgba(255,31,31,0.35)] hover:shadow-[0_0_40px_rgba(255,31,31,0.6)] w-full md:w-auto group relative overflow-hidden transition-all duration-300 transform hover:-translate-y-1">
                     
-                    <div class="relative z-10 flex flex-col items-center gap-3 md:gap-4 transition-transform duration-300 group-hover:scale-105">
-                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-war-red flex items-center justify-center bg-war-red/10 backdrop-blur-sm shadow-[0_0_30px_rgba(255,31,31,0.3)]">
-                            <i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-white fill-white ml-1"></i>
-                        </div>
-                        <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white group-hover:text-war-red transition-colors">Assistir Briefing</span>
-                    </div>
-                </div>
-
-                <div class="absolute bottom-2 md:bottom-4 left-3 md:left-6 right-3 md:right-6 flex justify-between items-center z-20 pointer-events-none opacity-60">
-                    <div class="w-full h-px bg-gradient-to-r from-transparent via-war-red to-transparent"></div>
-                </div>
-            </div>
-
-            <div class="reveal delay-300 mt-6 md:mt-8 text-center px-4">
-                <p class="text-gray-500 text-[10px] md:text-xs font-mono mb-4">[ ! ] ESTE VÍDEO CONTÉM INFORMAÇÕES SENSÍVEIS DE CENÁRIO</p>
-                <button onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})" class="btn-war px-8 md:px-12 py-4 md:py-5 text-xs md:text-sm inline-flex items-center justify-center gap-2 md:gap-3 shadow-glow-red w-full md:w-auto">
-                    <i data-lucide="lock-open" class="w-4 h-4"></i> Liberar Acesso ao Monitor
+                    <div class="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[25deg] group-hover:animate-[shine_0.75s_ease-in-out]"></div>
+                    
+                    <span class="relative z-10 font-black tracking-widest">LIBERAR ACESSO IMEDIATO</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10"></i>
                 </button>
+
+                <div class="flex items-center gap-4 text-[10px] md:text-xs font-mono text-gray-500 mt-2 opacity-80">
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="lock" class="w-3 h-3 text-war-blue"></i>
+                        Criptografia de Ponta
+                    </span>
+                    <span class="w-px h-3 bg-white/10"></span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-3 h-3 text-war-green"></i>
+                        Vagas Limitadas
+                    </span>
+                </div>
             </div>
         </div>
+        
+        <style>
+            @keyframes shine {
+                100% { left: 200%; }
+            }
+        </style>
     </section>
 
     <section class="py-16 md:py-24 bg-[#080808] border-b border-white/10 relative overflow-hidden">
@@ -486,7 +483,6 @@
         </div>
     </section>
     
-    <!-- SEÇÃO DO GRÁFICO - RESPONSIVA -->
     <section class="py-16 md:py-24 bg-[#050505] border-t border-white/10 relative overflow-hidden font-sans">
         <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
             
@@ -503,7 +499,6 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 
-                <!-- GRÁFICO -->
                 <div class="relative w-full h-[300px] md:h-[400px] bg-[#0A0A0A] border border-white/10 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                     <div class="absolute inset-0 opacity-20" 
                          style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 40px 40px;">
@@ -533,7 +528,6 @@
                     </div>
                 </div>
 
-                <!-- RANKING -->
                 <div class="flex flex-col h-[300px] md:h-[400px] bg-[#0A0A0A] border border-white/10 rounded-lg p-4 md:p-8 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white md:w-32 md:h-32"><line x1="10" x2="21" y1="6" y2="6"/><line x1="10" x2="21" y1="12" y2="12"/><line x1="10" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-2-1.5-2-1"/></svg>
@@ -575,13 +569,12 @@
             </div>
         </div>
 
-        <script>
+     <script>
             // --- CONFIGURAÇÃO RESPONSIVA ---
             const CONFIG = {
                 points: 60,
-                lerpSpeed: 0.15,
+                lerpSpeed: 0.1, // Velocidade suave
                 get rankingRowHeight() {
-                    // Altura responsiva baseada na tela
                     return window.innerWidth < 768 ? 68 : 88;
                 },
                 updateInterval: 1500
@@ -589,32 +582,116 @@
 
             const state = {
                 candidates: {
-                    a: { id: 'a', val: 35, targetHistory: [], currentHistory: [], dom: {} },
-                    b: { id: 'b', val: 32, targetHistory: [], currentHistory: [], dom: {} },
-                    c: { id: 'c', val: 33, targetHistory: [], currentHistory: [], dom: {} }
+                    a: { id: 'a', color: '#2E5CFF', targetHistory: [], currentHistory: [], val: 0, dom: {} },
+                    b: { id: 'b', color: '#FF1F1F', targetHistory: [], currentHistory: [], val: 0, dom: {} },
+                    c: { id: 'c', color: '#00ED60', targetHistory: [], currentHistory: [], val: 0, dom: {} }
                 }
             };
 
             const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
 
+            // Função auxiliar para garantir que 3 valores somem 100
+            function normalizeTo100(a, b, c) {
+                const total = a + b + c;
+                return {
+                    a: (a / total) * 100,
+                    b: (b / total) * 100,
+                    c: (c / total) * 100
+                };
+            }
+
             function init() {
+                // Mapear elementos do DOM
                 Object.values(state.candidates).forEach(cand => {
                     cand.dom.line = document.getElementById(`line-${cand.id}`);
                     cand.dom.tip = document.getElementById(`tip-${cand.id}`);
                     cand.dom.val = document.getElementById(`val-${cand.id}`);
                     cand.dom.card = document.getElementById(`card-${cand.id}`);
-
-                    let v = cand.val;
-                    for(let i=0; i<CONFIG.points; i++) {
-                        v += (Math.random() - 0.5) * 4;
-                        v = Math.max(10, Math.min(60, v));
-                        cand.targetHistory.push(v);
-                        cand.currentHistory.push(v);
-                    }
                 });
+
+                // Gerar histórico inicial
+                // Valores base iniciais (pesos brutos)
+                let rawA = 35;
+                let rawB = 32;
+                let rawC = 33;
+
+                for(let i = 0; i < CONFIG.points; i++) {
+                    // Adiciona uma pequena variação aleatória aos pesos brutos
+                    rawA += (Math.random() - 0.5) * 3;
+                    rawB += (Math.random() - 0.5) * 3;
+                    rawC += (Math.random() - 0.5) * 3;
+
+                    // Evita valores negativos ou zero
+                    rawA = Math.max(10, rawA);
+                    rawB = Math.max(10, rawB);
+                    rawC = Math.max(10, rawC);
+
+                    // Normaliza para somar 100%
+                    const norm = normalizeTo100(rawA, rawB, rawC);
+
+                    // Preenche os arrays
+                    state.candidates.a.targetHistory.push(norm.a);
+                    state.candidates.a.currentHistory.push(norm.a);
+                    
+                    state.candidates.b.targetHistory.push(norm.b);
+                    state.candidates.b.currentHistory.push(norm.b);
+                    
+                    state.candidates.c.targetHistory.push(norm.c);
+                    state.candidates.c.currentHistory.push(norm.c);
+                }
+
+                // Define valor inicial atual
+                state.candidates.a.val = state.candidates.a.currentHistory[CONFIG.points - 1];
+                state.candidates.b.val = state.candidates.b.currentHistory[CONFIG.points - 1];
+                state.candidates.c.val = state.candidates.c.currentHistory[CONFIG.points - 1];
 
                 requestAnimationFrame(animateLoop);
                 setInterval(updateTargets, CONFIG.updateInterval);
+            }
+
+            function updateTargets() {
+                // Pega os últimos valores ALVO (não os atuais interpolados)
+                let lastA = state.candidates.a.targetHistory[state.candidates.a.targetHistory.length - 1];
+                let lastB = state.candidates.b.targetHistory[state.candidates.b.targetHistory.length - 1];
+                let lastC = state.candidates.c.targetHistory[state.candidates.c.targetHistory.length - 1];
+
+                // Adiciona deriva (drift) aleatória
+                // Se um sobe, os outros tendem a descer naturalmente pela normalização,
+                // mas adicionamos variação individual primeiro.
+                let rawA = lastA + (Math.random() - 0.5) * 5;
+                let rawB = lastB + (Math.random() - 0.5) * 5;
+                let rawC = lastC + (Math.random() - 0.5) * 5;
+
+                // Limites de segurança (ninguém zera, ninguém passa de 80 sozinho antes de normalizar)
+                rawA = Math.max(5, Math.min(80, rawA));
+                rawB = Math.max(5, Math.min(80, rawB));
+                rawC = Math.max(5, Math.min(80, rawC));
+
+                // Normaliza para 100%
+                const norm = normalizeTo100(rawA, rawB, rawC);
+
+                // Atualiza Arrays (remove o primeiro, adiciona o novo no final)
+                const cands = state.candidates;
+                
+                cands.a.targetHistory.shift();
+                cands.a.targetHistory.push(norm.a);
+                
+                cands.b.targetHistory.shift();
+                cands.b.targetHistory.push(norm.b);
+                
+                cands.c.targetHistory.shift();
+                cands.c.targetHistory.push(norm.c);
+            }
+
+            function updateMath() {
+                Object.values(state.candidates).forEach(cand => {
+                    // Interpolação de todo o histórico para criar o efeito de "onda" andando
+                    cand.currentHistory = cand.currentHistory.map((curr, i) => {
+                        return lerp(curr, cand.targetHistory[i], CONFIG.lerpSpeed);
+                    });
+                    // O valor atual de exibição é o último ponto do gráfico
+                    cand.val = cand.currentHistory[cand.currentHistory.length - 1];
+                });
             }
 
             function animateLoop() {
@@ -622,25 +699,6 @@
                 renderGraph();
                 renderRanking();
                 requestAnimationFrame(animateLoop);
-            }
-
-            function updateMath() {
-                Object.values(state.candidates).forEach(cand => {
-                    cand.currentHistory = cand.currentHistory.map((curr, i) => {
-                        return lerp(curr, cand.targetHistory[i], CONFIG.lerpSpeed);
-                    });
-                    cand.val = cand.currentHistory[cand.currentHistory.length - 1];
-                });
-            }
-
-            function updateTargets() {
-                Object.values(state.candidates).forEach(cand => {
-                    cand.targetHistory.shift();
-                    const lastVal = cand.targetHistory[cand.targetHistory.length - 1];
-                    let nextVal = lastVal + (Math.random() - 0.5) * 20; 
-                    nextVal = Math.max(10, Math.min(60, nextVal));
-                    cand.targetHistory.push(nextVal);
-                });
             }
 
             function renderGraph() {
@@ -651,16 +709,21 @@
                 const h = svg.clientHeight;
                 const pad = window.innerWidth < 768 ? 15 : 20;
                 
+                // Escala vertical: 0 a 60% para dar respiro no gráfico
+                const maxScale = 60; 
+
                 Object.values(state.candidates).forEach(cand => {
                     const data = cand.currentHistory;
                     const len = data.length;
                     
                     const points = data.map((val, i) => {
                         const x = pad + (i / (len - 1)) * (w - pad * 2);
-                        const y = h - pad - ((val / 70) * (h - pad * 2)); 
+                        // Inverte Y pois SVG começa no topo
+                        const y = h - pad - ((val / maxScale) * (h - pad * 2)); 
                         return {x, y};
                     });
 
+                    // Desenhar curva Bezier suave
                     let d = `M ${points[0].x} ${points[0].y}`;
                     for (let i = 0; i < points.length - 1; i++) {
                         const curr = points[i];
@@ -671,11 +734,13 @@
                     
                     if (cand.dom.line) cand.dom.line.setAttribute('d', d);
 
+                    // Posicionar a bolinha na ponta
                     const last = points[points.length - 1];
                     if (cand.dom.tip) {
                         cand.dom.tip.setAttribute('transform', `translate(${last.x}, ${last.y})`);
                     }
                     
+                    // Atualizar texto de porcentagem
                     if (cand.dom.val) {
                         cand.dom.val.innerText = cand.val.toFixed(1) + '%';
                     }
@@ -683,6 +748,7 @@
             }
 
             function renderRanking() {
+                // Ordena baseada no valor atual
                 const sorted = Object.values(state.candidates).sort((a, b) => b.val - a.val);
                 
                 sorted.forEach((cand, index) => {
@@ -690,23 +756,26 @@
                         const yPos = index * CONFIG.rankingRowHeight;
                         cand.dom.card.style.transform = `translateY(${yPos}px)`;
                         
+                        // Destaque visual para o primeiro lugar
                         if (index === 0) {
                             cand.dom.card.style.borderColor = 'rgba(255,255,255,0.6)';
                             cand.dom.card.style.zIndex = 10;
+                            cand.dom.card.style.backgroundColor = `${cand.color}10`; // Hex alpha trick
                         } else {
                             cand.dom.card.style.borderColor = '';
                             cand.dom.card.style.zIndex = 1;
+                            cand.dom.card.style.backgroundColor = ''; 
                         }
                     }
                 });
             }
 
-            // Reinicializa ao redimensionar
+            // Reinicializa ao redimensionar a janela
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
-                    renderRanking();
+                    renderRanking(); // Ajusta altura das linhas
                 }, 250);
             });
 
@@ -741,6 +810,100 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    
+    <section class="py-16 md:py-24 bg-[#080808] border-t border-white/10 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-war-blue/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
+            
+            <div class="text-center mb-12 md:mb-16 reveal">
+                <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+                    <span class="w-2 h-2 bg-war-red rounded-full animate-pulse"></span>
+                    <span class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest">Acesso ao Comando</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-white uppercase leading-[0.9]">
+                    Quem comanda <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">A Operação?</span>
+                </h2>
+            </div>
+
+            <div class="reveal delay-100 relative bg-war-card border border-white/10 rounded-xl overflow-hidden hover:border-war-blue/30 transition-all duration-500 shadow-2xl">
+                
+                <div class="flex flex-col md:flex-row">
+                    
+                    <div class="md:w-2/5 relative min-h-[400px] md:min-h-full bg-gray-900 overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" 
+                             alt="Danuzio Neto" 
+                             class="absolute inset-0 w-full h-full object-cover opacity-90 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out">
+                        
+                        <div class="absolute inset-0 bg-[linear-gradient(transparent_2px,#000_3px)] bg-[length:100%_4px] opacity-20 pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-war-card via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-war-card"></div>
+                        
+                        <div class="absolute top-6 left-6 border-l-2 border-war-blue pl-3">
+                            <span class="block text-[10px] font-mono text-war-blue font-bold uppercase">Operador 01</span>
+                            <span class="block text-xs font-black text-white uppercase tracking-widest">Danuzio Neto</span>
+                        </div>
+                    </div>
+
+                    <div class="md:w-3/5 p-6 md:p-10 flex flex-col justify-center relative">
+                        <i data-lucide="fingerprint" class="absolute top-10 right-10 w-24 h-24 text-white/5 pointer-events-none"></i>
+
+                        <div class="mb-6">
+                            <h3 class="text-2xl md:text-4xl font-black text-white uppercase mb-2">Danuzio Neto</h3>
+                            <p class="text-sm font-mono text-war-blue font-bold uppercase tracking-widest border-b border-white/10 pb-4 inline-block">
+                                Head de Inteligência Política
+                            </p>
+                        </div>
+
+                        <p class="text-gray-400 font-light leading-relaxed mb-8 text-sm md:text-base">
+                            Jornalista político com acesso direto aos gabinetes que decidem o futuro do país. Enquanto a mídia especula, o Monitor 2026 trabalha com <strong class="text-white">fatos confirmados</strong>. 
+                            <br/><br/>
+                            Especialista em antecipar movimentos do xadrez eleitoral, Danuzio traduz o ruído de Brasília em informação acionável para quem não pode se dar ao luxo de ser surpreendido.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="bg-black/40 border border-white/5 p-3 rounded">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="shield" class="w-3 h-3 text-war-blue"></i>
+                                    <span class="text-[10px] text-gray-500 uppercase font-mono">Credencial</span>
+                                </div>
+                                <span class="text-white font-bold text-sm">Imprensa Oficial</span>
+                            </div>
+                            <div class="bg-black/40 border border-white/5 p-3 rounded">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="map-pin" class="w-3 h-3 text-war-red"></i>
+                                    <span class="text-[10px] text-gray-500 uppercase font-mono">Base</span>
+                                </div>
+                                <span class="text-white font-bold text-sm">Brasília, DF</span>
+                            </div>
+                            <div class="bg-black/40 border border-white/5 p-3 rounded">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="network" class="w-3 h-3 text-war-green"></i>
+                                    <span class="text-[10px] text-gray-500 uppercase font-mono">Network</span>
+                                </div>
+                                <span class="text-white font-bold text-sm">Executivo & Legislativo</span>
+                            </div>
+                            <div class="bg-black/40 border border-white/5 p-3 rounded">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="clock" class="w-3 h-3 text-yellow-500"></i>
+                                    <span class="text-[10px] text-gray-500 uppercase font-mono">Experiência</span>
+                                </div>
+                                <span class="text-white font-bold text-sm">15+ Anos de Cobertura</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 opacity-60">
+                            <div class="h-px bg-white/20 flex-1"></div>
+                            <span class="text-[10px] font-mono text-gray-500 uppercase">Dados Verificados</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
