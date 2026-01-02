@@ -29,13 +29,18 @@
                         }
                     },
                     boxShadow: {
-                        'glow-red': '0 0 30px rgba(255, 31, 31, 0.15)',
+                        'glow-red': '0 0 40px rgba(255, 31, 31, 0.15)',
                         'glow-blue': '0 0 30px rgba(46, 92, 255, 0.15)',
                         'glow-green': '0 0 30px rgba(0, 237, 96, 0.15)',
                     },
                     animation: {
                         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'spin-slow': 'spin 12s linear infinite',
+                    },
+                    // Adicionando border-radius específico para a silhueta de pasta
+                    borderRadius: {
+                        'folder-t': '1.5rem', 
+                        'folder-b': '0.25rem',
                     }
                 }
             }
@@ -90,6 +95,22 @@
             transform: translateY(-2px);
         }
         .btn-war:active { transform: translateY(1px) scale(0.98); }
+
+        /* --- FOLDER / FICHÁRIO STYLES --- */
+        .dossier-texture {
+            background-color: #0A0A0A;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .folder-transition {
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .folder-shape {
+             border-top-width: 8px;
+             border-radius: 1.5rem 1.5rem 0.25rem 0.25rem;
+        }
 
         /* Ticker */
         .ticker-container {
@@ -321,105 +342,86 @@
         </div>
     </section>
 
-    <section class="py-16 md:py-24 bg-[#0A0A0A] border-y border-white/10 relative">
+    <section class="py-16 md:py-24 bg-[#0A0A0A] border-y border-white/10 relative overflow-visible">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
         
         <div class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
-            <div class="flex items-center gap-3 mb-10 reveal">
-                <i data-lucide="folder-open" class="text-war-red w-6 h-6"></i>
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-black text-white uppercase">Arquivos de Acesso Imediato</h2>
-                    <p class="text-xs text-gray-500 font-mono mt-1">QUAIS BRIEFINGS VOCÊ DEVE LER ASSIM QUE ENTRAR</p>
-                </div>
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tight flex items-center justify-center gap-3">
+                    <i data-lucide="folder-open" class="w-6 h-6 text-war-red"></i>
+                    Arquivos de Acesso Imediato
+                </h2>
+                <p class="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">/// QUAIS BRIEFINGS VOCÊ DEVE LER ASSIM QUE ENTRAR</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="reveal delay-100 bg-[#050505] border-l-4 border-war-blue p-6 hover:translate-y-[-5px] transition-transform duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono font-bold text-war-blue bg-blue-900/20 px-2 py-1 rounded">BRIEFING #12 & #13</span>
-                        <i data-lucide="file-lock" class="w-4 h-4 text-gray-600"></i>
-                    </div>
-                    <h3 class="text-white font-bold text-lg mb-2 leading-tight">Lula: O Fim da Reeleição?</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Por que acredito que Lula não tentará a reeleição em 2026. Uma análise baseada em movimentações internas do partido.
-                    </p>
-                </div>
-
-                <div class="reveal delay-200 bg-[#050505] border-l-4 border-war-red p-6 hover:translate-y-[-5px] transition-transform duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono font-bold text-war-red bg-red-900/20 px-2 py-1 rounded">BRIEFING #17</span>
-                        <i data-lucide="file-lock" class="w-4 h-4 text-gray-600"></i>
-                    </div>
-                    <h3 class="text-white font-bold text-lg mb-2 leading-tight">Fator Moraes</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Alexandre de Moraes será candidato a presidente? Analisamos os sinais, a viabilidade e os movimentos de bastidor.
-                    </p>
-                </div>
-
-                <div class="reveal delay-300 bg-[#050505] border-l-4 border-white p-6 hover:translate-y-[-5px] transition-transform duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono font-bold text-white bg-white/10 px-2 py-1 rounded">BRIEFING #19</span>
-                        <i data-lucide="file-lock" class="w-4 h-4 text-gray-600"></i>
-                    </div>
-                    <h3 class="text-white font-bold text-lg mb-2 leading-tight">Suprema Corte & Política</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Dossiê histórico: Casos de ministros de Suprema Corte que cruzaram a linha e se envolveram diretamente com política.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-16 md:py-24 bg-[#080808] border-b border-white/10 relative overflow-hidden">
-        <div class="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
+            <div class="relative w-full max-w-2xl mx-auto mt-24 mb-32 group-perspective reveal delay-100">
                 
-                <div class="lg:w-1/2 reveal">
-                    <div class="inline-flex items-center gap-2 mb-4">
-                        <span class="w-2 h-2 bg-war-blue rounded-full animate-pulse"></span>
-                        <span class="text-xs font-mono text-war-blue font-bold uppercase">Contexto de Guerra</span>
+                <div class="folder-transition absolute -top-24 left-0 w-full scale-[0.94] z-0 hover:-translate-y-16 cursor-pointer group">
+                    <div class="dossier-texture folder-shape h-64 border border-white/10 border-t-war-green p-6 relative shadow-lg shadow-black/80 hover:border-war-green/50">
+                        
+                        <div class="absolute inset-0 bg-black/70 transition-opacity duration-300 group-hover:opacity-20 pointer-events-none folder-shape"></div>
+
+                        <div class="relative z-10 pb-4">
+                            <span class="text-[10px] font-mono font-bold text-war-green/80 uppercase tracking-widest">BRIEFING #12 & #13</span>
+                            <h3 class="text-lg font-bold text-gray-300 mt-1 uppercase leading-tight group-hover:text-white transition-colors">Lula: O Fim da Reeleição?</h3>
+                            
+                            <div class="mt-3 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+                                 <span class="text-xs font-mono text-gray-400">Análise de movimentações internas</span>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="text-2xl md:text-4xl font-black text-white uppercase leading-tight mb-6">
-                        Monitor 2026 não é um jornal.
-                    </h2>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
-                        Não queremos te "informar". Queremos te dar <strong class="text-white">vantagem cognitiva</strong>. Um briefing por dia. Curado. Sintetizado. Sem filtro editorial.
-                    </p>
                 </div>
 
-                <div class="lg:w-1/2 w-full reveal delay-200">
-                    <div class="relative bg-war-card border border-white/10 p-6 md:p-8 rounded-xl shadow-2xl hover:border-war-blue/30 transition-all duration-500">
-                        <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-6">
-                            <span class="text-[10px] font-mono text-gray-500">COMPARATIVO REAL</span>
-                            <i data-lucide="bar-chart-2" class="w-4 h-4 text-gray-500"></i>
+                <div class="folder-transition absolute -top-12 left-0 w-full scale-[0.97] z-10 hover:-translate-y-16 cursor-pointer group">
+                    <div class="dossier-texture folder-shape h-64 border border-white/10 border-t-white p-6 relative shadow-xl shadow-black/80 hover:border-white/50">
+                        
+                        <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:opacity-10 pointer-events-none folder-shape"></div>
+
+                        <div class="relative z-10 pb-4">
+                            <span class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest">BRIEFING #19</span>
+                            <h3 class="text-lg font-bold text-gray-300 mt-1 uppercase leading-tight group-hover:text-white transition-colors">Suprema Corte & Política</h3>
+                            
+                            <div class="mt-3 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+                                 <span class="text-xs font-mono text-gray-400">Dossiê Histórico: Ministros e Política</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="folder-transition relative z-20 hover:-translate-y-2 cursor-pointer group">
+                    <div class="dossier-texture folder-shape min-h-[280px] border border-white/10 border-t-war-red p-8 shadow-2xl shadow-black/90 hover:shadow-glow-red hover:border-war-red/50 transition-all">
+                        
+                        <div class="border-b border-white/10 pb-5 mb-5">
+                            <div class="flex items-center justify-between mb-2">
+                                 <span class="text-[10px] font-mono font-bold text-war-red uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="lock" class="w-3 h-3"></i> BRIEFING #17
+                                </span>
+                            </div>
+                           
+                            <h1 class="text-2xl md:text-3xl font-black text-white mt-1 uppercase leading-[0.95] tracking-tight">
+                                Fator Moraes
+                            </h1>
+                            
+                            <div class="mt-4 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-war-red/10 border border-war-red/30 flex items-center justify-center">
+                                     <i data-lucide="file-warning" class="w-4 h-4 text-war-red"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-white">Cenário 2026</span>
+                                    <span class="text-[10px] text-gray-500 font-mono uppercase">Alexandre será candidato?</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="mb-6 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                            <div class="flex justify-between text-xs font-bold uppercase mb-2 text-gray-400">
-                                <span>Mídia Tradicional</span>
-                                <span>Volume Excessivo</span>
-                            </div>
-                            <div class="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gray-500 w-[85%]"></div>
-                            </div>
-                            <p class="text-[10px] text-gray-500 mt-2 font-mono">// Delay de 24h • Narrativa Editorial</p>
-                        </div>
-
-                        <div class="relative scale-100 group-hover:scale-[1.02] transition-transform duration-500">
-                            <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-12 bg-war-blue"></div>
-                            <div class="flex justify-between text-xs font-bold uppercase mb-2 text-white">
-                                <span class="flex items-center gap-2"><i data-lucide="zap" class="w-3 h-3 text-war-blue"></i> Monitor 2026</span>
-                                <span class="text-war-blue animate-pulse">Síntese Imediata</span>
-                            </div>
-                            <div class="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-blue-600 to-war-blue w-[30%] shadow-[0_0_10px_#2E5CFF]"></div>
-                            </div>
-                            <p class="text-[10px] text-blue-200 mt-2 font-mono">// 1 Briefing Diário • Contexto Estratégico</p>
+                        <div class="text-gray-400 text-sm leading-relaxed font-light pl-2 border-l-2 border-war-red/20">
+                            <p>Analisamos os sinais, a viabilidade e os movimentos de bastidor sobre uma possível candidatura presidencial.</p>
                         </div>
                     </div>
                 </div>
 
             </div>
+            
+            <p class="text-center text-gray-600 text-[10px] font-mono uppercase mt-12 opacity-60">Passe o mouse nos dossiês anteriores para visualizar</p>
         </div>
     </section>
 
@@ -659,14 +661,12 @@
             }, 300);
         }
 
-        // Função Async para poder esperar o envio dos dados
         async function handleFormSubmit(e) {
             e.preventDefault();
             
             const btn = e.target.querySelector('button');
             const form = e.target;
             
-            // 1. Capturar os dados dos inputs
             const formData = {
                 nome: form.querySelector('input[name="nome"]').value,
                 email: form.querySelector('input[name="email"]').value,
@@ -675,12 +675,10 @@
                 origem: "Landing Page Monitor 2026"
             };
 
-            // Muda botão para estado de carregamento
             btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Validando acesso...';
             lucide.createIcons();
             
             try {
-                // 2. Enviar para o Webhook do Make
                 await fetch('https://hook.us1.make.com/excqknuh3a16f6ig7wmlbus91kjb69ec', {
                     method: 'POST',
                     headers: {
@@ -691,15 +689,11 @@
 
             } catch (error) {
                 console.error("Erro ao enviar dados:", error);
-                // Mesmo com erro de rede, liberamos o acesso para não travar o usuário
             }
 
-            // 3. Simular pequeno delay final e liberar o preço
             setTimeout(() => {
-                // Fechar o modal
                 closeModal();
 
-                // Trocar a visualização na página principal
                 const lockedSection = document.getElementById('planos-locked');
                 const unlockedSection = document.getElementById('planos-unlocked');
 
@@ -707,15 +701,12 @@
                 
                 unlockedSection.classList.remove('hidden');
                 
-                // Animação de entrada
                 setTimeout(() => {
                     unlockedSection.classList.remove('opacity-0', 'translate-y-10');
                 }, 50);
 
-                // Rolar até a seção de preço
                 document.getElementById('planos').scrollIntoView({behavior: 'smooth'});
 
-                // Recriar ícones
                 lucide.createIcons();
             }, 500);
         }
