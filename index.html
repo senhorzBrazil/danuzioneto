@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,10 +65,6 @@
         .modal-content { transform: scale(0.9) translateY(20px); transition: all 0.3s ease; }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
         
-        /* Price reveal */
-        .price-hidden { filter: blur(12px); user-select: none; pointer-events: none; opacity: 0.6; }
-        .price-revealed { filter: blur(0); opacity: 1; transition: all 0.6s ease; }
-        
         /* Loader */
         .loader {
             border: 3px solid rgba(156, 163, 175, 0.3);
@@ -106,22 +102,22 @@
 </head>
 <body class="bg-charcoal-950 text-slate-200 font-sans selection:bg-alert-500 selection:text-white">
 
-    <div id="leadModal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal-950/95 backdrop-blur-md">
-        <div class="modal-content bg-charcoal-900 border border-platinum-500/30 w-full max-w-md relative shadow-2xl shadow-platinum-500/10">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+    <div id="leadModal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal-950/95 backdrop-blur-md overflow-y-auto">
+        <div class="modal-content bg-charcoal-900 border border-platinum-500/30 w-full max-w-2xl relative shadow-2xl shadow-platinum-500/10 my-8">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors z-20">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             
-            <div id="formStep" class="p-8">
+            <div id="formStep" class="p-8 md:p-12">
                 <div class="text-center mb-8">
                     <div class="inline-flex items-center gap-2 px-3 py-1 bg-alert-900/30 text-alert-500 text-[10px] font-bold uppercase tracking-widest mb-4 border border-alert-500/30">
                         <i data-lucide="siren" class="w-3 h-3"></i> Canal Privado
                     </div>
-                    <h3 class="text-2xl font-serif font-black text-white mb-2">Acesso ao Telegram</h3>
-                    <p class="text-slate-400 text-sm">Entre no canal antes que o link seja revogado.</p>
+                    <h3 class="text-2xl md:text-3xl font-serif font-black text-white mb-2">Acesso ao Telegram</h3>
+                    <p class="text-slate-400 text-sm">Preencha seus dados para liberar a visualização dos planos.</p>
                 </div>
                 
-                <form id="leadForm" class="space-y-4">
+                <form id="leadForm" class="space-y-4 max-w-sm mx-auto">
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">Nome Completo</label>
                         <input type="text" id="leadName" required 
@@ -134,28 +130,79 @@
                             class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
                             placeholder="seu@email.com">
                     </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">WhatsApp</label>
+                        <input type="tel" id="leadPhone" required maxlength="15"
+                            onkeyup="handlePhone(event)"
+                            class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
+                            placeholder="(DD) 99999-9999">
+                    </div>
                     
-                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-platinum-500 to-platinum-300 hover:from-white hover:to-platinum-300 text-charcoal-950 py-4 text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-platinum-500/20">
-                        <span id="btnText">Gerar Link de Acesso</span>
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-platinum-500 to-platinum-300 hover:from-white hover:to-platinum-300 text-charcoal-950 py-4 text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-platinum-500/20 mt-6">
+                        <span id="btnText">Liberar Acesso</span>
                         <div id="btnLoader" class="loader hidden"></div>
                     </button>
                 </form>
                 
                 <p class="text-center text-[10px] text-slate-500 mt-4">
-                    Link único e intransferível.
+                    Seus dados estão seguros e criptografados.
                 </p>
             </div>
             
-            <div id="successStep" class="p-8 hidden">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-[#229ED9]/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-[#229ED9]/30">
-                        <i data-lucide="send" class="w-8 h-8 text-[#229ED9] ml-1"></i>
+            <div id="successStep" class="hidden p-6 md:p-10 bg-charcoal-900">
+                <div class="text-center mb-8">
+                    <div class="w-12 h-12 bg-[#229ED9]/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#229ED9]/30">
+                        <i data-lucide="check" class="w-6 h-6 text-[#229ED9]"></i>
                     </div>
-                    <h3 class="text-2xl font-serif font-black text-white mb-2">Link Gerado!</h3>
-                    <p class="text-slate-400 text-sm mb-6">Confira abaixo os planos para confirmar sua entrada.</p>
-                    <button onclick="closeModalAndReveal()" class="w-full bg-[#229ED9] hover:bg-[#1e8kb9] text-white py-4 text-sm font-bold uppercase tracking-widest transition-all">
-                        Ver Planos
-                    </button>
+                    <h3 class="text-2xl font-serif font-black text-white mb-2">Escolha seu Acesso</h3>
+                    <p class="text-slate-400 text-sm">Selecione o plano ideal para você.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-charcoal-800 bg-charcoal-950/50 p-6 hover:border-platinum-500/50 transition-all group relative flex flex-col">
+                        <h4 class="text-platinum-300 text-xs font-bold uppercase tracking-widest mb-2">Padrão</h4>
+                        <h3 class="text-xl font-serif font-bold text-white mb-4">Sem Censura</h3>
+                        <ul class="space-y-2 mb-6 flex-1">
+                            <li class="text-xs text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Áudios Diários</li>
+                            <li class="text-xs text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Análises Políticas</li>
+                            <li class="text-xs text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Canal Exclusivo</li>
+                        </ul>
+                        <div class="border-t border-charcoal-800 pt-4 mt-auto">
+                            <p class="text-xs text-slate-500 line-through mb-1">De R$ 497,00</p>
+                            <div class="flex items-end gap-1 mb-4">
+                                <span class="text-sm text-platinum-400 pb-1">12x</span>
+                                <span class="text-3xl font-bold text-white">R$ 29,93</span>
+                            </div>
+                            <p class="text-[10px] text-slate-500 mb-4">ou R$ 295,00 à vista</p>
+                            <a href="#" target="_blank" class="block w-full text-center bg-charcoal-800 hover:bg-platinum-500 hover:text-charcoal-950 text-white py-3 text-xs font-bold uppercase tracking-widest transition-all border border-platinum-500/30">
+                                Assinar Agora
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="border border-alert-900/50 bg-gradient-to-b from-alert-900/10 to-charcoal-950 p-6 relative flex flex-col shadow-lg shadow-alert-900/10">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-alert-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-lg">
+                            Recomendado
+                        </div>
+                        <h4 class="text-alert-500 text-xs font-bold uppercase tracking-widest mb-2 mt-2">Completo</h4>
+                        <h3 class="text-xl font-serif font-bold text-white mb-4">Combo Todos os Canais</h3>
+                        <ul class="space-y-2 mb-6 flex-1">
+                            <li class="text-xs text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> <strong>Tudo do Sem Censura</strong></li>
+                            <li class="text-xs text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Todos os produtos digitais</li>
+                            <li class="text-xs text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Acesso total ao acervo</li>
+                        </ul>
+                        <div class="border-t border-alert-900/30 pt-4 mt-auto">
+                            <p class="text-xs text-slate-500 line-through mb-1">De R$ 997,00</p>
+                            <div class="flex items-end gap-1 mb-4">
+                                <span class="text-sm text-platinum-400 pb-1">12x</span>
+                                <span class="text-3xl font-bold text-white text-gradient-platinum">R$ 70,92</span>
+                            </div>
+                            <p class="text-[10px] text-slate-500 mb-4">ou R$ 699,00 à vista</p>
+                            <a href="https://lastlink.com/p/C9622481A/checkout-payment/" target="_blank" class="block w-full text-center bg-alert-600 hover:bg-alert-500 text-white py-3 text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-alert-600/20">
+                                Quero Tudo
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,7 +311,7 @@
                     Neste espaço exclusivo, eu falo <strong class="text-white border-b border-alert-500/50">TUDO</strong> o que penso.
                 </p>
                 <p>
-                    Sem medo. Sem amarras. Sem me preocupar com "cancelamento".
+                    Sem medo. Sem amarras. Sem me preocupar com "cancelamento". 
                     <span class="text-white font-bold block mt-4">Bem-vindo à liberdade de verdade.</span>
                 </p>
             </div>
@@ -500,135 +547,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="flex justify-end items-center gap-1 mt-2">
-                                        <i data-lucide="eye" class="w-3 h-3 text-[#6c7883]"></i>
-                                        <span class="text-[10px] text-[#6c7883]">3.5K</span>
-                                        <span class="text-[10px] text-[#6c7883] ml-1">20:58</span>
-                                    </div>
                                 </div>
 
-                                <div class="self-start max-w-[90%] bg-[#182533] rounded-2xl rounded-tl-none p-3 shadow-sm border border-black/10">
-                                    <p class="text-[13px] text-[#e4ecf2] leading-snug">
-                                        Preparem-se. O que vou soltar amanhã cedo vai derrubar narrativas.
-                                    </p>
-                                    <div class="flex justify-end items-center gap-1 mt-1">
-                                        <i data-lucide="eye" class="w-3 h-3 text-[#6c7883]"></i>
-                                        <span class="text-[10px] text-[#6c7883]">1.8K</span>
-                                        <span class="text-[10px] text-[#6c7883] ml-1">21:03</span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="bg-[#17212b] p-2 border-t border-black/20">
-                                <div class="w-full py-2.5 flex items-center justify-center gap-2 uppercase text-[#6c7883] text-xs font-bold tracking-wide hover:bg-white/5 transition-colors rounded cursor-pointer">
-                                    SILENCIAR
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="mentor" class="py-24 bg-charcoal-950 text-white border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-platinum-500/30 bg-platinum-500/5 text-platinum-300 backdrop-blur-md mb-8 uppercase tracking-[0.2em] text-[10px] font-bold rounded-full">
-                <i data-lucide="user" class="w-3 h-3"></i> Prof. Danuzio Neto
-            </div>
-            
-            <h2 class="text-4xl font-serif text-white mb-8">Mais que um professor, <br />um <span class="text-platinum-300 italic">aliado na trincheira.</span></h2>
-            
-            <p class="text-slate-400 text-lg leading-relaxed mb-12">
-                "Não criei este canal para ser politicamente correto. Criei para ser um refúgio de sanidade em um mundo dominado pela histeria e pela censura. Se você quer a verdade, doa a quem doer, este é o seu lugar."
-            </p>
-
-            <div class="w-24 h-1 bg-platinum-500 mx-auto"></div>
-        </div>
-    </section>
-
-    <section id="investimento" class="py-24 bg-charcoal-900 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 border bg-alert-600 border-alert-500 text-white mb-6 uppercase tracking-[0.2em] text-[10px] font-bold">
-                        <i data-lucide="siren" class="w-3 h-3"></i> Vagas Limitadas
-                    </div>
-                    <h2 class="text-5xl font-serif font-black text-white mb-6 tracking-tighter leading-tight">Pare de depender das <br>Big Techs.</h2>
-                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                        Quando o grupo atingir a capacidade técnica ou de segurança, a porta fecha. Garanta seu acesso vitalício à informação livre.
-                    </p>
-                    
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-platinum-300"></i>
-                            <span class="font-medium text-slate-300">Acesso imediato e sem censura</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-alert-500"></i>
-                            <span class="font-medium text-slate-300">Conteúdo que não vai para o Instagram</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-platinum-300"></i>
-                            <span class="font-medium text-slate-300">Garantia total de 7 dias</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative">
-                    <div class="bg-charcoal-950 border border-platinum-500/30 p-8 md:p-12 relative z-10 shadow-2xl shadow-platinum-500/10">
-                        
-                        <div id="priceLockOverlay" class="absolute inset-0 bg-charcoal-950/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 border border-white/5">
-                            <div class="w-16 h-16 bg-platinum-300 text-charcoal-950 flex items-center justify-center mb-6 rounded-full shadow-lg shadow-platinum-500/50">
-                                <i data-lucide="lock" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-center mb-2 text-white">Condição Exclusiva</h3>
-                            <p class="text-slate-400 text-sm text-center mb-6">Clique abaixo para liberar o valor especial de lançamento.</p>
-                            <button onclick="openModal()" class="bg-white hover:bg-slate-200 text-charcoal-950 py-4 px-8 text-sm font-bold uppercase tracking-widest transition-all">
-                                Liberar Acesso
-                            </button>
-                        </div>
-                        
-                        <div id="priceContent" class="price-hidden flex flex-col gap-6">
-                            
-                            <div class="border border-slate-700 p-6 opacity-90 hover:opacity-100 transition-opacity bg-charcoal-900/30">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-white text-base font-bold uppercase tracking-wider">Danuzio Neto Sem Censura</h4>
-                                    <span class="bg-slate-700 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Básico</span>
-                                </div>
-                                <div class="flex items-baseline gap-2 mb-2">
-                                    <span class="text-sm text-slate-400">12x de</span>
-                                    <span class="text-3xl font-black text-white">R$ 23,23</span>
-                                </div>
-                                <p class="text-xs text-slate-500 mb-5">ou R$ 229,00 à vista</p>
-                                <a href="https://lastlink.com/p/C7E442417/checkout-payment/" class="block w-full text-center bg-transparent border border-white/20 hover:bg-white/10 text-white py-3 text-sm font-bold uppercase tracking-widest transition-all">
-                                    Assinar Agora
-                                </a>
-                            </div>
-
-                            <div class="border-2 border-platinum-300 p-6 relative bg-charcoal-900/80 shadow-lg shadow-platinum-500/5">
-                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-platinum-300 text-charcoal-950 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
-                                    Mais Completo
-                                </div>
-                                <h4 class="text-platinum-300 text-sm font-bold uppercase tracking-widest mb-2 text-center">Combo Completo</h4>
-                                <p class="text-xs text-center text-slate-400 mb-4 px-4 leading-relaxed">
-                                    Sem Censura + Geopolítica p/ Investidores + Monitor de Guerra
-                                </p>
-                                <div class="flex items-baseline justify-center gap-2 mb-2">
-                                    <span class="text-sm text-slate-400">12x de</span>
-                                    <span class="text-4xl font-black text-white">R$ 46,47</span>
-                                </div>
-                                <p class="text-xs text-center text-slate-500 mb-6">ou R$ 458,00 à vista</p>
-                                <a href="https://lastlink.com/p/C9622481A/checkout-payment/" class="block w-full text-center bg-platinum-300 hover:bg-white text-charcoal-950 py-3 text-sm font-bold uppercase tracking-widest transition-all shadow-lg shadow-platinum-500/20">
-                                    Quero o Combo
-                                </a>
                             </div>
                             
-                            <p class="text-center text-xs text-slate-500 flex items-center justify-center gap-2 mt-2">
-                                <i data-lucide="lock" class="w-3 h-3"></i> Pagamento Seguro via Lastlink
-                            </p>
+                            <div class="px-4 py-3 bg-[#17212b]/90 backdrop-blur-sm mt-auto text-center border-t border-black/10">
+                                <span class="text-[#6c7883] text-[10px] uppercase tracking-widest font-bold">Transmissão Ativa</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -636,130 +561,93 @@
         </div>
     </section>
 
-   <footer class="bg-charcoal-950 text-slate-600 py-16 border-t border-charcoal-900">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 flex items-center justify-center border border-alert-900 text-alert-700 rounded-sm">
-                    <i data-lucide="eye-off" class="w-4 h-4"></i>
-                </div>
-                <span class="text-white font-serif font-bold text-xl tracking-wide">SEM CENSURA</span>
-            </div>
-            <div class="flex gap-8 text-xs font-bold uppercase tracking-widest">
-                <a href="#" class="hover:text-platinum-300 transition-colors">Termos</a>
-                <a href="#" class="hover:text-platinum-300 transition-colors">Privacidade</a>
-                <a href="#" class="hover:text-platinum-300 transition-colors">Suporte</a>
-            </div>
-        </div>
-        
-        <div class="text-center md:text-left border-t border-charcoal-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-            <p>© 2024 Prof. Danuzio Neto. Todos os direitos reservados.</p>
-            
-            <p>
-                Página desenvolvida por 
-                <a href="https://www.instagram.com/mateusmvniz/" target="_blank" rel="noopener noreferrer" class="text-white font-bold hover:text-platinum-300 transition-colors">
-                    Mateus Muniz
-                </a>
-            </p>
-
-            <p class="opacity-60">
-               Liberdade de expressão é inegociável.
-            </p>
-        </div>
-    </div>
-</footer>
+    <footer class="bg-charcoal-950 border-t border-white/5 py-12 text-center">
+        <p class="text-slate-500 text-xs font-medium uppercase tracking-widest">
+            &copy; 2024 Prof. Danuzio Neto. Todos os direitos reservados.
+        </p>
+    </footer>
 
     <script>
+        // Inicializa ícones
         lucide.createIcons();
-        
-        // State management
-        let priceRevealed = localStorage.getItem('semcensura_price_revealed_v4') === 'true';
-        
-        if (priceRevealed) {
-            revealPrice();
+
+        // Máscara de Telefone
+        function handlePhone(event) {
+            let input = event.target;
+            input.value = phoneMask(input.value);
         }
-        
-        // Modal Logic
+
+        function phoneMask(value) {
+            if (!value) return "";
+            value = value.replace(/\D/g,'');
+            value = value.replace(/(\d{2})(\d)/,"($1) $2");
+            value = value.replace(/(\d)(\d{4})$/,"$1-$2");
+            return value;
+        }
+
+        // Modal Functions
         function openModal() {
-            if (priceRevealed) {
-                scrollToPrice();
-                return;
-            }
             document.getElementById('leadModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        
+
         function closeModal() {
             document.getElementById('leadModal').classList.remove('active');
-            document.body.style.overflow = '';
+            document.body.style.overflow = 'auto';
         }
-        
-        function closeModalAndReveal() {
-            closeModal();
-            revealPrice();
-            setTimeout(() => {
-                scrollToPrice();
-            }, 300);
-        }
-        
-        function revealPrice() {
-            priceRevealed = true;
-            localStorage.setItem('semcensura_price_revealed_v4', 'true');
-            
-            const overlay = document.getElementById('priceLockOverlay');
-            const priceContent = document.getElementById('priceContent');
-            
-            if (overlay) {
-                overlay.style.opacity = '0';
-                overlay.style.pointerEvents = 'none';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
-            }
-            
-            if (priceContent) {
-                priceContent.classList.remove('price-hidden');
-                priceContent.classList.add('price-revealed');
-            }
-        }
-        
-        function scrollToPrice() {
-            document.getElementById('investimento').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Form Handling
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
+
+        // FORM SUBMISSION & WEBHOOK
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('btnLoader');
             const name = document.getElementById('leadName').value;
             const email = document.getElementById('leadEmail').value;
+            const phone = document.getElementById('leadPhone').value;
+
+            // UI Loading state
+            btnText.classList.add('hidden');
+            loader.classList.remove('hidden');
+            btn.disabled = true;
+
+            // ==========================================
+            // INSIRA SUA URL DO WEBHOOK AQUI EMBAIXO
+            // ==========================================
+            const WEBHOOK_URL = 'SUA_URL_DO_WEBHOOK_AQUI'; 
             
-            // UI Loading State
-            document.getElementById('btnText').classList.add('hidden');
-            document.getElementById('btnLoader').classList.remove('hidden');
-            document.getElementById('submitBtn').disabled = true;
-            
-            // Simulate API delay
-            setTimeout(() => {
-                console.log('Lead captured:', { name, email });
-                
+            try {
+                if (WEBHOOK_URL && WEBHOOK_URL !== 'SUA_URL_DO_WEBHOOK_AQUI') {
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            phone: phone,
+                            date: new Date().toISOString()
+                        })
+                    });
+                } else {
+                    console.log("Simulando envio (configure o webhook no código):", { name, email, phone });
+                    await new Promise(r => setTimeout(r, 1500)); // Simula delay
+                }
+
+                // Sucesso: Troca para a tela de planos
                 document.getElementById('formStep').classList.add('hidden');
                 document.getElementById('successStep').classList.remove('hidden');
                 
-                lucide.createIcons();
-            }, 1000);
-        });
-        
-        // Close on Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
-        
-        // Close on Overlay Click
-        document.getElementById('leadModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao processar. Tente novamente.');
+                btnText.classList.remove('hidden');
+                loader.classList.add('hidden');
+                btn.disabled = false;
+            }
         });
     </script>
-    
 </body>
 </html>
