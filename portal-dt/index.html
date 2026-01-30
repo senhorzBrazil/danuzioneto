@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global English School | Domine o Mundo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-primary { background-color: #e11d48; }
+        .text-primary { color: #e11d48; }
+        .border-primary { border-color: #e11d48; }
+        .swiper-pagination-bullet-active { background: #e11d48 !important; }
+        
+        .hero-pagination .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(225, 29, 72, 0.2);
+            opacity: 1;
+        }
+
+        .hero-pagination .swiper-pagination-bullet-active {
+            background: #e11d48;
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        .category-tag {
+            transition: all 0.3s ease;
+        }
+
+        .category-tag:hover {
+            transform: translateY(-2px);
+        }
+
+        .article-card {
+            transition: all 0.4s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+        }
+    </style>
+</head>
+<body class="bg-white text-zinc-900">
+
+    <header class="bg-white sticky top-0 z-[100] border-b border-zinc-100 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <div class="text-2xl font-black uppercase tracking-tighter text-zinc-900">
+                    GLOBAL <span class="text-primary">ENGLISH</span>
+                </div>
+                <nav class="hidden lg:flex gap-6 text-[11px] font-bold uppercase tracking-widest text-zinc-500">
+                    <a href="#" class="hover:text-primary transition">Cursos</a>
+                    <a href="#" class="hover:text-primary transition">Metodologia</a>
+                    <a href="#" class="hover:text-primary transition">Unidades</a>
+                    <a href="#" class="hover:text-primary transition">Blog</a>
+                </nav>
+            </div>
+            <div class="flex gap-4">
+                <button class="hidden md:block text-[10px] font-black uppercase tracking-widest px-4">Portal do Aluno</button>
+                <button class="bg-primary hover:bg-rose-700 text-white px-8 py-3 rounded-full text-[10px] font-black uppercase transition-all shadow-lg shadow-rose-200">
+                    Agende uma Aula Grátis
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-10 md:py-20 bg-zinc-50">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <div class="swiper heroSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="grid lg:grid-cols-2 gap-12 items-center">
+                            <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square lg:aspect-video">
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover">
+                            </div>
+                            <div class="space-y-6">
+                                <span class="text-primary font-black uppercase tracking-[0.3em] text-xs">Matrículas Abertas 2026</span>
+                                <h1 class="text-5xl md:text-7xl font-black leading-tight tracking-tighter text-zinc-950">SPEAK ENGLISH <br>NATURALLY.</h1>
+                                <p class="text-zinc-600 text-lg">Aprenda com nossa metodologia imersiva focada 100% em conversação real. Deixe o medo de falar para trás.</p>
+                                <div class="flex gap-4">
+                                    <button class="bg-primary text-white px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition shadow-xl">Quero começar</button>
+                                    <button class="border-2 border-zinc-200 text-zinc-900 px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-white transition">Nossos Cursos</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-pagination mt-12"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white border-b-2 border-zinc-100">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-xs font-black uppercase tracking-[0.3em] text-zinc-400">Explore por Categoria</h3>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <button class="category-tag bg-primary text-white px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">Todos os Posts</button>
+                <button class="category-tag bg-zinc-100 hover:bg-zinc-200 text-zinc-700 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Carreira</button>
+                <button class="category-tag bg-zinc-100 hover:bg-zinc-200 text-zinc-700 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Grammar Tips</button>
+                <button class="category-tag bg-zinc-100 hover:bg-zinc-200 text-zinc-700 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Vocabulário</button>
+                <button class="category-tag bg-zinc-100 hover:bg-zinc-200 text-zinc-700 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Business English</button>
+                <button class="category-tag bg-zinc-100 hover:bg-zinc-200 text-zinc-700 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Cultura</button>
+                <button class="category-tag bg-zinc-100 hover:bg-zinc-200 text-zinc-700 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Entrevistas</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-black uppercase tracking-tighter">Aprenda em Minutos</h2>
+                    <p class="text-zinc-500 font-medium">Dicas rápidas com nossos professores nativos</p>
+                </div>
+                <div class="h-[2px] bg-zinc-100 flex-grow mx-8 hidden md:block"></div>
+                <button class="text-primary font-black uppercase text-[10px] tracking-widest">Ver Canal no YouTube →</button>
+            </div>
+
+            <div class="swiper videosSwiper overflow-hidden">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide space-y-4 group cursor-pointer">
+                        <div class="relative rounded-3xl overflow-hidden aspect-video shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-primary/40 transition-all">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-xl">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-black uppercase leading-tight">Como usar "Get" de 5 formas diferentes</h3>
+                        <span class="bg-zinc-100 text-zinc-500 text-[9px] px-2 py-1 rounded font-bold uppercase">Nível Intermediário</span>
+                    </div>
+
+                    <div class="swiper-slide space-y-4 group cursor-pointer">
+                        <div class="relative rounded-3xl overflow-hidden aspect-video shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-primary/40 transition-all">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-xl">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-black uppercase leading-tight">Phrasal Verbs para o dia a dia</h3>
+                        <span class="bg-zinc-100 text-zinc-500 text-[9px] px-2 py-1 rounded font-bold uppercase">Básico</span>
+                    </div>
+
+                    <div class="swiper-slide space-y-4 group cursor-pointer">
+                        <div class="relative rounded-3xl overflow-hidden aspect-video shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-primary/40 transition-all">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-xl">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-black uppercase leading-tight">Pronúncia: Sons que não existem em português</h3>
+                        <span class="bg-zinc-100 text-zinc-500 text-[9px] px-2 py-1 rounded font-bold uppercase">Intermediário</span>
+                    </div>
+
+                    <div class="swiper-slide space-y-4 group cursor-pointer">
+                        <div class="relative rounded-3xl overflow-hidden aspect-video shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-primary/40 transition-all">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-xl">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-black uppercase leading-tight">Business English: Expressões para reuniões</h3>
+                        <span class="bg-zinc-100 text-zinc-500 text-[9px] px-2 py-1 rounded font-bold uppercase">Avançado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-[1400px] mx-auto px-4 py-8">
+        <div class="bg-primary rounded-[2.5rem] p-8 md:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-rose-200">
+            <div class="text-center md:text-left">
+                <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">50% OFF NA MATRÍCULA</h3>
+                <p class="text-rose-100 mt-2 font-medium">Válido apenas para as primeiras 20 matrículas deste mês.</p>
+            </div>
+            <button class="bg-white text-primary px-12 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-zinc-100 transition shadow-xl">
+                Garantir Desconto
+            </button>
+        </div>
+    </div>
+
+    <section class="py-20">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <div class="grid lg:grid-cols-3 gap-16">
+                
+                <div class="lg:col-span-2 space-y-12">
+                    <div class="flex items-center justify-between border-b-4 border-zinc-950 pb-4">
+                        <h2 class="text-3xl font-black uppercase tracking-tighter">Educational Insights</h2>
+                        <button class="text-[10px] font-black uppercase tracking-widest text-zinc-400 hover:text-primary">Ver Todos</button>
+                    </div>
+                    
+                    <article class="group cursor-pointer">
+                        <div class="overflow-hidden rounded-[2.5rem] aspect-video mb-8">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-primary font-black uppercase text-xs tracking-widest">Carreira & Business</span>
+                                <span class="text-zinc-400 text-xs">•</span>
+                                <span class="text-zinc-400 text-xs font-medium">12 min de leitura</span>
+                            </div>
+                            <h2 class="text-4xl font-black uppercase tracking-tighter leading-tight group-hover:text-primary transition">O Inglês como acelerador de carreira em empresas de tecnologia</h2>
+                            <p class="text-zinc-500 text-lg leading-relaxed">Entenda por que o domínio do idioma não é mais um diferencial, mas um pré-requisito para salários acima de R$ 15k.</p>
+                            <div class="flex items-center justify-between pt-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-zinc-200 rounded-full"></div>
+                                    <div>
+                                        <p class="text-xs font-black uppercase">Por Sarah Johnson</p>
+                                        <p class="text-[10px] text-zinc-400 uppercase tracking-wider">28 Jan 2026</p>
+                                    </div>
+                                </div>
+                                <button class="border-b-2 border-primary pb-1 text-xs font-black uppercase">Ler artigo completo</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <article class="article-card bg-white border-2 border-zinc-100 rounded-[2rem] overflow-hidden group cursor-pointer">
+                            <div class="overflow-hidden aspect-video">
+                                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <span class="bg-rose-50 text-primary text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-wider">Grammar Tips</span>
+                                <h3 class="text-xl font-black uppercase leading-tight group-hover:text-primary transition">Present Perfect: Quando e como usar corretamente</h3>
+                                <p class="text-zinc-500 text-sm">Um dos tempos verbais que mais confundem brasileiros. Aprenda de vez.</p>
+                                <div class="flex items-center gap-2 pt-2 text-[10px] text-zinc-400 font-medium">
+                                    <span>24 Jan 2026</span>
+                                    <span>•</span>
+                                    <span>8 min</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="article-card bg-white border-2 border-zinc-100 rounded-[2rem] overflow-hidden group cursor-pointer">
+                            <div class="overflow-hidden aspect-video">
+                                <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <span class="bg-rose-50 text-primary text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-wider">Vocabulário</span>
+                                <h3 class="text-xl font-black uppercase leading-tight group-hover:text-primary transition">50 expressões idiomáticas que todo fluente precisa saber</h3>
+                                <p class="text-zinc-500 text-sm">De "piece of cake" a "break the ice" - domine o inglês coloquial.</p>
+                                <div class="flex items-center gap-2 pt-2 text-[10px] text-zinc-400 font-medium">
+                                    <span>22 Jan 2026</span>
+                                    <span>•</span>
+                                    <span>15 min</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="article-card bg-white border-2 border-zinc-100 rounded-[2rem] overflow-hidden group cursor-pointer">
+                            <div class="overflow-hidden aspect-video">
+                                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <span class="bg-rose-50 text-primary text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-wider">Cultura</span>
+                                <h3 class="text-xl font-black uppercase leading-tight group-hover:text-primary transition">Diferenças entre inglês americano e britânico</h3>
+                                <p class="text-zinc-500 text-sm">Pronúncia, vocabulário e gramática: entenda as variações do idioma.</p>
+                                <div class="flex items-center gap-2 pt-2 text-[10px] text-zinc-400 font-medium">
+                                    <span>20 Jan 2026</span>
+                                    <span>•</span>
+                                    <span>10 min</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="article-card bg-white border-2 border-zinc-100 rounded-[2rem] overflow-hidden group cursor-pointer">
+                            <div class="overflow-hidden aspect-video">
+                                <img src="https://images.unsplash.com/photo-1560439514-4e9645039924?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <span class="bg-rose-50 text-primary text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-wider">Entrevistas</span>
+                                <h3 class="text-xl font-black uppercase leading-tight group-hover:text-primary transition">Como me preparei para entrevista em inglês na Google</h3>
+                                <p class="text-zinc-500 text-sm">Ex-aluno conta sua jornada desde o zero até aprovação em big tech.</p>
+                                <div class="flex items-center gap-2 pt-2 text-[10px] text-zinc-400 font-medium">
+                                    <span>18 Jan 2026</span>
+                                    <span>•</span>
+                                    <span>12 min</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="border-t-2 border-zinc-100 pt-12">
+                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-8">Artigos Populares</h3>
+                        <div class="space-y-6">
+                            <article class="flex gap-6 group cursor-pointer pb-6 border-b border-zinc-100">
+                                <div class="w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div class="flex-grow space-y-2">
+                                    <span class="text-[9px] font-black uppercase tracking-wider text-zinc-400">Business English</span>
+                                    <h4 class="text-lg font-black uppercase leading-tight group-hover:text-primary transition">Vocabulário essencial para negociações internacionais</h4>
+                                    <div class="flex items-center gap-2 text-[10px] text-zinc-400">
+                                        <span>15 Jan 2026</span>
+                                        <span>•</span>
+                                        <span>6 min</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="flex gap-6 group cursor-pointer pb-6 border-b border-zinc-100">
+                                <div class="w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div class="flex-grow space-y-2">
+                                    <span class="text-[9px] font-black uppercase tracking-wider text-zinc-400">Carreira</span>
+                                    <h4 class="text-lg font-black uppercase leading-tight group-hover:text-primary transition">5 certificações que valorizam seu currículo</h4>
+                                    <div class="flex items-center gap-2 text-[10px] text-zinc-400">
+                                        <span>12 Jan 2026</span>
+                                        <span>•</span>
+                                        <span>9 min</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="flex gap-6 group cursor-pointer pb-6 border-b border-zinc-100">
+                                <div class="w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1491841573634-28140fc7ced7?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div class="flex-grow space-y-2">
+                                    <span class="text-[9px] font-black uppercase tracking-wider text-zinc-400">Grammar Tips</span>
+                                    <h4 class="text-lg font-black uppercase leading-tight group-hover:text-primary transition">Preposições: O guia definitivo para não errar mais</h4>
+                                    <div class="flex items-center gap-2 text-[10px] text-zinc-400">
+                                        <span>10 Jan 2026</span>
+                                        <span>•</span>
+                                        <span>14 min</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center pt-8">
+                        <button class="border-2 border-zinc-900 hover:bg-zinc-900 hover:text-white text-zinc-900 px-12 py-4 rounded-full text-xs font-black uppercase tracking-widest transition-all">
+                            Carregar Mais Artigos
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="bg-zinc-950 rounded-[2.5rem] p-10 text-white relative overflow-hidden sticky top-24">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+                        <h4 class="text-2xl font-black uppercase mb-6 tracking-tighter">Newsletter VIP</h4>
+                        <p class="text-zinc-400 text-sm mb-8 leading-relaxed">Receba materiais de estudo exclusivos e convites para nossos workshops gratuitos no seu e-mail.</p>
+                        <form class="space-y-4">
+                            <input type="email" placeholder="Seu e-mail" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-primary">
+                            <button class="w-full bg-primary py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:brightness-110 transition">Inscrever-se</button>
+                        </form>
+                    </div>
+
+                    <div class="border-2 border-zinc-100 rounded-[2.5rem] p-8">
+                        <h4 class="font-black uppercase tracking-widest text-xs mb-6 text-zinc-400">Nossos Planos</h4>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-primary font-black">01</div>
+                                <div>
+                                    <h5 class="font-black uppercase text-sm">Intensivo Férias</h5>
+                                    <p class="text-xs text-zinc-500">6 meses em 1</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-primary font-black">02</div>
+                                <div>
+                                    <h5 class="font-black uppercase text-sm">Business English</h5>
+                                    <p class="text-xs text-zinc-500">Focado em reuniões</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-primary font-black">03</div>
+                                <div>
+                                    <h5 class="font-black uppercase text-sm">Conversação Avançada</h5>
+                                    <p class="text-xs text-zinc-500">Fluência total</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-8 bg-zinc-50 hover:bg-zinc-100 text-zinc-900 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition">
+                            Ver Todos os Planos
+                        </button>
+                    </div>
+
+                    <div class="bg-rose-50 rounded-[2.5rem] p-8">
+                        <h4 class="font-black uppercase tracking-widest text-xs mb-6 text-primary">Guias Gratuitos</h4>
+                        <div class="space-y-4">
+                            <a href="#" class="block p-4 bg-white rounded-2xl hover:shadow-lg transition group">
+                                <h5 class="font-black uppercase text-sm mb-1 group-hover:text-primary">E-book: 100 Phrasal Verbs</h5>
+                                <p class="text-xs text-zinc-500">Download gratuito PDF</p>
+                            </a>
+                            <a href="#" class="block p-4 bg-white rounded-2xl hover:shadow-lg transition group">
+                                <h5 class="font-black uppercase text-sm mb-1 group-hover:text-primary">Checklist de Pronúncia</h5>
+                                <p class="text-xs text-zinc-500">Corrija seus erros comuns</p>
+                            </a>
+                            <a href="#" class="block p-4 bg-white rounded-2xl hover:shadow-lg transition group">
+                                <h5 class="font-black uppercase text-sm mb-1 group-hover:text-primary">Guia de Listening</h5>
+                                <p class="text-xs text-zinc-500">Melhore sua compreensão</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="border-2 border-zinc-100 rounded-[2.5rem] p-8">
+                        <h4 class="font-black uppercase tracking-widest text-xs mb-6 text-zinc-400">Tags Populares</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#Fluência</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#TOEFL</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#IELTS</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#Listening</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#Speaking</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#Grammar</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#Writing</span>
+                            <span class="bg-zinc-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase cursor-pointer transition">#Pronúncia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-zinc-50">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-primary font-black uppercase tracking-[0.3em] text-xs">Depoimentos</span>
+                <h2 class="text-4xl font-black uppercase tracking-tighter mt-4">O que nossos alunos dizem</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-[2rem] border-2 border-zinc-100">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                    </div>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">"Em 6 meses consegui promoção na empresa por dominar o inglês. A metodologia realmente funciona!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-zinc-200 rounded-full"></div>
+                        <div>
+                            <p class="font-black uppercase text-xs">Marina Silva</p>
+                            <p class="text-[10px] text-zinc-400 uppercase">Analista de TI</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-[2rem] border-2 border-zinc-100">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                    </div>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">"Aprovado no TOEFL com 110 pontos! Os professores são excelentes e o material é muito completo."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-zinc-200 rounded-full"></div>
+                        <div>
+                            <p class="font-black uppercase text-xs">Carlos Eduardo</p>
+                            <p class="text-[10px] text-zinc-400 uppercase">Estudante</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-[2rem] border-2 border-zinc-100">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                        <span class="text-primary text-xl">★</span>
+                    </div>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">"Consegui minha vaga de trabalho remoto para empresa americana. Obrigada Global English!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-zinc-200 rounded-full"></div>
+                        <div>
+                            <p class="font-black uppercase text-xs">Beatriz Costa</p>
+                            <p class="text-[10px] text-zinc-400 uppercase">Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-zinc-950 py-20 text-white">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="text-3xl font-black uppercase tracking-tighter mb-6">
+                        GLOBAL <span class="text-primary">ENGLISH</span>
+                    </div>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Transformando vidas através da educação de excelência em inglês desde 2015. Mais de 10.000 alunos fluentes.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-zinc-800 hover:bg-primary rounded-full flex items-center justify-center transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-zinc-800 hover:bg-primary rounded-full flex items-center justify-center transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-zinc-800 hover:bg-primary rounded-full flex items-center justify-center transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="font-black uppercase text-xs tracking-widest mb-6">Links Rápidos</h5>
+                    <ul class="space-y-3 text-sm text-zinc-400">
+                        <li><a href="#" class="hover:text-white transition">Sobre nós</a></li>
+                        <li><a href="#" class="hover:text-white transition">Metodologia</a></li>
+                        <li><a href="#" class="hover:text-white transition">Nossos Cursos</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-black uppercase text-xs tracking-widest mb-6">Contato</h5>
+                    <ul class="space-y-3 text-sm text-zinc-400">
+                        <li>contato@globalenglish.com.br</li>
+                        <li>(11) 98765-4321</li>
+                        <li>Av. Paulista, 1000<br>São Paulo - SP</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] text-zinc-700 font-bold uppercase tracking-[0.4em]">© 2026 Global English School. Education for everyone.</p>
+                <div class="flex gap-6 text-[10px] text-zinc-600 uppercase tracking-wider">
+                    <a href="#" class="hover:text-white transition">Privacidade</a>
+                    <a href="#" class="hover:text-white transition">Termos de Uso</a>
+                    <a href="#" class="hover:text-white transition">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper(".heroSwiper", {
+                slidesPerView: 1,
+                loop: true,
+                autoplay: { delay: 5000 },
+                pagination: { el: ".hero-pagination", clickable: true },
+                effect: 'fade'
+            });
+
+            new Swiper(".videosSwiper", {
+                slidesPerView: 1.2,
+                spaceBetween: 24,
+                breakpoints: {
+                    640: { slidesPerView: 2.2 },
+                    1024: { slidesPerView: 4 }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
