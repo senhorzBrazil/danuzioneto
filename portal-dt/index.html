@@ -68,31 +68,80 @@
         </div>
     </header>
 
-    <section class="py-10 md:py-20 bg-zinc-50">
-        <div class="max-w-[1400px] mx-auto px-4">
-            <div class="swiper heroSwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="grid lg:grid-cols-2 gap-12 items-center">
-                            <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square lg:aspect-video">
-                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover">
+   <section id="reta-final-tjba" class="relative min-h-[90vh] flex items-center justify-center pt-52 pb-20 px-6 overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('./s1_tjba_mobile.jpg')] md:bg-[url('./s1_tjba_desktop.jpg')] border-t border-[#D4AF37]/20">
+    <div class="absolute inset-0 bg-black/60 z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-0"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto text-center md:text-left">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+            
+            <div class="lg:w-3/5">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/5 backdrop-blur-md mb-8">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4AF37] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#D4AF37]"></span>
+                    </span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F3D27B]">Edital Publicado • 100 Vagas</span>
+                </div>
+
+                <h2 class="text-4xl md:text-6xl font-serif text-white leading-tight mb-6">
+                    Conquiste sua vaga de <br>
+                    <span class="text-gold italic">Juiz na Bahia</span>
+                </h2>
+
+                <p class="text-zinc-300 text-lg mb-8 font-light leading-relaxed border-l-2 border-[#D4AF37]/30 pl-6 text-left">
+                    Primeira fase em maio de 2026. O Reta Final TJ BA foi desenvolvido para quem não pode perder tempo com conteúdo genérico. Encontre exatamente o que a <span class="text-white font-medium">FGV cobra</span>: lei seca, jurisprudência e questões padrão.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="map" class="w-5 h-5 text-[#D4AF37] shrink-0"></i>
+                        <span class="text-zinc-200 text-sm">Mapas de Lei Seca (Artigos Recorrentes)</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="target" class="w-5 h-5 text-[#D4AF37] shrink-0"></i>
+                        <span class="text-zinc-200 text-sm">Simulados Semanais Padrão FGV</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="book-open-check" class="w-5 h-5 text-[#D4AF37] shrink-0"></i>
+                        <span class="text-zinc-200 text-sm">Informativos STF/STJ por Tema</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="calendar" class="w-5 h-5 text-[#D4AF37] shrink-0"></i>
+                        <span class="text-zinc-200 text-sm">Cronograma Diário de Reta Final</span>
+                    </div>
+                </div>
+
+                <button onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto bg-gradient-to-b from-[#F3D27B] to-[#B38728] text-black py-4 px-10 text-xs font-bold uppercase tracking-widest rounded-sm hover:shadow-gold hover:scale-[1.02] transition-all">
+                    Quero Garantir minha vaga no TJ BA
+                </button>
+            </div>
+
+            <div class="lg:w-2/5 hidden lg:block">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-[#D4AF37]/20 blur-[100px] rounded-full"></div>
+                    <div class="relative bg-black/40 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-[#D4AF37]/20 rounded-lg flex items-center justify-center">
+                                <i data-lucide="award" class="w-6 h-6 text-[#D4AF37]"></i>
                             </div>
-                            <div class="space-y-6">
-                                <span class="text-primary font-black uppercase tracking-[0.3em] text-xs">Matrículas Abertas 2026</span>
-                                <h1 class="text-5xl md:text-7xl font-black leading-tight tracking-tighter text-zinc-950">SPEAK ENGLISH <br>NATURALLY.</h1>
-                                <p class="text-zinc-600 text-lg">Aprenda com nossa metodologia imersiva focada 100% em conversação real. Deixe o medo de falar para trás.</p>
-                                <div class="flex gap-4">
-                                    <button class="bg-primary text-white px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition shadow-xl">Quero começar</button>
-                                    <button class="border-2 border-zinc-200 text-zinc-900 px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-white transition">Nossos Cursos</button>
-                                </div>
+                            <div>
+                                <h4 class="text-white font-bold">Método Magistrar</h4>
+                                <p class="text-zinc-400 text-xs uppercase tracking-widest">Foco Total na FGV</p>
                             </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="bg-[#D4AF37] h-full w-[85%]"></div>
+                            </div>
+                            <p class="text-[10px] text-zinc-300 text-center uppercase tracking-widest font-bold">Conteúdo 100% Mapeado</p>
                         </div>
                     </div>
                 </div>
-                <div class="hero-pagination mt-12"></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="py-12 bg-white border-b-2 border-zinc-100">
         <div class="max-w-[1400px] mx-auto px-4">
