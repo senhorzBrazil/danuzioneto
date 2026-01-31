@@ -102,88 +102,125 @@
 </head>
 <body class="bg-charcoal-950 text-slate-200 font-sans selection:bg-alert-500 selection:text-white">
 
-  <div id="leadModal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal-950/95 backdrop-blur-md overflow-y-auto">
-    <div class="modal-content bg-charcoal-900 border border-platinum-500/30 w-full max-w-5xl relative shadow-2xl shadow-platinum-500/10 my-8">
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors z-20">
-            <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
-        
-        <div id="formStep" class="p-8 md:p-12">
-            </div>
-        
-        <div id="successStep" class="hidden p-6 md:p-10 bg-charcoal-900">
-            <div class="text-center mb-8">
-                <div class="w-12 h-12 bg-[#229ED9]/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#229ED9]/30">
-                    <i data-lucide="check" class="w-6 h-6 text-[#229ED9]"></i>
+    <div id="leadModal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal-950/95 backdrop-blur-md overflow-y-auto">
+        <div class="modal-content bg-charcoal-900 border border-platinum-500/30 w-full max-w-2xl relative shadow-2xl shadow-platinum-500/10 my-8">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors z-20">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div id="formStep" class="p-8 md:p-12">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-alert-900/30 text-alert-500 text-[10px] font-bold uppercase tracking-widest mb-4 border border-alert-500/30">
+                        <i data-lucide="siren" class="w-3 h-3"></i> Canal Privado
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-serif font-black text-white mb-2">Acesso ao Telegram</h3>
+                    <p class="text-slate-400 text-sm">Preencha seus dados para liberar a visualização dos planos.</p>
                 </div>
-                <h3 class="text-2xl font-serif font-black text-white mb-2">Acesso Liberado</h3>
-                <p class="text-slate-400 text-sm">Escolha sua modalidade de entrada.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 
-                <div class="border border-charcoal-800 bg-charcoal-950/50 p-6 hover:border-platinum-500/50 transition-all group relative flex flex-col">
-                    <h4 class="text-platinum-300 text-xs font-bold uppercase tracking-widest mb-2">Padrão</h4>
-                    <h3 class="text-xl font-serif font-bold text-white mb-4">Sem Censura</h3>
-                    <ul class="space-y-2 mb-6 flex-1">
-                        <li class="text-xs text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Áudios Exclusivos</li>
-                        <li class="text-xs text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Análises Próprias</li>
-                    </ul>
-                    <div class="border-t border-charcoal-800 pt-4 mt-auto">
-                        <p class="text-xs text-slate-500 line-through mb-1">De R$ 497,00</p>
-                        <div class="flex items-end gap-1 mb-4">
-                            <span class="text-sm text-platinum-400 pb-1">12x</span>
-                            <span class="text-3xl font-bold text-white">R$ 29,93</span>
-                        </div>
-                        <a href="https://lastlink.com/p/C7E442417/checkout-payment/" target="_blank" class="block w-full text-center bg-charcoal-800 hover:bg-platinum-500 hover:text-charcoal-950 text-white py-3 text-xs font-bold uppercase tracking-widest transition-all border border-platinum-500/30">Assinar</a>
+                <form id="leadForm" class="space-y-4 max-w-sm mx-auto">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">Nome Completo</label>
+                        <input type="text" id="leadName" required 
+                            class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
+                            placeholder="Seu nome">
                     </div>
-                </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">Seu melhor E-mail</label>
+                        <input type="email" id="leadEmail" required 
+                            class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
+                            placeholder="seu@email.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-platinum-300 mb-2">WhatsApp</label>
+                        <input type="tel" id="leadPhone" required maxlength="15"
+                            onkeyup="handlePhone(event)"
+                            class="w-full px-4 py-3 bg-charcoal-950 border border-charcoal-800 focus:border-platinum-500 text-white outline-none transition-colors text-sm placeholder-slate-600"
+                            placeholder="(DD) 99999-9999">
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-platinum-500 to-platinum-300 hover:from-white hover:to-platinum-300 text-charcoal-950 py-4 text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-platinum-500/20 mt-6">
+                        <span id="btnText">Liberar Acesso</span>
+                        <div id="btnLoader" class="loader hidden"></div>
+                    </button>
+                </form>
+                
+                <p class="text-center text-[10px] text-slate-500 mt-4">
+                    Seus dados estão seguros e criptografados.
+                </p>
+            </div>
+            
+            <div id="successStep" class="hidden p-4 md:p-8 bg-charcoal-900">
+    <div class="text-center mb-6">
+        <div class="w-10 h-10 bg-[#229ED9]/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-[#229ED9]/30">
+            <i data-lucide="check" class="w-5 h-5 text-[#229ED9]"></i>
+        </div>
+        <h3 class="text-xl font-serif font-black text-white mb-1">Acesso Liberado</h3>
+        <p class="text-slate-400 text-xs">Escolha sua modalidade de entrada.</p>
+    </div>
 
-                <div class="border border-alert-900/50 bg-charcoal-950/50 p-6 relative flex flex-col shadow-lg">
-                    <h4 class="text-alert-500 text-xs font-bold uppercase tracking-widest mb-2">Completo</h4>
-                    <h3 class="text-xl font-serif font-bold text-white mb-4">Combo Canais</h3>
-                    <ul class="space-y-2 mb-6 flex-1">
-                        <li class="text-xs text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Tudo do Sem Censura</li>
-                        <li class="text-xs text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Todos os Canais</li>
-                    </ul>
-                    <div class="border-t border-alert-900/30 pt-4 mt-auto">
-                        <p class="text-xs text-slate-500 line-through mb-1">De R$ 997,00</p>
-                        <div class="flex items-end gap-1 mb-4">
-                            <span class="text-sm text-platinum-400 pb-1">12x</span>
-                            <span class="text-3xl font-bold text-white">R$ 70,92</span>
-                        </div>
-                        <a href="https://lastlink.com/p/C9622481A/checkout-payment/" target="_blank" class="block w-full text-center bg-alert-600 hover:bg-alert-500 text-white py-3 text-xs font-bold uppercase tracking-widest transition-all">Quero Tudo</a>
-                    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="border border-charcoal-800 bg-charcoal-950/50 p-5 flex flex-col">
+            <h4 class="text-platinum-400 text-[10px] font-bold uppercase tracking-widest mb-1">Individual</h4>
+            <h3 class="text-lg font-serif font-bold text-white mb-3">Sem Censura</h3>
+            <ul class="space-y-1.5 mb-4 flex-1">
+                <li class="text-[10px] text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Áudios Exclusivos</li>
+                <li class="text-[10px] text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-green-500"></i> Canal Telegram</li>
+            </ul>
+            <div class="border-t border-charcoal-800 pt-3">
+                <div class="flex items-end gap-1 mb-3">
+                    <span class="text-xs text-platinum-400 pb-0.5">12x</span>
+                    <span class="text-2xl font-bold text-white">R$ 29,93</span>
                 </div>
+                <a href="https://lastlink.com/p/C7E442417/checkout-payment/" target="_blank" class="block w-full text-center bg-charcoal-800 hover:bg-platinum-500 hover:text-charcoal-950 text-white py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all border border-platinum-500/30">
+                    Assinar
+                </a>
+            </div>
+        </div>
 
-                <div class="border-2 border-platinum-500 bg-gradient-to-b from-platinum-500/10 to-charcoal-950 p-6 relative flex flex-col shadow-2xl shadow-platinum-500/10">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-platinum-500 text-charcoal-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-sm">
-                        Experiência Black
-                    </div>
-                    <h4 class="text-platinum-400 text-xs font-bold uppercase tracking-widest mb-2 mt-2">Elite</h4>
-                    <h3 class="text-xl font-serif font-bold text-white mb-4">Combo + Escola Danuzio Neto</h3>
-                    <ul class="space-y-2 mb-6 flex-1">
-                        <li class="text-xs text-white flex items-center gap-2"><i data-lucide="star" class="w-3 h-3 text-platinum-500 fill-platinum-500"></i> <strong>Todos os Canais</strong></li>
-                        <li class="text-xs text-white flex items-center gap-2"><i data-lucide="star" class="w-3 h-3 text-platinum-500 fill-platinum-500"></i> <strong>Acesso à Escola</strong></li>
-                        <li class="text-xs text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-platinum-500"></i> Mentorias e Aulas</li>
-                    </ul>
-                    <div class="border-t border-platinum-500/30 pt-4 mt-auto">
-                        <p class="text-xs text-slate-400 mb-1">Apenas 12 parcelas de:</p>
-                        <div class="flex items-end gap-1 mb-4">
-                            <span class="text-sm text-platinum-400 pb-1">12x</span>
-                            <span class="text-4xl font-black text-white">R$ 81,06</span>
-                        </div>
-                        <p class="text-[10px] text-slate-500 mb-4">ou R$ 799,00 à vista</p>
-                        <a href="https://lastlink.com/p/C1ACFBDDE/checkout-payment" target="_blank" class="block w-full text-center bg-white hover:bg-platinum-300 text-charcoal-950 py-3 text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-white/10">
-                            Acesso Premium
-                        </a>
-                    </div>
+        <div class="border border-charcoal-700 bg-charcoal-950/50 p-5 flex flex-col relative">
+            <h4 class="text-platinum-300 text-[10px] font-bold uppercase tracking-widest mb-1">Canais</h4>
+            <h3 class="text-lg font-serif font-bold text-white mb-3">Combo Canais</h3>
+            <ul class="space-y-1.5 mb-4 flex-1">
+                <li class="text-[10px] text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-platinum-400"></i> Todos os Canais</li>
+                <li class="text-[10px] text-slate-400 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-platinum-400"></i> 12 Meses de Acesso</li>
+            </ul>
+            <div class="border-t border-charcoal-800 pt-3">
+                <div class="flex items-end gap-1 mb-3">
+                    <span class="text-xs text-platinum-400 pb-0.5">12x</span>
+                    <span class="text-2xl font-bold text-white">R$ 70,92</span>
                 </div>
+                <a href="https://lastlink.com/p/C9622481A/checkout-payment/" target="_blank" class="block w-full text-center bg-charcoal-700 hover:bg-platinum-500 hover:text-charcoal-950 text-white py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all">
+                    Assinar
+                </a>
+            </div>
+        </div>
 
+        <div class="border-2 border-alert-600 bg-gradient-to-b from-alert-900/20 to-charcoal-950 p-5 flex flex-col relative shadow-xl shadow-alert-900/20">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-alert-600 text-white text-[9px] font-black uppercase tracking-tighter px-2 py-1 rounded-sm">
+                Acesso Total
+            </div>
+            <h4 class="text-alert-500 text-[10px] font-bold uppercase tracking-widest mb-1">Premium</h4>
+            <h3 class="text-lg font-serif font-bold text-white mb-1">Canais + Escola</h3>
+            <p class="text-[9px] text-alert-200/60 uppercase mb-3">O ecossistema completo</p>
+            <ul class="space-y-1.5 mb-4 flex-1">
+                <li class="text-[10px] text-white flex items-center gap-2 font-bold"><i data-lucide="crown" class="w-3 h-3 text-alert-500"></i> Escola Danuzio Neto</li>
+                <li class="text-[10px] text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Todos os Canais Telegram</li>
+                <li class="text-[10px] text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Formação Geopolítica</li>
+            </ul>
+            <div class="border-t border-alert-900/30 pt-3">
+                <div class="flex items-end gap-1 mb-3">
+                    <span class="text-xs text-platinum-400 pb-0.5">12x</span>
+                    <span class="text-2xl font-bold text-white text-gradient-platinum">R$ 130,22</span>
+                </div>
+                <a href="https://lastlink.com/p/C1ACFBDDE/checkout-payment" target="_blank" class="block w-full text-center bg-alert-600 hover:bg-alert-500 text-white py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg shadow-alert-600/20">
+                    Garantir Tudo
+                </a>
             </div>
         </div>
     </div>
 </div>
+        </div>
+    </div>
 
     <header class="fixed top-0 left-0 right-0 z-50 bg-charcoal-950/90 backdrop-blur-md border-b border-white/5 py-4 transition-all">
         <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -537,107 +574,43 @@
             </div>
         </div>
     </section>
-    <section id="precos" class="py-32 bg-charcoal-950 border-t border-white/5 relative overflow-hidden">
-    <div class="absolute inset-0 noise-bg pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] bg-platinum-500/5 blur-[120px] rounded-full pointer-events-none"></div>
-    
-    <div class="max-w-6xl mx-auto px-6 relative z-10">
+  <section id="precos" class="py-32 bg-charcoal-950 border-t border-white/5 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
         <div class="text-center mb-16">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-alert-500/30 bg-alert-900/20 text-alert-500 backdrop-blur-md mb-6 uppercase tracking-[0.2em] text-[10px] font-bold rounded-full">
-                <i data-lucide="lock" class="w-3 h-3"></i> Acesso Exclusivo
-            </div>
-            <h2 class="text-4xl md:text-5xl font-serif font-black text-white mb-4 leading-tight">
-                Escolha Sua <span class="text-platinum-300 italic">Modalidade</span>
-            </h2>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-                Liberdade de expressão tem um preço. E é menor do que você imagina.
-            </p>
+            <h2 class="text-4xl md:text-5xl font-serif font-black text-white mb-4">Escolha sua <span class="text-platinum-300 italic">Armadura</span></h2>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Do acompanhamento diário à formação intelectual completa.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            
-            <!-- Plano Padrão -->
-            <div class="border border-charcoal-800 bg-charcoal-900/50 p-8 hover:border-platinum-500/50 transition-all group relative flex flex-col">
-                <h4 class="text-platinum-300 text-xs font-bold uppercase tracking-widest mb-2">Padrão</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            <div class="border border-charcoal-800 bg-charcoal-900/50 p-8 flex flex-col">
                 <h3 class="text-2xl font-serif font-bold text-white mb-6">Sem Censura</h3>
-                
-                <ul class="space-y-3 mb-8 flex-1">
-                    <li class="text-sm text-slate-300 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-green-500"></i> 
-                        Áudios Exclusivos
-                    </li>
-                    <li class="text-sm text-slate-300 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-green-500"></i> 
-                        Análises Políticas Profundas
-                    </li>
-                    <li class="text-sm text-slate-300 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-green-500"></i> 
-                        Canal Telegram Exclusivo
-                    </li>
-                    <li class="text-sm text-slate-300 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-green-500"></i> 
-                        Temas Sem Censura
-                    </li>
-                    <li class="text-sm text-slate-300 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-green-500"></i> 
-                        Notificações em Tempo Real
-                    </li>
+                <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-400">
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> Áudios diários exclusivos</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> Bastidores do poder</li>
                 </ul>
-                
-                <div class="border-t border-charcoal-800 pt-6 mt-auto">
-                    <button onclick="openModal()" class="block w-full text-center bg-charcoal-800 hover:bg-platinum-500 hover:text-charcoal-950 text-white py-4 text-sm font-bold uppercase tracking-widest transition-all border border-platinum-500/30 flex items-center justify-center gap-2">
-                        <i data-lucide="eye" class="w-4 h-4"></i>
-                        Ver Investimento
-                    </button>
-                </div>
+                <button onclick="openModal()" class="w-full py-4 border border-platinum-500/30 text-white text-xs font-bold uppercase tracking-widest hover:bg-platinum-500 hover:text-charcoal-950 transition-all">Ver Detalhes</button>
             </div>
 
-            <!-- Plano Combo -->
-            <div class="border border-alert-900/50 bg-gradient-to-b from-alert-900/10 to-charcoal-950 p-8 relative flex flex-col shadow-lg shadow-alert-900/10">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-alert-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-sm shadow-lg">
-                    Mais Completo
-                </div>
-                
-                <h4 class="text-alert-500 text-xs font-bold uppercase tracking-widest mb-2 mt-2">Completo</h4>
-                <h3 class="text-2xl font-serif font-bold text-white mb-6">Combo Todos os Canais</h3>
-                
-                <ul class="space-y-3 mb-8 flex-1">
-                    <li class="text-sm text-slate-200 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-alert-500"></i> 
-                        <strong>Tudo do Sem Censura</strong>
-                    </li>
-                    <li class="text-sm text-slate-200 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-alert-500"></i> 
-                        Todos os canais
-                    </li>
-                    <li class="text-sm text-slate-200 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-alert-500"></i> 
-                        Acesso Total ao Acervo
-                    </li>
-                    <li class="text-sm text-slate-200 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-alert-500"></i> 
-                        Material Bônus Exclusivo
-                    </li>
-                    <li class="text-sm text-slate-200 flex items-center gap-3">
-                        <i data-lucide="check" class="w-4 h-4 text-alert-500"></i> 
-                        Descontos futuros
-                    </li>
+            <div class="border border-charcoal-700 bg-charcoal-900/80 p-8 flex flex-col">
+                <h3 class="text-2xl font-serif font-bold text-white mb-6">Combo Canais</h3>
+                <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-400">
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-platinum-500 w-4 h-4"></i> Todos os canais de áudio</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-platinum-500 w-4 h-4"></i> Análises geopolíticas</li>
                 </ul>
-                
-                <div class="border-t border-alert-900/30 pt-6 mt-auto">
-                    <button onclick="openModal()" class="block w-full text-center bg-alert-600 hover:bg-alert-500 text-white py-4 text-sm font-bold uppercase tracking-widest transition-all shadow-lg shadow-alert-600/20 flex items-center justify-center gap-2">
-                        <i data-lucide="crown" class="w-4 h-4"></i>
-                        Ver Investimento
-                    </button>
-                </div>
+                <button onclick="openModal()" class="w-full py-4 bg-charcoal-800 text-white text-xs font-bold uppercase tracking-widest hover:bg-charcoal-700 transition-all">Ver Detalhes</button>
             </div>
-        </div>
 
-        <div class="text-center mt-12">
-            <p class="text-slate-500 text-sm">
-                <i data-lucide="shield-check" class="w-4 h-4 inline-block mr-1"></i>
-                Pagamento 100% seguro via cartão de crédito ou PIX
-            </p>
+            <div class="border-2 border-alert-600 bg-gradient-to-b from-alert-900/20 to-charcoal-950 p-8 flex flex-col relative shadow-2xl shadow-alert-900/20">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-alert-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-sm">Insuperável</div>
+                <h3 class="text-2xl font-serif font-bold text-white mb-2">Escola + Canais</h3>
+                <p class="text-alert-500 text-[10px] font-bold uppercase mb-6 tracking-widest">Acesso Vitalício ao Conhecimento</p>
+                <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-300">
+                    <li class="flex items-center gap-3 font-bold text-white"><i data-lucide="crown" class="text-alert-500 w-5 h-5"></i> Escola Danuzio Neto</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-alert-500 w-4 h-4"></i> Todos os Canais (1 ano)</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-alert-500 w-4 h-4"></i> Aulas de História e Política</li>
+                </ul>
+                <button onclick="openModal()" class="w-full py-4 bg-alert-600 text-white text-xs font-bold uppercase tracking-widest hover:bg-alert-500 transition-all shadow-lg shadow-alert-600/30">Garantir Acesso Total</button>
+            </div>
         </div>
     </div>
 </section>
