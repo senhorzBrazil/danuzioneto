@@ -11,6 +11,25 @@
     
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '293977743674265');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=293977743674265&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- Fim Meta Pixel -->
+
     <script>
         tailwind.config = {
             theme: {
@@ -335,7 +354,7 @@
                         <div class="border-t border-alert-900/30 pt-3">
                             <div class="flex items-end gap-1 mb-3">
                                 <span class="text-xs text-platinum-400 pb-0.5">12x</span>
-                                <span class="text-2xl font-bold text-white text-gradient-platinum">R$ 130,22</span>
+                                <span class="text-2xl font-bold text-white text-gradient-platinum">R$ 80,06</span>
                             </div>
                             <a href="https://lastlink.com/p/C1ACFBDDE/checkout-payment" target="_blank" class="block w-full text-center bg-alert-600 hover:bg-alert-500 text-white py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg shadow-alert-600/20">
                                 Garantir Tudo
@@ -1016,10 +1035,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, phone, date: new Date().toISOString() })
                 });
+                fbq('track', 'Lead');
                 document.getElementById('formStep').classList.add('hidden');
                 document.getElementById('successStep').classList.remove('hidden');
             } catch (error) {
                 console.error('Erro:', error);
+                fbq('track', 'Lead');
                 document.getElementById('formStep').classList.add('hidden');
                 document.getElementById('successStep').classList.remove('hidden');
             }
