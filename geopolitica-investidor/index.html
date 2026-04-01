@@ -564,6 +564,12 @@
       padding: 88px clamp(20px,5vw,64px);
     }
     .section.tight { padding-top: 0; }
+    .section--white {
+      max-width: 100%;
+      margin: 0;
+      background: #fff;
+      padding: 88px clamp(20px,5vw,64px);
+    }
     .section-hr { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,64px); }
     .section-hr hr { border: none; border-top: 1px solid var(--glass-border); }
 
@@ -590,6 +596,47 @@
       line-height: 1.1;
       color: var(--white);
       margin-bottom: 44px;
+    }
+
+    /* ─── SEÇÃO FUNDO BRANCO ─── */
+    .section--white {
+      background: #fff;
+      max-width: 100%;
+      padding: 88px clamp(20px,5vw,64px);
+      position: relative;
+      z-index: 2;
+    }
+    .section--white .narrative {
+      max-width: 680px;
+    }
+    .s-label--dark { color: #2563eb; }
+
+    .n-lead--dark {
+      color: #0f172a !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
+    .n-lead--dark .grad--dark {
+      -webkit-text-fill-color: transparent !important;
+    }
+    .grad--dark {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .n-body--dark {
+      color: #374151;
+      -webkit-text-fill-color: #374151;
+    }
+    .n-body--dark strong {
+      color: #0f172a;
+      -webkit-text-fill-color: #0f172a;
+      font-weight: 600;
+    }
+    .n-punch--dark {
+      color: #1f2937;
+      -webkit-text-fill-color: #1f2937;
+      border-left-color: #3b82f6;
     }
 
     /* ─── NARRATIVE ─── */
@@ -1609,13 +1656,15 @@
   <div class="section-hr"><hr></div>
 
   <!-- NARRATIVE -->
-  <section class="section">
-    <div class="s-label">Por que isso importa</div>
+  <section class="section section--white">
+    <div style="max-width:1200px; margin:0 auto;">
+    <div class="s-label s-label--dark">Por que isso importa</div>
     <div class="narrative">
-      <div class="n-lead" data-reveal>Toda grande virada econômica começou como um evento geopolítico que <span class="grad">a maioria subestimou.</span></div>
-      <p class="n-body" data-reveal>A pandemia não foi só uma crise de saúde: foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra: foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar: é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</p>
-      <p class="n-body" data-reveal>O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa — mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
-      <div class="n-punch" data-reveal="scale">Um briefing diário que transforma o caos geopolítico em contexto claro — e contexto claro em vantagem para quem pensa antes de agir.</div>
+      <div class="n-lead n-lead--dark" data-reveal>Toda grande virada econômica começou como um evento geopolítico que <span class="grad--dark">a maioria subestimou.</span></div>
+      <p class="n-body n-body--dark" data-reveal>A pandemia não foi só uma crise de saúde: foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra: foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar: é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</p>
+      <p class="n-body n-body--dark" data-reveal>O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa — mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
+      <div class="n-punch n-punch--dark" data-reveal="scale">Um briefing diário que transforma o caos geopolítico em contexto claro — e contexto claro em vantagem para quem pensa antes de agir.</div>
+    </div>
     </div>
   </section>
 
@@ -2097,6 +2146,8 @@
 
     </ul>
   </section>
+
+  <!-- FINAL CTA -->
 
   <!-- D3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
