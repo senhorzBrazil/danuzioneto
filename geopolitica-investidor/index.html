@@ -1341,6 +1341,213 @@
       transform: none;
     }
 
+    /* ─── FAQ 2 (componente) ─── */
+    @keyframes faq-beam-spin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes faq-pulse-ring {
+      0%   { transform: scale(.7); opacity: .55; }
+      60%  { opacity: .1; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+    @keyframes faq-meter {
+      0%,20%  { transform: scaleX(0); transform-origin: left; }
+      45%,60% { transform: scaleX(1); transform-origin: left; }
+      80%,100%{ transform: scaleX(0); transform-origin: right; }
+    }
+    @keyframes faq-tick {
+      0%,30%  { transform: translateX(-6px); opacity: .4; }
+      50%     { transform: translateX(2px);  opacity: 1; }
+      100%    { transform: translateX(20px); opacity: 0; }
+    }
+    @keyframes faq-ping {
+      0%   { transform: scale(1); opacity: .6; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .faq-section { max-width: 900px; }
+
+    /* Intro badge */
+    .faq-intro {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: .85rem;
+      padding: .75rem 1.4rem;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(12,12,12,.42);
+      color: rgba(248,250,252,.9);
+      text-transform: uppercase;
+      letter-spacing: .35em;
+      font-size: .65rem;
+      margin-bottom: 40px;
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(10px);
+      filter: blur(6px);
+      transition: opacity .7s ease, transform .7s ease, filter .7s ease;
+    }
+    .faq-intro.faq-intro--active {
+      opacity: 1; transform: none; filter: none;
+    }
+    .faq-intro__beam {
+      position: absolute; inset: -110%;
+      pointer-events: none; border-radius: 50%;
+      background: conic-gradient(from 160deg, rgba(59,130,246,.3), transparent 32%, rgba(59,130,246,.2) 58%, transparent 78%);
+      animation: faq-beam-spin 18s linear infinite;
+      opacity: .6;
+    }
+    .faq-intro__pulse {
+      position: absolute; inset: -110%;
+      pointer-events: none; border-radius: 50%;
+      border: 1px solid currentColor; opacity: .25;
+      animation: faq-pulse-ring 3.4s ease-out infinite;
+    }
+    .faq-intro__label { position: relative; z-index: 1; font-weight: 600; letter-spacing: .4em; color: var(--gold); }
+    .faq-intro__meter {
+      position: relative; z-index: 1;
+      flex: 1 1 auto; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold) 35%, transparent 85%);
+      transform: scaleX(0); transform-origin: left;
+      animation: faq-meter 5.8s ease-in-out infinite;
+      opacity: .7;
+    }
+    .faq-intro__tick {
+      position: relative; z-index: 1;
+      width: .55rem; height: .55rem; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.15);
+      animation: faq-tick 3.2s ease-in-out infinite;
+    }
+
+    /* Header */
+    .faq-header { margin-bottom: 40px; }
+    .faq-header-sub {
+      font-size: 10px; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--zinc-500); margin-bottom: 14px;
+    }
+    .faq-heading {
+      font-family: var(--display);
+      font-size: clamp(28px,4vw,46px);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .faq-heading-desc {
+      font-size: 15px; color: var(--zinc-400); font-weight: 300; line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* Cards */
+    .faq-list2 { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-card2 {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .2s;
+    }
+    .faq-card2:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.14); }
+    .faq-card2.is-open { border-color: rgba(59,130,246,.25); }
+
+    /* Cursor glow */
+    .faq-glow2 {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0; transition: opacity .4s;
+      background: radial-gradient(240px circle at var(--fx,50%) var(--fy,50%), rgba(59,130,246,.08), transparent 70%);
+    }
+    .faq-card2:hover .faq-glow2 { opacity: 1; }
+    .faq-card2.is-open .faq-glow2 { opacity: 1; }
+
+    /* Button */
+    .faq-btn2 {
+      position: relative; z-index: 1;
+      width: 100%; display: flex; align-items: flex-start; gap: 20px;
+      padding: 28px 28px 28px 28px;
+      background: none; border: none; cursor: pointer; text-align: left;
+    }
+
+    /* Icon */
+    .faq-icon2-wrap {
+      position: relative; flex-shrink: 0;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
+      transition: transform .3s, border-color .2s, background .2s;
+    }
+    .faq-card2:hover .faq-icon2-wrap { transform: scale(1.05); }
+    .faq-card2.is-open .faq-icon2-wrap {
+      border-color: rgba(59,130,246,.4);
+      background: rgba(59,130,246,.1);
+    }
+
+    .faq-icon2-ring {
+      position: absolute; inset: -2px; border-radius: 50%;
+      border: 1px solid rgba(59,130,246,.4);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .faq-card2.is-open .faq-icon2-ring {
+      opacity: 1;
+      animation: faq-ping 1.5s ease-out infinite;
+    }
+
+    .faq-plus2 {
+      width: 18px; height: 18px;
+      color: var(--white);
+      transition: transform .4s cubic-bezier(.22,1,.36,1);
+    }
+    .faq-card2.is-open .faq-plus2 { transform: rotate(45deg); }
+
+    /* Body */
+    .faq-btn2-body { flex: 1; }
+    .faq-btn2-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      flex-wrap: wrap; justify-content: space-between;
+    }
+    .faq-btn2-q {
+      font-size: 15px; font-weight: 500;
+      color: var(--white); line-height: 1.4;
+      flex: 1;
+    }
+
+    .faq-meta2 {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--zinc-500);
+    }
+
+    /* Panel */
+    .faq-panel2 {
+      position: relative; z-index: 1;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .45s cubic-bezier(.22,1,.36,1);
+      padding: 0 28px 0 92px;
+    }
+    @media (max-width: 640px) { .faq-panel2 { padding: 0 20px; } }
+    .faq-panel2 p {
+      font-size: 14px; line-height: 1.85;
+      color: var(--zinc-400); font-weight: 300;
+      padding-bottom: 24px;
+    }
+    .faq-panel2 p strong { color: var(--zinc-300); font-weight: 500; }
+    .faq-panel2.is-open { max-height: 300px; }
+
     /* ─── INLINE SVG HELPERS ─── */
     svg.icon { display: inline-block; vertical-align: middle; }
   </style>
@@ -1750,15 +1957,146 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <div class="final-cta" data-reveal>
-    <h2>O tabuleiro já está<br>em movimento.<br><span class="grad">Você está vendo?</span></h2>
-    <p>Cancele quando quiser. Sem fidelidade. Sem letras miúdas. Com garantia de 7 dias — se não agregar, devolvemos cada centavo.</p>
-    <a href="#planos" class="shiny-cta">
-      <span>Escolher meu plano →</span>
-    </a>
-    <p class="guarantee">Há mais de dois anos formando leitores que entendem o mundo antes de todo mundo.</p>
-  </div>
+  <!-- HR -->
+  <div class="section-hr"><hr></div>
+
+  <!-- FAQ -->
+  <section class="section tight faq-section" style="padding-top:80px;">
+
+    <div class="faq-intro" id="faqIntro">
+      <span class="faq-intro__beam" aria-hidden="true"></span>
+      <span class="faq-intro__pulse" aria-hidden="true"></span>
+      <span class="faq-intro__label">Perguntas frequentes</span>
+      <span class="faq-intro__meter" aria-hidden="true"></span>
+      <span class="faq-intro__tick" aria-hidden="true"></span>
+    </div>
+
+    <header class="faq-header">
+      <div>
+        <p class="faq-header-sub">Respostas</p>
+        <h2 class="faq-heading">Foque no sinal,<br>não no ruído.</h2>
+        <p class="faq-heading-desc">Tudo o que você precisa saber sobre o canal, condensado com clareza.</p>
+      </div>
+    </header>
+
+    <ul class="faq-list2">
+
+      <li class="faq-card2" data-reveal>
+        <div class="faq-glow2"></div>
+        <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-1">
+          <span class="faq-icon2-wrap">
+            <span class="faq-icon2-ring"></span>
+            <svg class="faq-plus2" viewBox="0 0 24 24" fill="none"><path d="M12 5v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="faq-btn2-body">
+            <span class="faq-btn2-row">
+              <span class="faq-btn2-q">O que é exatamente o Geopolítica para Investidores?</span>
+              <span class="faq-meta2">Produto</span>
+            </span>
+          </span>
+        </button>
+        <div class="faq-panel2" id="faq-p-1" role="region">
+          <p>É um canal de análise geopolítica com foco em implicações econômicas. Todos os dias úteis você recebe um briefing que pega o evento mais relevante do dia, explica o que está por trás dele e mapeia as pressões econômicas que ele tende a gerar. Não é consultoria financeira — é contexto para quem quer pensar antes de agir.</p>
+        </div>
+      </li>
+
+      <li class="faq-card2" data-reveal>
+        <div class="faq-glow2"></div>
+        <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-2">
+          <span class="faq-icon2-wrap">
+            <span class="faq-icon2-ring"></span>
+            <svg class="faq-plus2" viewBox="0 0 24 24" fill="none"><path d="M12 5v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="faq-btn2-body">
+            <span class="faq-btn2-row">
+              <span class="faq-btn2-q">Preciso ter formação em economia ou relações internacionais?</span>
+              <span class="faq-meta2">Acesso</span>
+            </span>
+          </span>
+        </button>
+        <div class="faq-panel2" id="faq-p-2" role="region">
+          <p>Não. O briefing é escrito para ser lido em 4 minutos, com linguagem direta e sem jargão acadêmico. A premissa é que você acompanha o mundo mas sente que falta a camada de contexto — é exatamente essa camada que entregamos, sem exigir nenhum conhecimento prévio específico.</p>
+        </div>
+      </li>
+
+      <li class="faq-card2" data-reveal>
+        <div class="faq-glow2"></div>
+        <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-3">
+          <span class="faq-icon2-wrap">
+            <span class="faq-icon2-ring"></span>
+            <svg class="faq-plus2" viewBox="0 0 24 24" fill="none"><path d="M12 5v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="faq-btn2-body">
+            <span class="faq-btn2-row">
+              <span class="faq-btn2-q">Como funciona a garantia de 7 dias?</span>
+              <span class="faq-meta2">Garantia</span>
+            </span>
+          </span>
+        </button>
+        <div class="faq-panel2" id="faq-p-3" role="region">
+          <p>Se dentro dos primeiros 7 dias você sentir que o conteúdo não agrega, basta pedir o reembolso. Sem perguntas, sem burocracia — devolvemos cada centavo. O risco é todo nosso.</p>
+        </div>
+      </li>
+
+      <li class="faq-card2" data-reveal>
+        <div class="faq-glow2"></div>
+        <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-4">
+          <span class="faq-icon2-wrap">
+            <span class="faq-icon2-ring"></span>
+            <svg class="faq-plus2" viewBox="0 0 24 24" fill="none"><path d="M12 5v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="faq-btn2-body">
+            <span class="faq-btn2-row">
+              <span class="faq-btn2-q">Qual é a diferença entre os planos Essencial, Pro e Reservado?</span>
+              <span class="faq-meta2">Planos</span>
+            </span>
+          </span>
+        </button>
+        <div class="faq-panel2" id="faq-p-4" role="region">
+          <p>O <strong>Essencial</strong> cobre o dia a dia: briefing diário, alertas de risco e mapa semanal. O <strong>Pro</strong> adiciona o cenário mensal e o grupo exclusivo de discussão. O <strong>Reservado</strong> inclui tudo isso mais a videochamada ao vivo toda terça-feira — acesso direto a quem analisa o tabuleiro todo dia.</p>
+        </div>
+      </li>
+
+      <li class="faq-card2" data-reveal>
+        <div class="faq-glow2"></div>
+        <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-5">
+          <span class="faq-icon2-wrap">
+            <span class="faq-icon2-ring"></span>
+            <svg class="faq-plus2" viewBox="0 0 24 24" fill="none"><path d="M12 5v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="faq-btn2-body">
+            <span class="faq-btn2-row">
+              <span class="faq-btn2-q">Posso cancelar a qualquer momento?</span>
+              <span class="faq-meta2">Cancelamento</span>
+            </span>
+          </span>
+        </button>
+        <div class="faq-panel2" id="faq-p-5" role="region">
+          <p>Sim. Não há fidelidade, não há multa. Você cancela quando quiser, sem precisar justificar. O acesso segue ativo até o fim do período pago.</p>
+        </div>
+      </li>
+
+      <li class="faq-card2" data-reveal>
+        <div class="faq-glow2"></div>
+        <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-6">
+          <span class="faq-icon2-wrap">
+            <span class="faq-icon2-ring"></span>
+            <svg class="faq-plus2" viewBox="0 0 24 24" fill="none"><path d="M12 5v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="faq-btn2-body">
+            <span class="faq-btn2-row">
+              <span class="faq-btn2-q">O conteúdo é uma recomendação de investimento?</span>
+              <span class="faq-meta2">Legal</span>
+            </span>
+          </span>
+        </button>
+        <div class="faq-panel2" id="faq-p-6" role="region">
+          <p>Não. O canal é analítico e informativo. Entregamos contexto geopolítico e mapeamos suas possíveis implicações econômicas — não indicamos ativos, não gerimos carteiras e não oferecemos consultoria financeira. Cada assinante é responsável pelas suas próprias decisões.</p>
+        </div>
+      </li>
+
+    </ul>
+  </section>
 
   <!-- D3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
@@ -1961,6 +2299,53 @@
     });
 
     els.forEach((el) => observer.observe(el));
+  })();
+  </script>
+  <!-- FAQ ACCORDION -->
+  <script>
+  (function () {
+    // Accordion
+    document.querySelectorAll('.faq-btn2').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card  = btn.closest('.faq-card2');
+        const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        const isOpen = card.classList.contains('is-open');
+
+        // Fecha todos
+        document.querySelectorAll('.faq-card2').forEach(c => {
+          c.classList.remove('is-open');
+          c.querySelector('.faq-btn2').setAttribute('aria-expanded','false');
+          const p = c.querySelector('.faq-panel2');
+          if (p) p.classList.remove('is-open');
+        });
+
+        // Abre o clicado
+        if (!isOpen) {
+          card.classList.add('is-open');
+          btn.setAttribute('aria-expanded','true');
+          if (panel) panel.classList.add('is-open');
+        }
+      });
+    });
+
+    // Cursor glow
+    document.querySelectorAll('.faq-card2').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--fx', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--fy', `${e.clientY - rect.top}px`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.removeProperty('--fx');
+        card.style.removeProperty('--fy');
+      });
+    });
+
+    // Intro badge reveal after paint
+    requestAnimationFrame(() => {
+      const intro = document.getElementById('faqIntro');
+      if (intro) intro.classList.add('faq-intro--active');
+    });
   })();
   </script>
 
