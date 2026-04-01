@@ -168,7 +168,7 @@
     .hero-wrap {
       position: relative;
       z-index: 2;
-      padding: clamp(48px,7vh,80px) clamp(20px,5vw,64px) clamp(32px,4vh,56px);
+      padding: clamp(48px,7vh,80px) clamp(20px,5vw,64px) clamp(72px,10vh,110px);
       width: min(680px, 100%);
       margin-left: clamp(20px,8vw,120px);
     }
@@ -180,10 +180,10 @@
     .globe-bg {
       position: absolute;
       top: 50%;
-      right: -160px;
+      right: -200px;
       transform: translateY(-50%);
-      width: 680px;
-      height: 680px;
+      width: 820px;
+      height: 820px;
       z-index: 1;
       pointer-events: none;
       -webkit-mask-image: radial-gradient(ellipse 90% 90% at 70% 50%, black 40%, transparent 75%);
@@ -191,8 +191,8 @@
     }
     .globe-bg canvas {
       display: block;
-      width: 680px !important;
-      height: 680px !important;
+      width: 820px !important;
+      height: 820px !important;
     }
     @media (max-width: 900px) {
       .globe-bg {
@@ -967,7 +967,7 @@
       z-index: 2;
       max-width: 800px;
       margin: 0 auto;
-      padding: clamp(80px,12vh,120px) clamp(20px,5vw,64px) clamp(80px,10vh,112px);
+      padding: clamp(80px,12vh,120px) clamp(20px,5vw,64px) clamp(112px,14vh,160px);
       text-align: center;
       border-top: 1px solid var(--glass-border);
       display: flex;
@@ -1770,7 +1770,7 @@
     const dpr = window.devicePixelRatio || 1;
 
     // ── Tamanho fixo ──
-    const SIZE   = 680;
+    const SIZE   = 820;
     const RADIUS = SIZE / 2.1;
 
     canvas.width        = SIZE * dpr;
