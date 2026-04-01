@@ -1559,23 +1559,24 @@
     /* Body */
     .faq-btn2-body { flex: 1; }
     .faq-btn2-row {
-      display: flex; align-items: flex-start; gap: 12px;
-      flex-wrap: wrap; justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
     }
     .faq-btn2-q {
       font-size: 15px; font-weight: 500;
       color: var(--white); line-height: 1.4;
-      flex: 1;
     }
 
     .faq-meta2 {
-      flex-shrink: 0;
       display: inline-flex; align-items: center;
       border: 1px solid var(--glass-border);
       border-radius: 999px;
       padding: 3px 12px;
       font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
       color: var(--zinc-500);
+      width: fit-content;
     }
 
     /* Panel */
@@ -2148,6 +2149,7 @@
   </section>
 
   <!-- FINAL CTA -->
+
 
   <!-- D3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
