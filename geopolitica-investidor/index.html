@@ -376,32 +376,16 @@
     }
 
     .shiny-cta span { z-index: 1; position: relative; }
-    .shiny-cta span::before {
-      content: "";
-      pointer-events: none;
-      position: absolute;
-      inset-inline-start: 50%;
-      inset-block-start: 50%;
-      translate: -50% -50%;
-      z-index: -1;
-      --size: calc(100% + 1rem);
-      width: var(--size);
-      height: var(--size);
-      box-shadow: inset 0 -1ex 2rem 4px var(--shiny-hi);
-      opacity: 0;
-      transition: opacity var(--transition);
-      animation: calc(var(--duration) * 1.5) breathe linear infinite;
-    }
 
     /* Animações: pausadas por padrão, rodam no hover */
     .shiny-cta,
     .shiny-cta::before {
       animation: gradient-angle 3s linear infinite;
-      animation-play-state: paused;
+      animation-play-state: running;
     }
     .shiny-cta::after {
       animation: shimmer 3s linear infinite;
-      animation-play-state: paused;
+      animation-play-state: running;
     }
     .shiny-cta:is(:hover, :focus-visible),
     .shiny-cta:is(:hover, :focus-visible)::before,
@@ -413,12 +397,10 @@
       --gradient-angle-offset: 95deg;
       --gradient-shine: var(--shiny-hi-subtle);
     }
-    .shiny-cta:is(:hover, :focus-visible) span::before { opacity: 1; }
     .shiny-cta:active { translate: 0 1px; }
 
     @keyframes gradient-angle { to { --gradient-angle: 360deg; } }
     @keyframes shimmer { to { rotate: 360deg; } }
-    @keyframes breathe { from, to { scale: 1; } 50% { scale: 1.2; } }
 
     /* old btn kept for plan cards only */
     .btn-white {
@@ -590,18 +572,24 @@
       align-items: center;
       gap: 10px;
       font-size: 10px;
-      letter-spacing: .2em;
+      letter-spacing: .22em;
       text-transform: uppercase;
       font-weight: 600;
       color: var(--gold);
-      margin-bottom: 40px;
+      margin-bottom: 16px;
     }
-    .s-label::before {
-      content: '';
-      display: block;
-      width: 24px; height: 1px;
-      background: var(--gold);
-      opacity: .5;
+
+    /* Quando s-label precede section-h2, reduz margin */
+    .s-label + .section-h2 { margin-top: 0; }
+
+    .section-h2 {
+      font-family: var(--display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 44px;
     }
 
     /* ─── NARRATIVE ─── */
@@ -1307,6 +1295,38 @@
       font-size: 14px; line-height: 1.8;
       color: var(--zinc-400); font-weight: 300;
     }
+    /* Nav logo slot */
+    .nav-logo-slot {
+      width: 120px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-slot img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    [data-reveal="left"]  { transform: translateX(-28px); }
+    [data-reveal="right"] { transform: translateX(28px); }
+    [data-reveal="scale"] { transform: translateY(16px) scale(.97); }
+    [data-reveal].visible {
+      opacity: 1;
+      transform: none;
+    }
+
     /* ─── INLINE SVG HELPERS ─── */
     svg.icon { display: inline-block; vertical-align: middle; }
   </style>
@@ -1319,9 +1339,8 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <div class="logo">
-      <span class="logo-main">Geopolítica para Investidores</span>
-      <span class="logo-sub">Canal exclusivo de análise</span>
+    <div class="nav-logo-slot">
+      <!-- coloque sua imagem aqui: <img src="logo.png" alt="Logo" /> -->
     </div>
     <a href="#planos" class="nav-pill">
       Quero entrar
@@ -1338,9 +1357,8 @@
         </div>
 
         <h1 class="hero-h1 fade-in delay-2">
-          O mundo não para.<br>
-          <span class="grad">E você não pode</span><br>
-          ficar para trás.
+          O mundo não para. E você<br>
+          não pode <span class="grad">ficar para trás.</span>
         </h1>
 
         <p class="hero-desc fade-in delay-3">
@@ -1352,7 +1370,7 @@
         </p>
 
         <div class="hero-ctas fade-in delay-4">
-          <a href="#planos" class="btn-white">
+          <a href="#planos" class="shiny-cta">
             <span>Quero entender o jogo →</span>
           </a>
         </div>
@@ -1373,10 +1391,10 @@
   <section class="section">
     <div class="s-label">Por que isso importa</div>
     <div class="narrative">
-      <div class="n-lead">Toda grande virada econômica começou como um evento geopolítico que <span class="grad">a maioria subestimou.</span></div>
-      <p class="n-body">A pandemia não foi só uma crise de saúde: foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra: foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar: é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</p>
-      <p class="n-body">O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa — mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
-      <div class="n-punch">Um briefing diário que transforma o caos geopolítico em contexto claro — e contexto claro em vantagem para quem pensa antes de agir.</div>
+      <div class="n-lead" data-reveal>Toda grande virada econômica começou como um evento geopolítico que <span class="grad">a maioria subestimou.</span></div>
+      <p class="n-body" data-reveal>A pandemia não foi só uma crise de saúde: foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra: foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar: é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</p>
+      <p class="n-body" data-reveal>O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa — mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
+      <div class="n-punch" data-reveal="scale">Um briefing diário que transforma o caos geopolítico em contexto claro — e contexto claro em vantagem para quem pensa antes de agir.</div>
     </div>
   </section>
 
@@ -1385,7 +1403,8 @@
 
   <!-- TRÍADE HISTÓRICA -->
   <section class="section tight" style="padding-top:72px;">
-    <div class="s-label">Quando o mapa muda, o dinheiro se move</div>
+    <div class="s-label">Padrão que se repete</div>
+    <h2 class="section-h2">Quando o mapa muda,<br>o dinheiro se move</h2>
 
     <div class="n-body" style="max-width:680px; margin-bottom:40px;">
       Não é teoria. <strong>É o padrão que se repete, e que você viveu nos últimos cinco anos.</strong> Cada vez que o tabuleiro geopolítico se reorganiza, uma janela se abre. Quem tem o contexto certo a vê antes de todo mundo. Quem não tem, descobre tarde demais. Sempre.
@@ -1394,7 +1413,7 @@
     <div class="historico-list">
 
       <!-- 2020 -->
-      <div class="hist-card">
+      <div class="hist-card" data-reveal>
         <div class="hist-top">
           <div class="hist-year">
             <div class="hist-year-num">2020</div>
@@ -1418,7 +1437,7 @@
       </div>
 
       <!-- 2022 -->
-      <div class="hist-card">
+      <div class="hist-card" data-reveal>
         <div class="hist-top">
           <div class="hist-year">
             <div class="hist-year-num">2022</div>
@@ -1442,7 +1461,7 @@
       </div>
 
       <!-- 2026 — AO VIVO -->
-      <div class="hist-card ao-vivo">
+      <div class="hist-card ao-vivo" data-reveal>
         <div class="hist-top">
           <div class="hist-year">
             <div class="hist-year-num">2026</div>
@@ -1472,7 +1491,7 @@
     </div>
 
     <!-- Padrão box -->
-    <div class="padrao-box">
+    <div class="padrao-box" data-reveal="scale">
       <div class="padrao-box-title">O padrão não mudou. <span class="grad">Só o cenário muda.</span></div>
       <div class="padrao-box-text">2020, 2022, 2026: três choques em seis anos, um padrão idêntico: <strong>eventos geopolíticos que a maioria leu como notícia, mas que eram reorganizações de poder com consequências econômicas profundas e antecipáveis.</strong> O próximo choque já está em formação. A questão não é se ele vai acontecer, mas se você vai estar preparado para lê-lo antes que vire manchete.</div>
     </div>
@@ -1483,11 +1502,12 @@
 
   <!-- O QUE VOCÊ RECEBE -->
   <section class="section tight" style="padding-top:72px;">
-    <div class="s-label">O que entra na sua semana</div>
+    <div class="s-label">Sua assinatura inclui</div>
+    <h2 class="section-h2">O que entra na sua semana</h2>
     <div class="bento-grid">
 
       <!-- 01 — 2 cols -->
-      <div class="bento-item col2 persist">
+      <div class="bento-item col2 persist" data-reveal>
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1504,7 +1524,7 @@
       </div>
 
       <!-- 02 — 1 col -->
-      <div class="bento-item">
+      <div class="bento-item" data-reveal>
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1521,7 +1541,7 @@
       </div>
 
       <!-- 03 — 1 col -->
-      <div class="bento-item">
+      <div class="bento-item" data-reveal>
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1538,7 +1558,7 @@
       </div>
 
       <!-- 04 — 2 cols -->
-      <div class="bento-item col2">
+      <div class="bento-item col2" data-reveal>
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1555,7 +1575,7 @@
       </div>
 
       <!-- 05 — 3 cols -->
-      <div class="bento-item col3">
+      <div class="bento-item col3" data-reveal>
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1576,8 +1596,9 @@
 
   <!-- BRIEFING EXEMPLO -->
   <section class="section tight" style="padding-top:48px;">
-    <div class="s-label">Veja como é na prática</div>
-    <div class="briefing-outer">
+    <div class="s-label">Exemplo real</div>
+    <h2 class="section-h2">Veja como é na prática</h2>
+    <div class="briefing-outer" data-reveal="scale">
       <div class="briefing-header">
         <div class="briefing-title-text">Geopolítica para Investidores</div>
         <div class="briefing-date">Quarta-feira, 19 mar 2025</div>
@@ -1610,7 +1631,7 @@
   <div class="section-hr"><hr></div>
 
   <!-- MANIFESTO -->
-  <div class="manifesto">
+  <div class="manifesto" data-reveal>
     <h2>Não vendemos notícias.<br>Vendemos <span class="grad">a capacidade<br>de lê-las.</span></h2>
     <p>Qualquer pessoa acessa as manchetes. O que separa quem entende o mundo de quem apenas o observa é a camada de análise — o contexto histórico, os interesses em jogo, as consequências que ainda não chegaram. É isso que entregamos, todo dia útil, com consistência e sem ruído.</p>
   </div>
@@ -1620,11 +1641,12 @@
 
   <!-- PLANOS -->
   <section id="planos" class="section tight" style="padding-top:72px;">
-    <div class="s-label">Escolha o seu nível de acesso</div>
+    <div class="s-label">Planos e preços</div>
+    <h2 class="section-h2">Escolha o seu nível de acesso</h2>
     <div class="plans-grid">
 
       <!-- ESSENCIAL -->
-      <div class="plan-card">
+      <div class="plan-card" data-reveal>
         <div class="plan-name">Essencial</div>
         <div class="plan-price"><span class="plan-cur">R$</span>297</div>
         <div class="plan-period">por ano</div>
@@ -1640,7 +1662,7 @@
       </div>
 
       <!-- PRO -->
-      <div class="plan-card featured">
+      <div class="plan-card featured" data-reveal>
         <div class="plan-badge badge-gold">Mais escolhido</div>
         <div class="plan-name">Pro</div>
         <div class="plan-price"><span class="plan-cur">R$</span>997</div>
@@ -1657,7 +1679,7 @@
       </div>
 
       <!-- RESERVADO -->
-      <div class="plan-card reservado">
+      <div class="plan-card reservado" data-reveal>
         <div class="plan-badge badge-platinum">Acesso direto</div>
         <div class="plan-name">Reservado</div>
         <div class="plan-price"><span class="plan-cur">R$</span>2.997</div>
@@ -1685,7 +1707,7 @@
   <!-- PARA QUEM É -->
   <section class="section tight" style="padding-top:72px;">
     <div class="s-label">Isso foi feito para você se</div>
-    <div class="forwho-item">
+    <div class="forwho-item" data-reveal="left">
       <div class="forwho-icon">
         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </div>
@@ -1694,7 +1716,7 @@
         <div class="forwho-desc">Não para receber dicas — para ter o contexto que a maioria ignora. Quem entende o cenário geopolítico toma decisões com mais clareza. Simples assim.</div>
       </div>
     </div>
-    <div class="forwho-item">
+    <div class="forwho-item" data-reveal="left">
       <div class="forwho-icon">
         <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
       </div>
@@ -1703,7 +1725,7 @@
         <div class="forwho-desc">Câmbio, importação, parceiros internacionais, cadeia de suprimentos. O mundo muda e o seu negócio sente — às vezes antes de você entender por quê. Isso muda quando você tem o contexto certo.</div>
       </div>
     </div>
-    <div class="forwho-item">
+    <div class="forwho-item" data-reveal="left">
       <div class="forwho-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
@@ -1715,7 +1737,7 @@
   </section>
 
   <!-- FINAL CTA -->
-  <div class="final-cta">
+  <div class="final-cta" data-reveal>
     <h2>O tabuleiro já está<br>em movimento.<br><span class="grad">Você está vendo?</span></h2>
     <p>Cancele quando quiser. Sem fidelidade. Sem letras miúdas. Com garantia de 7 dias — se não agregar, devolvemos cada centavo.</p>
     <a href="#planos" class="btn-white" style="margin:0 auto;">
@@ -1893,6 +1915,38 @@
       canvas.addEventListener('touchmove', mv, { passive: true });
       canvas.addEventListener('touchend', end);
     }, { passive: true });
+  })();
+  </script>
+  <!-- SCROLL REVEAL -->
+  <script>
+  (function () {
+    const els = document.querySelectorAll('[data-reveal]');
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    // Stagger items in the same parent
+    const groups = {};
+    els.forEach((el) => {
+      const key = el.parentElement;
+      groups[key] = groups[key] || [];
+      groups[key].push(el);
+    });
+
+    Object.values(groups).forEach((group) => {
+      group.forEach((el, i) => {
+        el.style.transitionDelay = `${i * 80}ms`;
+      });
+    });
+
+    els.forEach((el) => observer.observe(el));
   })();
   </script>
 
