@@ -1374,20 +1374,6 @@
       display: block;
     }
 
-    /* ─── SCROLL ANIMATIONS ─── */
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
-    }
-    [data-reveal="left"]  { transform: translateX(-28px); }
-    [data-reveal="right"] { transform: translateX(28px); }
-    [data-reveal="scale"] { transform: translateY(16px) scale(.97); }
-    [data-reveal].visible {
-      opacity: 1;
-      transform: none;
-    }
-
     /* ─── FAQ 2 (componente) ─── */
     @keyframes faq-beam-spin {
       0%   { transform: rotate(0deg); }
@@ -1661,10 +1647,10 @@
     <div style="max-width:1200px; margin:0 auto;">
     <div class="s-label s-label--dark">Por que isso importa</div>
     <div class="narrative">
-      <div class="n-lead n-lead--dark" data-reveal>Toda grande virada econômica começou como um evento geopolítico que <span class="grad--dark">a maioria subestimou.</span></div>
-      <p class="n-body n-body--dark" data-reveal>A pandemia não foi só uma crise de saúde: foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra: foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar: é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</p>
-      <p class="n-body n-body--dark" data-reveal>O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa — mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
-      <div class="n-punch n-punch--dark" data-reveal="scale">Um briefing diário que transforma o caos geopolítico em contexto claro — e contexto claro em vantagem para quem pensa antes de agir.</div>
+      <div class="n-lead n-lead--dark">Toda grande virada econômica começou como um evento geopolítico que <span class="grad--dark">a maioria subestimou.</span></div>
+      <p class="n-body n-body--dark">A pandemia não foi só uma crise de saúde: foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra: foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar: é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</p>
+      <p class="n-body n-body--dark">O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa — mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
+      <div class="n-punch n-punch--dark">Um briefing diário que transforma o caos geopolítico em contexto claro — e contexto claro em vantagem para quem pensa antes de agir.</div>
     </div>
     </div>
   </section>
@@ -1684,7 +1670,7 @@
     <div class="historico-list">
 
       <!-- 2020 -->
-      <div class="hist-card" data-reveal>
+      <div class="hist-card">
         <div class="hist-top">
           <div class="hist-year">
             <div class="hist-year-num">2020</div>
@@ -1708,7 +1694,7 @@
       </div>
 
       <!-- 2022 -->
-      <div class="hist-card" data-reveal>
+      <div class="hist-card">
         <div class="hist-top">
           <div class="hist-year">
             <div class="hist-year-num">2022</div>
@@ -1732,7 +1718,7 @@
       </div>
 
       <!-- 2026 — AO VIVO -->
-      <div class="hist-card ao-vivo" data-reveal>
+      <div class="hist-card ao-vivo">
         <div class="hist-top">
           <div class="hist-year">
             <div class="hist-year-num">2026</div>
@@ -1762,7 +1748,7 @@
     </div>
 
     <!-- Padrão box -->
-    <div class="padrao-box" data-reveal="scale">
+    <div class="padrao-box">
       <div class="padrao-box-title">O padrão não mudou. <span class="grad">Só o cenário muda.</span></div>
       <div class="padrao-box-text">2020, 2022, 2026: três choques em seis anos, um padrão idêntico: <strong>eventos geopolíticos que a maioria leu como notícia, mas que eram reorganizações de poder com consequências econômicas profundas e antecipáveis.</strong> O próximo choque já está em formação. A questão não é se ele vai acontecer, mas se você vai estar preparado para lê-lo antes que vire manchete.</div>
     </div>
@@ -1778,7 +1764,7 @@
     <div class="bento-grid">
 
       <!-- 01 — 2 cols -->
-      <div class="bento-item col2 persist" data-reveal>
+      <div class="bento-item col2 persist">
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1795,7 +1781,7 @@
       </div>
 
       <!-- 02 — 1 col -->
-      <div class="bento-item" data-reveal>
+      <div class="bento-item">
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1812,7 +1798,7 @@
       </div>
 
       <!-- 03 — 1 col -->
-      <div class="bento-item" data-reveal>
+      <div class="bento-item">
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1829,7 +1815,7 @@
       </div>
 
       <!-- 04 — 2 cols -->
-      <div class="bento-item col2" data-reveal>
+      <div class="bento-item col2">
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1846,7 +1832,7 @@
       </div>
 
       <!-- 05 — 3 cols -->
-      <div class="bento-item col3" data-reveal>
+      <div class="bento-item col3">
         <div class="bento-dots"></div>
         <div class="bento-glow"></div>
         <div class="bento-header">
@@ -1869,7 +1855,7 @@
   <section class="section tight" style="padding-top:48px;">
     <div class="s-label">Exemplo real</div>
     <h2 class="section-h2">Veja como é na prática</h2>
-    <div class="briefing-outer" data-reveal="scale">
+    <div class="briefing-outer">
       <div class="briefing-header">
         <div class="briefing-title-text">Geopolítica para Investidores</div>
         <div class="briefing-date">Quarta-feira, 19 mar 2025</div>
@@ -1902,7 +1888,7 @@
   <div class="section-hr"><hr></div>
 
   <!-- MANIFESTO -->
-  <div class="manifesto" data-reveal>
+  <div class="manifesto">
     <h2>Não vendemos notícias.<br>Vendemos <span class="grad">a capacidade<br>de lê-las.</span></h2>
     <p>Qualquer pessoa acessa as manchetes. O que separa quem entende o mundo de quem apenas o observa é a camada de análise — o contexto histórico, os interesses em jogo, as consequências que ainda não chegaram. É isso que entregamos, todo dia útil, com consistência e sem ruído.</p>
   </div>
@@ -1917,7 +1903,7 @@
     <div class="plans-grid">
 
       <!-- ESSENCIAL -->
-      <div class="plan-card" data-reveal>
+      <div class="plan-card">
         <div class="plan-name">Essencial</div>
         <div class="plan-price"><span class="plan-cur">R$</span>297</div>
         <div class="plan-period">por ano</div>
@@ -1933,7 +1919,7 @@
       </div>
 
       <!-- PRO -->
-      <div class="plan-card featured" data-reveal>
+      <div class="plan-card featured">
         <div class="plan-badge badge-gold">Mais escolhido</div>
         <div class="plan-name">Pro</div>
         <div class="plan-price"><span class="plan-cur">R$</span>997</div>
@@ -1950,7 +1936,7 @@
       </div>
 
       <!-- RESERVADO -->
-      <div class="plan-card reservado" data-reveal>
+      <div class="plan-card reservado">
         <div class="plan-badge badge-platinum">Acesso direto</div>
         <div class="plan-name">Reservado</div>
         <div class="plan-price"><span class="plan-cur">R$</span>2.997</div>
@@ -1978,7 +1964,7 @@
   <!-- PARA QUEM É -->
   <section class="section tight" style="padding-top:72px;">
     <div class="s-label">Isso foi feito para você se</div>
-    <div class="forwho-item" data-reveal="left">
+    <div class="forwho-item">
       <div class="forwho-icon">
         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </div>
@@ -1987,7 +1973,7 @@
         <div class="forwho-desc">Não para receber dicas — para ter o contexto que a maioria ignora. Quem entende o cenário geopolítico toma decisões com mais clareza. Simples assim.</div>
       </div>
     </div>
-    <div class="forwho-item" data-reveal="left">
+    <div class="forwho-item">
       <div class="forwho-icon">
         <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
       </div>
@@ -1996,7 +1982,7 @@
         <div class="forwho-desc">Câmbio, importação, parceiros internacionais, cadeia de suprimentos. O mundo muda e o seu negócio sente — às vezes antes de você entender por quê. Isso muda quando você tem o contexto certo.</div>
       </div>
     </div>
-    <div class="forwho-item" data-reveal="left">
+    <div class="forwho-item">
       <div class="forwho-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
@@ -2031,7 +2017,7 @@
 
     <ul class="faq-list2">
 
-      <li class="faq-card2" data-reveal>
+      <li class="faq-card2">
         <div class="faq-glow2"></div>
         <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-1">
           <span class="faq-icon2-wrap">
@@ -2050,7 +2036,7 @@
         </div>
       </li>
 
-      <li class="faq-card2" data-reveal>
+      <li class="faq-card2">
         <div class="faq-glow2"></div>
         <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-2">
           <span class="faq-icon2-wrap">
@@ -2069,7 +2055,7 @@
         </div>
       </li>
 
-      <li class="faq-card2" data-reveal>
+      <li class="faq-card2">
         <div class="faq-glow2"></div>
         <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-3">
           <span class="faq-icon2-wrap">
@@ -2088,7 +2074,7 @@
         </div>
       </li>
 
-      <li class="faq-card2" data-reveal>
+      <li class="faq-card2">
         <div class="faq-glow2"></div>
         <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-4">
           <span class="faq-icon2-wrap">
@@ -2107,7 +2093,7 @@
         </div>
       </li>
 
-      <li class="faq-card2" data-reveal>
+      <li class="faq-card2">
         <div class="faq-glow2"></div>
         <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-5">
           <span class="faq-icon2-wrap">
@@ -2126,7 +2112,7 @@
         </div>
       </li>
 
-      <li class="faq-card2" data-reveal>
+      <li class="faq-card2">
         <div class="faq-glow2"></div>
         <button class="faq-btn2" aria-expanded="false" aria-controls="faq-p-6">
           <span class="faq-icon2-wrap">
@@ -2320,38 +2306,6 @@
       canvas.addEventListener('touchmove', mv, { passive: true });
       canvas.addEventListener('touchend', end);
     }, { passive: true });
-  })();
-  </script>
-  <!-- SCROLL REVEAL -->
-  <script>
-  (function () {
-    const els = document.querySelectorAll('[data-reveal]');
-    if (!els.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    // Stagger items in the same parent
-    const groups = {};
-    els.forEach((el) => {
-      const key = el.parentElement;
-      groups[key] = groups[key] || [];
-      groups[key].push(el);
-    });
-
-    Object.values(groups).forEach((group) => {
-      group.forEach((el, i) => {
-        el.style.transitionDelay = `${i * 80}ms`;
-      });
-    });
-
-    els.forEach((el) => observer.observe(el));
   })();
   </script>
   <!-- FAQ ACCORDION -->
