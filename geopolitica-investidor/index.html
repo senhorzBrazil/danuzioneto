@@ -967,9 +967,13 @@
       z-index: 2;
       max-width: 800px;
       margin: 0 auto;
-      padding: clamp(72px,10vh,112px) clamp(20px,5vw,64px);
+      padding: clamp(80px,12vh,120px) clamp(20px,5vw,64px) clamp(80px,10vh,112px);
       text-align: center;
       border-top: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
     }
     .final-cta h2 {
       font-family: var(--display);
@@ -978,7 +982,7 @@
       letter-spacing: -.04em;
       line-height: 1.1;
       color: var(--white);
-      margin-bottom: 20px;
+      margin-bottom: 28px;
     }
     .final-cta h2 .grad {
       background: linear-gradient(135deg, #fff 30%, var(--gold2) 100%);
@@ -986,8 +990,18 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .final-cta p { font-size: 16px; color: var(--zinc-400); font-weight: 300; line-height: 1.75; max-width: 460px; margin: 0 auto 36px; }
-    .guarantee { margin-top: 20px; font-size: 12px; color: rgba(255,255,255,.18); letter-spacing: .04em; }
+    .final-cta p {
+      font-size: 16px; color: var(--zinc-400); font-weight: 300;
+      line-height: 1.75; max-width: 440px;
+      margin: 0 0 40px;
+    }
+    .final-cta .btn-white { margin: 0 auto; }
+    .guarantee {
+      margin-top: 32px;
+      font-size: 12px;
+      color: rgba(255,255,255,.22);
+      letter-spacing: .04em;
+    }
 
     /* ═══════════════════════════════
        MOBILE — até 640px
@@ -1740,10 +1754,10 @@
   <div class="final-cta" data-reveal>
     <h2>O tabuleiro já está<br>em movimento.<br><span class="grad">Você está vendo?</span></h2>
     <p>Cancele quando quiser. Sem fidelidade. Sem letras miúdas. Com garantia de 7 dias — se não agregar, devolvemos cada centavo.</p>
-    <a href="#planos" class="btn-white" style="margin:0 auto;">
+    <a href="#planos" class="shiny-cta">
       <span>Escolher meu plano →</span>
     </a>
-    <p class="guarantee">Mais de dois anos formando leitores que entendem o mundo antes de todo mundo.</p>
+    <p class="guarantee">Há mais de dois anos formando leitores que entendem o mundo antes de todo mundo.</p>
   </div>
 
   <!-- D3 -->
