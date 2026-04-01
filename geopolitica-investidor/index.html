@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geopolítica para Investidores — Formação em análise estratégica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-33.333%); }
+    }
+    @keyframes ping {
+      75%, 100% { transform: scale(2); opacity: 0; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: .5; }
+      50%       { opacity: 1; }
+    }
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    .fade-in            { animation: fadeSlideIn .7s ease-out both; }
+    .delay-1            { animation-delay: .10s; }
+    .delay-2            { animation-delay: .22s; }
+    .delay-3            { animation-delay: .34s; }
+    .delay-4            { animation-delay: .46s; }
+    .delay-5            { animation-delay: .58s; }
+    .delay-6            { animation-delay: .70s; }
+
+    /* ─── BASE ─── */
+    :root {
+      --gold:   #3b82f6;
+      --gold2:  #93c5fd;
+      --zinc-950: #09090b;
+      --zinc-900: #18181b;
+      --zinc-800: #27272a;
+      --zinc-700: #3f3f46;
+      --zinc-500: #71717a;
+      --zinc-400: #a1a1aa;
+      --zinc-300: #d4d4d8;
+      --white:  #ffffff;
+      --glass-bg:     rgba(255,255,255,0.05);
+      --glass-border: rgba(255,255,255,0.10);
+      --glass-hover:  rgba(255,255,255,0.09);
+      --sans: 'Inter', system-ui, sans-serif;
+      --display: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--zinc-950);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE GRAIN ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* ─── BACKGROUND ORBS ─── */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      top: -200px; right: -100px;
+      background: rgba(59,130,246,.08);
+      animation: pulseGlow 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      bottom: 20%; left: -150px;
+      background: rgba(255,255,255, .03);
+      animation: pulseGlow 12s ease-in-out infinite reverse;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(9,9,11,.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0 clamp(20px,5vw,64px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo { display: flex; flex-direction: column; gap: 2px; }
+    .logo-main {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .8;
+    }
+    .nav-pill {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      color: var(--zinc-300);
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .18s, border-color .18s, color .18s;
+    }
+    .nav-pill:hover { background: var(--glass-hover); border-color: rgba(255,255,255,.2); color: var(--white); }
+
+    /* ─── HERO ─── */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+    @media (max-width: 900px) {
+      .hero-section { overflow: visible; }
+    }
+    .hero-wrap {
+      position: relative;
+      z-index: 2;
+      padding: clamp(48px,7vh,80px) clamp(20px,5vw,64px) clamp(32px,4vh,56px);
+      width: min(680px, 100%);
+      margin-left: clamp(20px,8vw,120px);
+    }
+    @media (max-width: 900px) {
+      .hero-wrap { margin-left: auto; margin-right: auto; }
+    }
+
+    /* Globe background */
+    .globe-bg {
+      position: absolute;
+      top: 50%;
+      right: -160px;
+      transform: translateY(-50%);
+      width: 680px;
+      height: 680px;
+      z-index: 1;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 70% 50%, black 40%, transparent 75%);
+      mask-image: radial-gradient(ellipse 90% 90% at 70% 50%, black 40%, transparent 75%);
+    }
+    .globe-bg canvas {
+      display: block;
+      width: 680px !important;
+      height: 680px !important;
+    }
+    @media (max-width: 900px) {
+      .globe-bg {
+        position: relative;
+        top: auto; right: auto;
+        transform: none;
+        width: 100%;
+        /* 340px = onde o centro visual do globo cai com scale(0.62) e flex-start */
+        height: 340px;
+        overflow: hidden;
+        pointer-events: none;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        /* Fade só nas laterais — overflow faz o corte limpo em baixo */
+        -webkit-mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+        margin-top: 8px;
+      }
+      .globe-bg canvas {
+        width: 680px !important;
+        height: 680px !important;
+        transform: scale(0.62);
+        transform-origin: center center;
+        flex-shrink: 0;
+      }
+    }
+
+    /* LEFT */
+    .hero-left { display: flex; flex-direction: column; gap: 28px; padding-top: 8px; position: relative; z-index: 2; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      padding: 6px 14px;
+      width: fit-content;
+    }
+    .hero-badge span {
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--zinc-300);
+    }
+    .badge-star { width: 12px; height: 12px; fill: #facc15; color: #facc15; }
+
+    .hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(42px, 6.5vw, 80px);
+      font-weight: 800;
+      line-height: .92;
+      letter-spacing: -.04em;
+      color: var(--white);
+    }
+    .hero-h1 .grad {
+      background: linear-gradient(135deg, #fff 0%, #fff 55%, var(--gold2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* fade bottom of h1 */
+    .hero-h1 {
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 100%);
+    }
+
+    .hero-desc {
+      font-size: clamp(15px,1.5vw,18px);
+      line-height: 1.75;
+      color: var(--zinc-400);
+      font-weight: 300;
+      max-width: 520px;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    /* ─── SHINY CTA BUTTON ─── */
+    @property --gradient-angle {
+      syntax: "<angle>"; initial-value: 0deg; inherits: false;
+    }
+    @property --gradient-angle-offset {
+      syntax: "<angle>"; initial-value: 0deg; inherits: false;
+    }
+    @property --gradient-percent {
+      syntax: "<percentage>"; initial-value: 5%; inherits: false;
+    }
+    @property --gradient-shine {
+      syntax: "<color>"; initial-value: white; inherits: false;
+    }
+
+    .shiny-cta {
+      --shiny-bg:            #000;
+      --shiny-bg-subtle:     #0f172a;
+      --shiny-fg:            #fff;
+      --shiny-hi:            #3b82f6;
+      --shiny-hi-subtle:     #93c5fd;
+      --animation:           gradient-angle linear infinite;
+      --duration:            3s;
+      --shadow-size:         2px;
+      --transition:          800ms cubic-bezier(0.25, 1, 0.5, 1);
+
+      isolation: isolate;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      outline-offset: 4px;
+      padding: 14px 32px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.2;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--shiny-fg);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background:
+        linear-gradient(var(--shiny-bg), var(--shiny-bg)) padding-box,
+        conic-gradient(
+          from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+          transparent,
+          var(--shiny-hi) var(--gradient-percent),
+          var(--gradient-shine) calc(var(--gradient-percent) * 2),
+          var(--shiny-hi) calc(var(--gradient-percent) * 3),
+          transparent calc(var(--gradient-percent) * 4)
+        ) border-box;
+      box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle);
+      transition: var(--transition);
+      transition-property: --gradient-angle-offset, --gradient-percent, --gradient-shine, transform;
+    }
+
+    /* Dot pattern */
+    .shiny-cta::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+      --size: calc(100% - var(--shadow-size) * 3);
+      --position: 2px;
+      --space: calc(var(--position) * 2);
+      width: var(--size);
+      height: var(--size);
+      background: radial-gradient(
+        circle at var(--position) var(--position),
+        white calc(var(--position) / 4),
+        transparent 0
+      ) padding-box;
+      background-size: var(--space) var(--space);
+      background-repeat: space;
+      mask-image: conic-gradient(
+        from calc(var(--gradient-angle) + 45deg),
+        black, transparent 10% 90%, black
+      );
+      border-radius: inherit;
+      opacity: 0.4;
+    }
+
+    /* Inner shimmer */
+    .shiny-cta::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(-50deg, transparent, var(--shiny-hi), transparent);
+      mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+      opacity: 0.6;
+    }
+
+    .shiny-cta span { z-index: 1; position: relative; }
+    .shiny-cta span::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+      --size: calc(100% + 1rem);
+      width: var(--size);
+      height: var(--size);
+      box-shadow: inset 0 -1ex 2rem 4px var(--shiny-hi);
+      opacity: 0;
+      transition: opacity var(--transition);
+      animation: calc(var(--duration) * 1.5) breathe linear infinite;
+    }
+
+    /* Animações: pausadas por padrão, rodam no hover */
+    .shiny-cta,
+    .shiny-cta::before {
+      animation: gradient-angle 3s linear infinite;
+      animation-play-state: paused;
+    }
+    .shiny-cta::after {
+      animation: shimmer 3s linear infinite;
+      animation-play-state: paused;
+    }
+    .shiny-cta:is(:hover, :focus-visible),
+    .shiny-cta:is(:hover, :focus-visible)::before,
+    .shiny-cta:is(:hover, :focus-visible)::after {
+      animation-play-state: running;
+    }
+    .shiny-cta:is(:hover, :focus-visible) {
+      --gradient-percent: 20%;
+      --gradient-angle-offset: 95deg;
+      --gradient-shine: var(--shiny-hi-subtle);
+    }
+    .shiny-cta:is(:hover, :focus-visible) span::before { opacity: 1; }
+    .shiny-cta:active { translate: 0 1px; }
+
+    @keyframes gradient-angle { to { --gradient-angle: 360deg; } }
+    @keyframes shimmer { to { rotate: 360deg; } }
+    @keyframes breathe { from, to { scale: 1; } 50% { scale: 1.2; } }
+
+    /* old btn kept for plan cards only */
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); color: var(--zinc-950);
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      padding: 14px 32px; border-radius: 999px; border: none;
+      cursor: pointer; text-decoration: none;
+    }
+
+    /* ─── GLASS CARD ─── */
+    .glass-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    /* Stats card */
+    .stats-card { padding: 32px; animation: floatCard 6s ease-in-out infinite; }
+
+    /* Globe card */
+    .globe-card {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      border-radius: 24px;
+      line-height: 0;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+    }
+    .globe-card canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      border-radius: 24px;
+    }
+    .globe-hint {
+      position: absolute;
+      bottom: 12px; left: 16px;
+      font-size: 11px;
+      color: rgba(255,255,255,.3);
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      padding: 4px 10px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .stats-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .stats-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .stats-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 1.8; }
+    .stats-big  { font-family: var(--display); font-size: 32px; font-weight: 800; letter-spacing: -.03em; color: var(--white); line-height: 1; }
+    .stats-sub  { font-size: 13px; color: var(--zinc-400); margin-top: 2px; }
+
+    .progress-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+    .progress-label span:first-child { color: var(--zinc-400); }
+    .progress-label span:last-child  { color: var(--white); font-weight: 500; }
+    .progress-track {
+      height: 6px; width: 100%;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(to right, var(--white), var(--zinc-400));
+    }
+
+    .stats-divider { height: 1px; background: var(--glass-border); margin-bottom: 22px; }
+
+    .mini-stats { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0; text-align: center; }
+    .mini-stat-val { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--white); display: block; }
+    .mini-stat-lbl { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--zinc-500); margin-top: 2px; display: block; }
+    .mini-divider  { background: var(--glass-border); align-self: stretch; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--zinc-300);
+    }
+    .pulse-dot { position: relative; display: flex; width: 8px; height: 8px; }
+    .pulse-dot::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: #4ade80;
+      opacity: .7;
+      animation: ping 1.8s ease-out infinite;
+    }
+    .pulse-dot::after {
+      content: '';
+      position: relative;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      z-index: 1;
+    }
+    .pill-crown { width: 12px; height: 12px; fill: #eab308; color: #eab308; }
+
+    /* Marquee card */
+    .marquee-card { padding: 28px 0; }
+    .marquee-title { font-size: 12px; font-weight: 500; color: var(--zinc-500); letter-spacing: .06em; padding: 0 28px; margin-bottom: 20px; }
+    .marquee-outer {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      white-space: nowrap;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      opacity: .4;
+      cursor: default;
+      transition: opacity .2s;
+      flex-shrink: 0;
+    }
+    .marquee-item:hover { opacity: 1; }
+    .marquee-item svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 1.8; }
+    .marquee-item span { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--white); letter-spacing: -.01em; }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 88px clamp(20px,5vw,64px);
+    }
+    .section.tight { padding-top: 0; }
+    .section-hr { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,64px); }
+    .section-hr hr { border: none; border-top: 1px solid var(--glass-border); }
+
+    .s-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+    .s-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--gold);
+      opacity: .5;
+    }
+
+    /* ─── NARRATIVE ─── */
+    .narrative { max-width: 680px; }
+    .n-lead {
+      font-family: var(--display);
+      font-size: clamp(24px,3.2vw,38px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -.03em;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .n-lead .grad {
+      background: linear-gradient(135deg, #fff 40%, var(--gold2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .n-body {
+      font-size: 16px; line-height: 1.9; color: var(--zinc-400); font-weight: 300; margin-bottom: 20px;
+    }
+    .n-body strong { color: var(--zinc-300); font-weight: 500; }
+    .n-punch {
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,.7);
+      margin-top: 32px;
+    }
+
+    /* ─── BENTO MODULES ─── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) { .bento-grid { grid-template-columns: 1fr; } }
+
+    .bento-item {
+      position: relative;
+      padding: 28px 24px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.6);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bento-item:hover,
+    .bento-item.persist {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 4px 24px rgba(255,255,255,0.04);
+    }
+    .bento-item.col2 { grid-column: span 2; }
+    .bento-item.col3 { grid-column: span 3; }
+    @media (max-width: 768px) {
+      .bento-item.col2, .bento-item.col3 { grid-column: span 1; }
+    }
+
+    /* Dot pattern overlay */
+    .bento-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at center, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 4px 4px;
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+    .bento-item:hover .bento-dots,
+    .bento-item.persist .bento-dots { opacity: 1; }
+
+    /* Gradient border glow */
+    .bento-glow {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.06), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+    .bento-item:hover .bento-glow,
+    .bento-item.persist .bento-glow { opacity: 1; }
+
+    /* Header row */
+    .bento-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .bento-icon {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .3s;
+    }
+    .bento-item:hover .bento-icon { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.25); }
+    .bento-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .bento-status {
+      font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      color: var(--zinc-300);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: background .3s;
+    }
+    .bento-item:hover .bento-status { background: rgba(255,255,255,0.12); }
+
+    /* Body */
+    .bento-num {
+      font-family: var(--display);
+      font-size: 48px; font-weight: 800; letter-spacing: -.04em;
+      color: rgba(59,130,246,.18);
+      line-height: 1;
+      margin-bottom: -4px;
+    }
+    .bento-item.col2 .bento-num,
+    .bento-item.col3 .bento-num { font-size: 56px; }
+
+    .bento-title {
+      font-family: var(--display);
+      font-size: 15px; font-weight: 700; letter-spacing: -.01em;
+      color: var(--white);
+      line-height: 1.35;
+    }
+    .bento-desc {
+      font-size: 13px; line-height: 1.75;
+      color: var(--zinc-400); font-weight: 300;
+    }
+
+    /* Footer row */
+    .bento-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .bento-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .bento-tag {
+      font-size: 11px; font-weight: 500;
+      padding: 3px 9px; border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      color: var(--zinc-400);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: background .2s;
+    }
+    .bento-tag:hover { background: rgba(255,255,255,0.1); }
+    .bento-tag.gold { background: rgba(59,130,246,.1); color: var(--gold); border-color: rgba(59,130,246,.2); }
+    .bento-cta {
+      font-size: 12px; color: var(--zinc-500);
+      opacity: 0; transition: opacity .25s;
+      white-space: nowrap;
+    }
+    .bento-item:hover .bento-cta { opacity: 1; }
+
+    /* ─── CASE CARD ─── */
+    .case-outer {
+      border-radius: 24px;
+      border: 1px solid rgba(59,130,246,.25);
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .case-header {
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid rgba(59,130,246,.15);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .case-header-title {
+      font-family: var(--display);
+      font-size: 13px; font-weight: 600;
+      color: var(--gold);
+      letter-spacing: .03em;
+    }
+    .case-header-meta { font-size: 12px; color: var(--zinc-500); display: flex; align-items: center; gap: 10px; }
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(59,130,246,.1);
+      border: 1px solid rgba(59,130,246,.3);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+      animation: ping 1.8s ease-out infinite;
+    }
+    .live-text { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+    .case-body {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 640px) { .case-body { grid-template-columns: 1fr; } }
+    .case-full { grid-column: 1 / -1; }
+    .case-hr { grid-column: 1 / -1; height: 1px; background: var(--glass-border); }
+    .case-tag { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); opacity: .7; margin-bottom: 8px; }
+    .case-text { font-size: 14px; line-height: 1.8; color: var(--zinc-400); font-weight: 300; }
+    .case-text strong { color: var(--zinc-200); font-weight: 500; }
+
+    /* ─── MANIFESTO ─── */
+    .manifesto {
+      text-align: center;
+      padding: 80px clamp(20px,5vw,64px);
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .manifesto h2 {
+      font-family: var(--display);
+      font-size: clamp(26px,4vw,44px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .manifesto h2 .grad {
+      background: linear-gradient(135deg, #fff 40%, var(--gold2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .manifesto p { font-size: 16px; line-height: 1.9; color: var(--zinc-400); font-weight: 300; max-width: 580px; margin: 0 auto; }
+
+    /* ─── PLANS ─── */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 14px;
+      margin-top: 40px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .plans-grid { grid-template-columns: 1fr 1fr; }
+      .plan-card.reservado { grid-column: 1 / -1; max-width: 440px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 540px) {
+      .plans-grid { grid-template-columns: 1fr; }
+      .plan-card.reservado { grid-column: auto; max-width: 100%; }
+    }
+
+    .plan-card {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s;
+    }
+    .plan-card:hover { transform: translateY(-4px); }
+    .plan-card.featured  { border-color: rgba(59,130,246,.35); background: rgba(59,130,246,.04); }
+    .plan-card.reservado { border-color: rgba(59,130,246,.6); background: rgba(59,130,246,.06); }
+
+    .plan-badge {
+      position: absolute;
+      top: -1px; right: 20px;
+      font-size: 9px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 0 0 10px 10px;
+    }
+    .badge-gold     { background: var(--gold);  color: #09090b; }
+    .badge-platinum { background: #e4e4e7;       color: #09090b; }
+
+    .plan-name { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--zinc-500); margin-bottom: 18px; }
+    .plan-price {
+      font-family: var(--display);
+      font-size: 48px; font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+      display: flex; align-items: flex-start; gap: 3px;
+    }
+    .plan-cur { font-size: 18px; margin-top: 10px; font-family: var(--sans); color: var(--zinc-500); font-weight: 400; }
+    .plan-period  { font-size: 12px; color: var(--zinc-500); margin-bottom: 8px; }
+    .plan-pitch   { font-size: 13px; line-height: 1.6; color: var(--zinc-500); font-style: italic; margin-bottom: 18px; font-weight: 300; }
+    .plan-divider { height: 1px; background: var(--glass-border); margin-bottom: 20px; }
+
+    .plan-feat {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: var(--zinc-400); font-weight: 300; line-height: 1.5; margin-bottom: 10px;
+    }
+    .plan-feat.hi  { color: var(--zinc-200); }
+    .plan-feat.dim { color: rgba(255,255,255,.18); }
+    .plan-feat.sp  { color: var(--white); font-weight: 500; }
+    .feat-check {
+      width: 16px; height: 16px; min-width: 16px;
+      border-radius: 50%;
+      background: rgba(59,130,246,.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .feat-check span { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); display: block; }
+    .plan-feat.dim .feat-check { opacity: .2; }
+
+    .plan-btn { margin-top: auto; padding-top: 24px; }
+    .plan-btn a {
+      display: block; width: 100%;
+      padding: 13px;
+      font-family: var(--sans);
+      font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600;
+      border-radius: 999px;
+      text-align: center; text-decoration: none;
+      transition: background .18s, transform .12s, border-color .18s;
+    }
+    .plan-btn a:active { transform: scale(.98); }
+    .plan-btn a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .b-ghost { background: rgba(255,255,255,.06); border: 1px solid var(--glass-border); color: var(--zinc-300); }
+    .b-ghost:hover { background: rgba(255,255,255,.1); }
+    .b-gold  { background: var(--gold); border: none; color: #09090b; }
+    .b-gold:hover  { background: #2563eb; }
+    .b-white { background: #e4e4e7; border: none; color: #09090b; }
+    .b-white:hover { background: #fff; }
+
+    /* ─── DISCLAIMER ─── */
+    .disclaimer {
+      margin-top: 28px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,.02);
+      padding: 20px 24px;
+      font-size: 12px; line-height: 1.7; color: var(--zinc-500); font-weight: 300;
+    }
+    .disclaimer strong { color: var(--zinc-400); font-weight: 500; }
+
+    /* ─── FOR WHO ─── */
+    .forwho-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--glass-border);
+      transition: background .15s;
+    }
+    .forwho-item:last-child { border-bottom: none; }
+    .forwho-icon {
+      width: 42px; height: 42px; min-width: 42px;
+      border-radius: 12px;
+      background: rgba(59,130,246,.08);
+      border: 1px solid rgba(59,130,246,.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .forwho-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .forwho-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px; letter-spacing: -.01em; }
+    .forwho-desc  { font-size: 13px; line-height: 1.75; color: var(--zinc-500); font-weight: 300; }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: clamp(72px,10vh,112px) clamp(20px,5vw,64px);
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
+    .final-cta h2 {
+      font-family: var(--display);
+      font-size: clamp(30px,5vw,54px);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .final-cta h2 .grad {
+      background: linear-gradient(135deg, #fff 30%, var(--gold2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .final-cta p { font-size: 16px; color: var(--zinc-400); font-weight: 300; line-height: 1.75; max-width: 460px; margin: 0 auto 36px; }
+    .guarantee { margin-top: 20px; font-size: 12px; color: rgba(255,255,255,.18); letter-spacing: .04em; }
+
+    /* ═══════════════════════════════
+       MOBILE — até 640px
+    ═══════════════════════════════ */
+    @media (max-width: 640px) {
+
+      /* Nav */
+      .nav { padding: 0 20px; height: 56px; }
+      .logo-sub { display: none; }
+      .nav-pill { padding: 7px 14px; font-size: 10px; }
+      .nav-pill svg { display: none; }
+
+      /* Hero */
+      .hero-wrap {
+        padding: 48px 20px 20px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+      }
+      .hero-left { gap: 20px; }
+      .hero-badge { padding: 5px 12px; }
+      .hero-badge span { font-size: 9px; letter-spacing: .1em; }
+      .hero-h1 {
+        font-size: clamp(38px, 11vw, 52px);
+        line-height: 1.05;
+        letter-spacing: -.03em;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+      .hero-h1 br { display: none; }
+      .hero-desc {
+        font-size: 15px;
+        max-width: 100%;
+      }
+      .hero-ctas {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .shiny-cta {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Sections */
+      .section { padding: 52px 20px; }
+      .section.tight { padding-top: 0; }
+      .section-hr { padding: 0 20px; }
+      .s-label { margin-bottom: 28px; font-size: 9px; }
+
+      /* Narrative */
+      .n-lead { font-size: clamp(20px, 6vw, 26px); margin-bottom: 20px; }
+      .n-body { font-size: 14px; }
+      .n-punch { font-size: 14px; padding-left: 16px; }
+
+      /* Bento grid — força 1 coluna e reseta spans */
+      .bento-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
+      .bento-item.col2,
+      .bento-item.col3 { grid-column: span 1; }
+      .bento-num { font-size: 36px; }
+      .bento-item.col2 .bento-num,
+      .bento-item.col3 .bento-num { font-size: 36px; }
+      .bento-item { padding: 22px 18px; }
+      .bento-cta { opacity: 1; }
+
+      /* Case card */
+      .case-header { padding: 16px 20px; gap: 10px; }
+      .case-header-meta { flex-wrap: wrap; gap: 6px; }
+      .case-body { padding: 20px; gap: 18px; }
+      .case-body { grid-template-columns: 1fr; }
+      .case-tag { font-size: 9px; }
+      .case-text { font-size: 13px; }
+
+      /* Manifesto */
+      .manifesto { padding: 52px 20px; }
+      .manifesto h2 { font-size: clamp(22px, 7vw, 30px); }
+      .manifesto p { font-size: 14px; }
+
+      /* Plans */
+      .plans-grid { grid-template-columns: 1fr; gap: 12px; }
+      .plan-card { padding: 24px 20px; }
+      .plan-card.reservado { grid-column: auto; max-width: 100%; }
+      .plan-price { font-size: 40px; }
+      .plan-btn a { padding: 14px; }
+
+      /* Disclaimer */
+      .disclaimer { padding: 16px 18px; font-size: 11px; }
+
+      /* For who */
+      .forwho-item { gap: 16px; padding: 22px 0; }
+      .forwho-title { font-size: 14px; }
+      .forwho-desc { font-size: 12px; }
+
+      /* Final CTA */
+      .final-cta { padding: 52px 20px; }
+      .final-cta h2 { font-size: clamp(26px, 8vw, 36px); }
+      .final-cta p { font-size: 14px; }
+      .final-cta .btn-white {
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+      }
+    }
+
+    /* ═══════════════════════════════
+       MOBILE PEQUENO — até 380px
+    ═══════════════════════════════ */
+    @media (max-width: 380px) {
+      .hero-h1 { font-size: 34px; }
+      .nav-pill { display: none; }
+      .bento-item { padding: 18px 14px; }
+      .plan-card { padding: 20px 16px; }
+    }
+
+    /* ─── INLINE SVG HELPERS ─── */
+    svg.icon { display: inline-block; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+  <!-- BG ORBS -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="logo">
+      <span class="logo-main">Geopolítica para Investidores</span>
+      <span class="logo-sub">Formação em análise estratégica</span>
+    </div>
+    <a href="#planos" class="nav-pill">
+      Quero me inscrever
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-wrap">
+      <div class="hero-left">
+        <div class="hero-badge fade-in delay-1">
+          <span>Formação em análise geopolítica</span>
+          <svg class="badge-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+
+        <h1 class="hero-h1 fade-in delay-2">
+          Manchete você já<br>
+          <span class="grad">sabe ler.</span>
+        </h1>
+
+        <p class="hero-desc fade-in delay-3">
+          Existe um método para enxergar o que está por trás dos eventos — antes que virem manchete, antes que movam mercados, antes que afetem o seu portfólio ou negócio.
+        </p>
+
+        <div class="hero-ctas fade-in delay-4">
+          <a href="#planos" class="btn-white">
+            <span>Quero aprender o método →</span>
+          </a>
+        </div>
+      </div>
+    </div><!-- /hero-wrap -->
+
+    <!-- Globe: desktop = absolute direita | mobile = abaixo dos CTAs -->
+    <div class="globe-bg">
+      <canvas id="globe-canvas"></canvas>
+    </div>
+
+  </section>
+
+  <!-- HR -->
+  <div class="section-hr"><hr></div>
+
+  <!-- NARRATIVE -->
+  <section class="section">
+    <div class="s-label">O problema não é o que você lê</div>
+    <div class="narrative">
+      <div class="n-lead">Você já tem acesso às mesmas informações que os analistas. O que os separa de você <span class="grad">não é a fonte — é o método.</span></div>
+      <p class="n-body">Existe uma diferença fundamental entre acompanhar geopolítica e analisá-la. Acompanhar é consumir eventos em sequência. <strong>Analisar é entender os interesses por trás deles, os padrões históricos que os moldaram e as consequências econômicas que eles vão gerar — antes de todo mundo.</strong></p>
+      <p class="n-body">A maioria das pessoas consome geopolítica como notícia — um fato depois do outro, sem estrutura, sem contexto, sem uma lente clara. O resultado é familiaridade superficial com os eventos e paralisia na hora de agir. <strong>Informação sem método não gera clareza. Gera ruído com nome de cultura geral.</strong></p>
+      <div class="n-punch">Um programa que te ensina a construir sua própria leitura do tabuleiro — com método, com rigor histórico e com aplicação direta ao ambiente econômico.</div>
+    </div>
+  </section>
+
+  <!-- HR -->
+  <div class="section-hr"><hr></div>
+
+  <!-- MÓDULOS -->
+  <section id="modulos" class="section tight" style="padding-top:72px;">
+    <div class="s-label">O que entra na sua formação</div>
+    <div class="bento-grid">
+
+      <!-- 01 — 2 cols, persist hover -->
+      <div class="bento-item col2 persist">
+        <div class="bento-dots"></div>
+        <div class="bento-glow"></div>
+        <div class="bento-header">
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="bento-status">Base do programa</div>
+        </div>
+        <div class="bento-num">01</div>
+        <div class="bento-title">Como funciona o tabuleiro geopolítico</div>
+        <div class="bento-desc">Atores, interesses, instrumentos de poder. Como ler um conflito sem se perder em narrativa. O que separa geopolítica de geopolítica econômica.</div>
+        <div class="bento-footer">
+          <div class="bento-tags">
+            <span class="bento-tag">#Atores</span>
+            <span class="bento-tag">#Poder</span>
+            <span class="bento-tag gold">#Método</span>
+          </div>
+          <span class="bento-cta">Explorar →</span>
+        </div>
+      </div>
+
+      <!-- 02 — 1 col -->
+      <div class="bento-item">
+        <div class="bento-dots"></div>
+        <div class="bento-glow"></div>
+        <div class="bento-header">
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="bento-status">Parte 1</div>
+        </div>
+        <div class="bento-num">02</div>
+        <div class="bento-title">Padrões históricos que se repetem</div>
+        <div class="bento-desc">Os ciclos que estruturam a ordem mundial e como eles se manifestam diferente em cada era.</div>
+        <div class="bento-footer">
+          <div class="bento-tags">
+            <span class="bento-tag">#História</span>
+            <span class="bento-tag">#Ciclos</span>
+          </div>
+          <span class="bento-cta">Explorar →</span>
+        </div>
+      </div>
+
+      <!-- 03 — 1 col -->
+      <div class="bento-item">
+        <div class="bento-dots"></div>
+        <div class="bento-glow"></div>
+        <div class="bento-header">
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="bento-status">Parte 2</div>
+        </div>
+        <div class="bento-num">03</div>
+        <div class="bento-title">Energia, alimentos e fluxos de capital</div>
+        <div class="bento-desc">As três dimensões que mais conectam geopolítica à economia real. Como identificar a janela antes que feche.</div>
+        <div class="bento-footer">
+          <div class="bento-tags">
+            <span class="bento-tag">#Energia</span>
+            <span class="bento-tag">#Capital</span>
+          </div>
+          <span class="bento-cta">Explorar →</span>
+        </div>
+      </div>
+
+      <!-- 04 — 2 cols -->
+      <div class="bento-item col2">
+        <div class="bento-dots"></div>
+        <div class="bento-glow"></div>
+        <div class="bento-header">
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20l-2-12 7 4 4-8 4 8 7-4-2 12"/></svg></div>
+          <div class="bento-status">Plano Pro</div>
+        </div>
+        <div class="bento-num">04</div>
+        <div class="bento-title">Leitura de cenários e antecipação de riscos</div>
+        <div class="bento-desc">Como construir um cenário a partir de sinais fracos. Quais variáveis monitorar, como ponderá-las e como comunicar uma leitura com clareza e convicção.</div>
+        <div class="bento-footer">
+          <div class="bento-tags">
+            <span class="bento-tag">#Cenários</span>
+            <span class="bento-tag">#Risco</span>
+            <span class="bento-tag gold">#Pro</span>
+          </div>
+          <span class="bento-cta">Explorar →</span>
+        </div>
+      </div>
+
+      <!-- 05 — 3 cols full width -->
+      <div class="bento-item col3">
+        <div class="bento-dots"></div>
+        <div class="bento-glow"></div>
+        <div class="bento-header">
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div class="bento-status">Reservado</div>
+        </div>
+        <div class="bento-num">05</div>
+        <div class="bento-title">Sessões ao vivo com análise de casos reais</div>
+        <div class="bento-desc">Aplicação do método em conflitos acontecendo agora. Raciocínio em tempo real.</div>
+        <div class="bento-footer">
+          <div class="bento-tags">
+            <span class="bento-tag gold">#AoVivo</span>
+          </div>
+          <span class="bento-cta">Explorar →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section class="section tight" style="padding-top:48px;">
+    <div class="s-label">Veja o método aplicado</div>
+    <div class="case-outer">
+      <div class="case-header">
+        <div class="case-header-title">Geopolítica para Investidores — Análise de Caso</div>
+        <div class="case-header-meta">
+          Módulo 3 · Energia e Fluxos de Capital
+          <div class="live-badge">
+            <div class="live-dot"></div>
+            <span class="live-text">Acontecendo agora</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-full">
+          <div class="case-tag">O evento</div>
+          <div class="case-text">Em fevereiro de 2026, EUA e Israel lançaram operações coordenadas contra infraestrutura militar iraniana. O Irã respondeu encerrando o tráfego pelo Estreito de Ormuz — por onde passa aproximadamente 20% do petróleo mundial.</div>
+        </div>
+        <div class="case-hr"></div>
+        <div>
+          <div class="case-tag">A leitura estrutural</div>
+          <div class="case-text">Este não foi um evento isolado. Foi o ponto de chegada de um processo que durou meses: colapso das negociações nucleares, acúmulo de forças americanas no Golfo Pérsico, escalada de retórica. <strong>Quem aplicava o método via os sinais. Quem consumia manchetes foi surpreendido.</strong></div>
+        </div>
+        <div>
+          <div class="case-tag">Implicações econômicas</div>
+          <div class="case-text">O fechamento do Estreito não afeta só petróleo. <strong>Fertilizantes, petroquímicos, fretes</strong> — toda a cadeia que depende do Golfo sentiu. O Brasil, maior exportador agrícola do mundo, absorveu choques de custo nas safras seguintes.</div>
+        </div>
+        <div class="case-hr"></div>
+        <div class="case-full">
+          <div class="case-tag">O que o método ensina aqui</div>
+          <div class="case-text">Identificar o ponto de inflexão antes que vire manchete. Mapear as cadeias de impacto além do setor óbvio. Construir um cenário de dois ou três passos à frente — não uma previsão, mas uma leitura estruturada de probabilidades.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HR -->
+  <div class="section-hr"><hr></div>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto">
+    <h2>Não ensinamos geopolítica.<br>Ensinamos <span class="grad">a capacidade<br>de analisá-la.</span></h2>
+    <p>O que diferencia quem entende o mundo de quem apenas o acompanha é ter um método — uma forma consistente de ler o que está por trás das notícias, mapear os interesses em jogo e antecipar as consequências antes que cheguem.</p>
+  </div>
+
+  <!-- HR -->
+  <div class="section-hr"><hr></div>
+
+  <!-- PLANOS -->
+  <section id="planos" class="section tight" style="padding-top:72px;">
+    <div class="s-label">Escolha o seu nível de formação</div>
+    <div class="plans-grid">
+
+      <!-- ESSENCIAL -->
+      <div class="plan-card">
+        <div class="plan-name">Essencial</div>
+        <div class="plan-price"><span class="plan-cur">R$</span>497</div>
+        <div class="plan-period">acesso por 6 meses</div>
+        <div class="plan-pitch">Para quem quer dominar o método no próprio ritmo.</div>
+        <div class="plan-divider"></div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Módulos 1, 2 e 3 — acesso completo</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Materiais de apoio e frameworks</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Biblioteca de casos históricos</div>
+        <div class="plan-feat dim"><div class="feat-check"><span></span></div>Módulo 4 — Cenários e antecipação</div>
+        <div class="plan-feat dim"><div class="feat-check"><span></span></div>Grupo exclusivo de discussão</div>
+        <div class="plan-feat dim"><div class="feat-check"><span></span></div>Sessões ao vivo com análise em tempo real</div>
+        <div class="plan-btn"><a href="#" class="b-ghost">Começar agora</a></div>
+      </div>
+
+      <!-- PRO -->
+      <div class="plan-card featured">
+        <div class="plan-badge badge-gold">Mais escolhido</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price"><span class="plan-cur">R$</span>997</div>
+        <div class="plan-period">acesso por 12 meses</div>
+        <div class="plan-pitch">Para quem quer a formação completa — e aplicação imediata.</div>
+        <div class="plan-divider"></div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Módulos 1, 2 e 3 — acesso completo</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Materiais de apoio e frameworks</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Biblioteca de casos históricos</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Módulo 4 — Cenários e antecipação de riscos</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Grupo exclusivo de discussão</div>
+        <div class="plan-feat dim"><div class="feat-check"><span></span></div>Sessões ao vivo com análise em tempo real</div>
+        <div class="plan-btn"><a href="#" class="b-gold">Quero o Pro →</a></div>
+      </div>
+
+      <!-- RESERVADO -->
+      <div class="plan-card reservado">
+        <div class="plan-badge badge-platinum">Acesso direto</div>
+        <div class="plan-name">Reservado</div>
+        <div class="plan-price"><span class="plan-cur">R$</span>2.497</div>
+        <div class="plan-period">acesso por 12 meses · vagas limitadas</div>
+        <div class="plan-pitch">Para quem quer aprender o método e debatê-lo ao vivo.</div>
+        <div class="plan-divider"></div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Módulos 1, 2 e 3 — acesso completo</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Materiais de apoio e frameworks</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Biblioteca de casos históricos</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Módulo 4 — Cenários e antecipação de riscos</div>
+        <div class="plan-feat hi"><div class="feat-check"><span></span></div>Grupo exclusivo de discussão</div>
+        <div class="plan-feat sp"><div class="feat-check"><span></span></div>Sessões ao vivo toda terça — análise em tempo real</div>
+        <div class="plan-btn"><a href="#" class="b-white">Entrar no Reservado →</a></div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Aviso importante:</strong> O conteúdo de <em>Geopolítica para Investidores</em> tem caráter exclusivamente analítico e educacional. Os casos e análises apresentados têm finalidade formativa — não constituem recomendação de investimento, consultoria financeira ou indicação de compra e venda de ativos de qualquer natureza. Cada aluno é responsável por suas próprias decisões financeiras.
+    </div>
+  </section>
+
+  <!-- HR -->
+  <div class="section-hr"><hr></div>
+
+  <!-- PARA QUEM É -->
+  <section class="section tight" style="padding-top:72px;">
+    <div class="s-label">Isso foi feito para você se</div>
+    <div class="forwho-item">
+      <div class="forwho-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div>
+        <div class="forwho-title">Você investe e quer mais do que seguir recomendações</div>
+        <div class="forwho-desc">Você quer entender o ambiente antes de decidir — não depender de quem já decidiu por você. O método muda a relação com a informação. Para sempre.</div>
+      </div>
+    </div>
+    <div class="forwho-item">
+      <div class="forwho-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
+      </div>
+      <div>
+        <div class="forwho-title">Você tem negócios com exposição ao ambiente global</div>
+        <div class="forwho-desc">Câmbio, insumos, parceiros internacionais, cadeia de suprimentos. O mundo muda e o seu negócio sente — às vezes antes de você entender por quê. O método muda essa equação.</div>
+      </div>
+    </div>
+    <div class="forwho-item">
+      <div class="forwho-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div>
+        <div class="forwho-title">Você já acompanha geopolítica e quer ir além do raso</div>
+        <div class="forwho-desc">Você lê, discute, tem opinião formada — mas sente que falta a lente que conecta o poder ao dinheiro de forma estruturada. É exatamente essa lente que este programa constrói.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <h2>O tabuleiro não espera.<br><span class="grad">Você vai continuar<br>só observando?</span></h2>
+    <p>Garantia de 7 dias. Se o método não mudar a forma como você lê o mundo, devolvemos cada centavo — sem perguntas.</p>
+    <a href="#planos" class="btn-white" style="margin:0 auto;">
+      <span>Escolher meu plano →</span>
+    </a>
+    <p class="guarantee">Formação desenvolvida por quem analisa esse tabuleiro todo dia — há mais de dois anos.</p>
+  </div>
+
+  <!-- D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script>
+  (function () {
+    const canvas = document.getElementById('globe-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    // ── Tamanho fixo ──
+    const SIZE   = 680;
+    const RADIUS = SIZE / 2.1;
+
+    canvas.width        = SIZE * dpr;
+    canvas.height       = SIZE * dpr;
+    canvas.style.width  = SIZE + 'px';
+    canvas.style.height = SIZE + 'px';
+    ctx.scale(dpr, dpr);
+
+    const projection = d3.geoOrthographic()
+      .scale(RADIUS)
+      .translate([SIZE / 2, SIZE / 2])
+      .clipAngle(90);
+
+    const geoPath = d3.geoPath().projection(projection).context(ctx);
+
+    // ── Dot grid ──
+    const allDots = [];
+    let landFeatures = null;
+
+    function ptInRing(p, ring) {
+      const [x, y] = p; let inside = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi)
+          inside = !inside;
+      }
+      return inside;
+    }
+
+    function ptInFeature(pt, f) {
+      const g = f.geometry;
+      if (g.type === 'Polygon') {
+        if (!ptInRing(pt, g.coordinates[0])) return false;
+        for (let i = 1; i < g.coordinates.length; i++)
+          if (ptInRing(pt, g.coordinates[i])) return false;
+        return true;
+      }
+      if (g.type === 'MultiPolygon') {
+        for (const poly of g.coordinates) {
+          if (ptInRing(pt, poly[0])) {
+            let hole = false;
+            for (let i = 1; i < poly.length; i++)
+              if (ptInRing(pt, poly[i])) { hole = true; break; }
+            if (!hole) return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    function buildDots(feat, step = 1.35) {
+      const [[minLng, minLat], [maxLng, maxLat]] = d3.geoBounds(feat);
+      for (let lng = minLng; lng <= maxLng; lng += step)
+        for (let lat = minLat; lat <= maxLat; lat += step)
+          if (ptInFeature([lng, lat], feat))
+            allDots.push({ lng, lat });
+    }
+
+    // ── Render ──
+    function render() {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+
+      // Ocean
+      ctx.beginPath();
+      ctx.arc(SIZE / 2, SIZE / 2, RADIUS, 0, 2 * Math.PI);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      if (!landFeatures) return;
+
+      // Graticule
+      ctx.beginPath();
+      geoPath(d3.geoGraticule()());
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth   = 0.5;
+      ctx.globalAlpha = 0.1;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Land outlines
+      ctx.beginPath();
+      landFeatures.features.forEach(f => geoPath(f));
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.lineWidth   = 0.8;
+      ctx.stroke();
+
+      // Gold dots
+      ctx.fillStyle = 'rgba(59,130,246,.75)';
+      allDots.forEach(d => {
+        const p = projection([d.lng, d.lat]);
+        if (!p || p[0] < 0 || p[0] > SIZE || p[1] < 0 || p[1] > SIZE) return;
+        ctx.beginPath();
+        ctx.arc(p[0], p[1], 1.3, 0, 2 * Math.PI);
+        ctx.fill();
+      });
+    }
+
+    // ── Geo data ──
+    fetch('https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/110m/physical/ne_110m_land.json')
+      .then(r => r.json())
+      .then(data => {
+        landFeatures = data;
+        data.features.forEach(f => buildDots(f));
+        render();
+      })
+      .catch(() => {});
+
+    render();
+
+    // ── Auto-rotation ──
+    const rot = [0, -20];
+    let autoRotate = true;
+    d3.timer(() => {
+      if (!autoRotate) return;
+      rot[0] += 0.2;
+      projection.rotate(rot);
+      render();
+    });
+
+    // ── Drag (mouse) ──
+    canvas.addEventListener('mousedown', e => {
+      autoRotate = false;
+      const sx = e.clientX, sy = e.clientY, sr = [...rot];
+      const mv = ev => {
+        rot[0] = sr[0] + (ev.clientX - sx) * 0.4;
+        rot[1] = Math.max(-80, Math.min(80, sr[1] - (ev.clientY - sy) * 0.4));
+        projection.rotate(rot); render();
+      };
+      const up = () => {
+        document.removeEventListener('mousemove', mv);
+        document.removeEventListener('mouseup', up);
+        setTimeout(() => { autoRotate = true; }, 100);
+      };
+      document.addEventListener('mousemove', mv);
+      document.addEventListener('mouseup', up);
+    });
+
+    // ── Drag (touch) ──
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length !== 1) return;
+      autoRotate = false;
+      const sx = e.touches[0].clientX, sy = e.touches[0].clientY, sr = [...rot];
+      const mv = ev => {
+        rot[0] = sr[0] + (ev.touches[0].clientX - sx) * 0.4;
+        rot[1] = Math.max(-80, Math.min(80, sr[1] - (ev.touches[0].clientY - sy) * 0.4));
+        projection.rotate(rot); render();
+      };
+      const end = () => {
+        canvas.removeEventListener('touchmove', mv);
+        canvas.removeEventListener('touchend', end);
+        setTimeout(() => { autoRotate = true; }, 100);
+      };
+      canvas.addEventListener('touchmove', mv, { passive: true });
+      canvas.addEventListener('touchend', end);
+    }, { passive: true });
+  })();
+  </script>
+
+</body>
+</html>
