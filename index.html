@@ -64,11 +64,21 @@
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 30px -5px rgba(220, 38, 38, 0.3), 0 0 60px -10px rgba(220, 38, 38, 0.15)' },
+                            '50%': { boxShadow: '0 0 50px -5px rgba(220, 38, 38, 0.5), 0 0 80px -10px rgba(220, 38, 38, 0.25)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' },
                         }
                     }
                 }
@@ -101,6 +111,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #fbbf24);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s ease-in-out infinite;
+        }
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -116,6 +134,29 @@
             background-image: radial-gradient(#1e2c3a 15%, transparent 16%), radial-gradient(#1e2c3a 15%, transparent 16%);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
+        }
+
+        /* Offer card special border */
+        .offer-border-glow {
+            position: relative;
+        }
+        .offer-border-glow::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #dc2626, #f59e0b, #dc2626, #f59e0b);
+            background-size: 300% 300%;
+            animation: borderShift 4s ease infinite;
+            z-index: -1;
+        }
+        @keyframes borderShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Countdown styling */
+        .countdown-digit {
+            font-variant-numeric: tabular-nums;
         }
     </style>
 </head>
@@ -178,7 +219,31 @@
                     <p class="text-slate-400 text-xs">Escolha sua modalidade de entrada.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Oferta destaque 3 anos -->
+                <div class="border-2 border-amber-500 bg-gradient-to-b from-amber-900/20 to-charcoal-950 p-5 flex flex-col relative shadow-xl shadow-amber-500/20 mb-4">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-amber-400 text-charcoal-950 text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-sm shadow-lg flex items-center gap-1">
+                        <i data-lucide="flame" class="w-3 h-3"></i> Oferta Especial
+                    </div>
+                    <h4 class="text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-1 mt-1">3 Anos de Acesso</h4>
+                    <h3 class="text-lg font-serif font-bold text-white mb-3">Canais + Escola Danuzio Neto</h3>
+                    <ul class="space-y-1.5 mb-4 flex-1">
+                        <li class="text-[10px] text-white flex items-center gap-2 font-bold"><i data-lucide="crown" class="w-3 h-3 text-amber-400"></i> Escola Danuzio Neto</li>
+                        <li class="text-[10px] text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber-400"></i> Todos os Canais Telegram</li>
+                        <li class="text-[10px] text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber-400"></i> 3 Anos Garantidos</li>
+                    </ul>
+                    <div class="border-t border-amber-500/20 pt-3">
+                        <div class="flex items-end gap-1 mb-1">
+                            <span class="text-xs text-amber-400 pb-0.5">12x</span>
+                            <span class="text-2xl font-bold text-white">R$ 121,59</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500">ou R$ 1.198,50 à vista</span>
+                        <a href="https://lastlink.com/p/CBB12C1E7/checkout-payment" target="_blank" class="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-charcoal-950 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-amber-500/20 mt-3">
+                            Garantir 3 Anos
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="border border-charcoal-800 bg-charcoal-950/50 p-5 flex flex-col">
                         <h4 class="text-platinum-400 text-[10px] font-bold uppercase tracking-widest mb-1">Individual</h4>
                         <h3 class="text-lg font-serif font-bold text-white mb-3">Sem Censura</h3>
@@ -214,29 +279,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="border-2 border-alert-600 bg-gradient-to-b from-alert-900/20 to-charcoal-950 p-5 flex flex-col relative shadow-xl shadow-alert-900/20">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-alert-600 text-white text-[9px] font-black uppercase tracking-tighter px-2 py-1 rounded-sm">
-                            Acesso Total
-                        </div>
-                        <h4 class="text-alert-500 text-[10px] font-bold uppercase tracking-widest mb-1">Premium</h4>
-                        <h3 class="text-lg font-serif font-bold text-white mb-1">Canais + Escola</h3>
-                        <p class="text-[9px] text-alert-200/60 uppercase mb-3">O ecossistema completo</p>
-                        <ul class="space-y-1.5 mb-4 flex-1">
-                            <li class="text-[10px] text-white flex items-center gap-2 font-bold"><i data-lucide="crown" class="w-3 h-3 text-alert-500"></i> Escola Danuzio Neto</li>
-                            <li class="text-[10px] text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Todos os Canais Telegram</li>
-                            <li class="text-[10px] text-slate-300 flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-alert-500"></i> Formação Geopolítica</li>
-                        </ul>
-                        <div class="border-t border-alert-900/30 pt-3">
-                            <div class="flex items-end gap-1 mb-3">
-                                <span class="text-xs text-platinum-400 pb-0.5">12x</span>
-                                <span class="text-2xl font-bold text-white text-gradient-platinum">R$ 81,06</span>
-                            </div>
-                            <a href="https://lastlink.com/p/C1ACFBDDE/checkout-payment" target="_blank" class="block w-full text-center bg-alert-600 hover:bg-alert-500 text-white py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg shadow-alert-600/20">
-                                Garantir Tudo
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -257,11 +299,14 @@
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="#proposta" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors">A Realidade</a>
                 <a href="#entregaveis" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Conteúdo</a>
+                <a href="#oferta-destaque" class="text-xs font-bold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="flame" class="w-3 h-3"></i> Oferta 3 Anos
+                </a>
             </nav>
             
             <div class="flex gap-4">
-                <button onclick="openModal()" class="bg-alert-900/20 hover:bg-alert-600 text-alert-500 hover:text-white border border-alert-900/50 hover:border-alert-600 py-2 px-6 text-xs font-bold uppercase tracking-widest transition-all hidden md:block">
-                    Acesso Restrito
+                <button onclick="openModal()" class="bg-alert-600 hover:bg-alert-500 text-white py-2 px-6 text-xs font-bold uppercase tracking-widest transition-all hidden md:flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="flame" class="w-3 h-3"></i> Oferta Especial
                 </button>
             </div>
         </div>
@@ -289,9 +334,9 @@
                 Aqui, a conversa é outra.
             </p>
             
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                <button onclick="openModal()" class="bg-[#229ED9] hover:bg-[#1e8eb9] text-white py-4 px-10 text-sm font-bold uppercase tracking-widest shadow-lg shadow-[#229ED9]/20 transition-all flex items-center gap-2">
-                    <i data-lucide="send" class="w-4 h-4"></i> Entrar no Canal
+            <div class="flex items-center justify-center mb-16">
+                <button onclick="openModal()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-charcoal-950 py-4 px-10 text-sm font-bold uppercase tracking-widest shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 hover:scale-105 transform cursor-pointer">
+                    <i data-lucide="flame" class="w-4 h-4"></i> 3 Anos de Acesso Total
                 </button>
             </div>
 
@@ -315,6 +360,132 @@
             </div>
         </div>
     </section>
+
+    <!-- ========== OFERTA DESTAQUE — 3 ANOS ========== -->
+    <section id="oferta-destaque" class="py-24 md:py-32 bg-charcoal-950 relative overflow-hidden border-t border-amber-500/20">
+        <!-- Ambient background -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-900/10 via-charcoal-950 to-charcoal-950"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-alert-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="absolute inset-0 noise-bg pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-5 py-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 mb-6 uppercase tracking-[0.25em] text-[10px] font-bold rounded-full">
+                    <i data-lucide="flame" class="w-3.5 h-3.5"></i> Oferta em Destaque <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-white mb-4 leading-tight">
+                    3 Anos de Acesso <br class="hidden md:block" />
+                    <span class="text-gradient-gold">Canais + Escola</span>
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    A oportunidade definitiva para quem quer se manter informado sem amarras. Acesso completo a todos os canais <strong class="text-white">e à Escola Danuzio Neto</strong> por 3 anos inteiros.
+                </p>
+            </div>
+
+            <!-- Main Offer Card -->
+            <div class="max-w-3xl mx-auto">
+                <div class="offer-border-glow animate-pulse-glow rounded-sm">
+                    <div class="bg-charcoal-900 p-8 md:p-12 relative overflow-hidden">
+                        <!-- Corner accents -->
+                        <div class="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-amber-500/40"></div>
+                        <div class="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-amber-500/40"></div>
+
+                        <!-- Inner subtle pattern -->
+                        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+                        <div class="relative z-10">
+                            <!-- Top badge -->
+                            <div class="flex justify-center mb-8">
+                                <div class="bg-gradient-to-r from-amber-600 to-amber-500 text-charcoal-950 text-[11px] font-black uppercase tracking-widest px-6 py-2 rounded-sm shadow-lg shadow-amber-500/20">
+                                    <i data-lucide="crown" class="w-3.5 h-3.5 inline-block mr-1 -mt-0.5"></i> Melhor Custo-Benefício
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div class="text-center mb-8">
+                                <h3 class="text-3xl md:text-4xl font-serif font-black text-white mb-2">Canais + Escola Danuzio Neto</h3>
+                                <p class="text-amber-400 text-sm font-bold uppercase tracking-widest">Acesso completo por 3 anos</p>
+                            </div>
+
+                            <!-- Benefits grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 max-w-xl mx-auto">
+                                <div class="flex items-start gap-3 bg-charcoal-950/50 p-4 border border-charcoal-800">
+                                    <div class="bg-amber-500/10 p-1.5 rounded border border-amber-500/30 mt-0.5 shrink-0">
+                                        <i data-lucide="crown" class="w-4 h-4 text-amber-400"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="text-white block text-sm font-serif">Escola Danuzio Neto</strong>
+                                        <span class="text-xs text-slate-500">Formação completa em geopolítica</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 bg-charcoal-950/50 p-4 border border-charcoal-800">
+                                    <div class="bg-amber-500/10 p-1.5 rounded border border-amber-500/30 mt-0.5 shrink-0">
+                                        <i data-lucide="check" class="w-4 h-4 text-amber-400"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="text-white block text-sm font-serif">Todos os Canais Telegram</strong>
+                                        <span class="text-xs text-slate-500">Acesso irrestrito ao ecossistema</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 bg-charcoal-950/50 p-4 border border-charcoal-800">
+                                    <div class="bg-amber-500/10 p-1.5 rounded border border-amber-500/30 mt-0.5 shrink-0">
+                                        <i data-lucide="check" class="w-4 h-4 text-amber-400"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="text-white block text-sm font-serif">Áudios e Análises Exclusivas</strong>
+                                        <span class="text-xs text-slate-500">Bastidores do poder mundial</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 bg-charcoal-950/50 p-4 border border-charcoal-800">
+                                    <div class="bg-amber-500/10 p-1.5 rounded border border-amber-500/30 mt-0.5 shrink-0">
+                                        <i data-lucide="calendar-check" class="w-4 h-4 text-amber-400"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="text-white block text-sm font-serif">3 Anos Garantidos</strong>
+                                        <span class="text-xs text-slate-500">Sem surpresas, sem renovação</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CTA -->
+                            <div class="max-w-md mx-auto">
+                                <button onclick="openModal()" 
+                                   class="group block w-full text-center bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:via-amber-300 hover:to-amber-400 text-charcoal-950 py-5 text-sm font-black uppercase tracking-widest transition-all shadow-xl shadow-amber-500/25 hover:shadow-amber-400/40 hover:scale-[1.02] transform cursor-pointer">
+                                    <span class="flex items-center justify-center gap-2">
+                                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                        Quero Garantir 3 Anos
+                                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                    </span>
+                                </button>
+                                <p class="text-center text-[10px] text-slate-600 mt-3 flex items-center justify-center gap-1.5">
+                                    <i data-lucide="lock" class="w-3 h-3"></i> Preencha seus dados para liberar o acesso
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust signals below card -->
+            <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto mt-10">
+                <div class="text-center">
+                    <div class="text-2xl font-black text-white font-serif">3</div>
+                    <div class="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Anos de Acesso</div>
+                </div>
+                <div class="text-center border-x border-charcoal-800">
+                    <div class="text-2xl font-black text-white font-serif">100%</div>
+                    <div class="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Sem Censura</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-black text-white font-serif">24/7</div>
+                    <div class="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Conteúdo Novo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== FIM OFERTA DESTAQUE ========== -->
     
     <section id="manifesto" class="py-24 bg-charcoal-950 relative border-t border-white/5 overflow-hidden">
         <div class="absolute inset-0 noise-bg pointer-events-none"></div>
@@ -573,7 +744,7 @@
                 <p class="text-slate-400 text-lg max-w-2xl mx-auto">Do acompanhamento diário à formação intelectual completa.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 <div class="border border-charcoal-800 bg-charcoal-900/50 p-8 flex flex-col">
                     <h3 class="text-2xl font-serif font-bold text-white mb-6">Sem Censura</h3>
                     <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-400">
@@ -592,18 +763,37 @@
                     <button onclick="openModal()" class="w-full py-4 bg-charcoal-800 text-white text-xs font-bold uppercase tracking-widest hover:bg-charcoal-700 transition-all">Ver Detalhes</button>
                 </div>
 
-                <div class="border-2 border-alert-600 bg-gradient-to-b from-alert-900/20 to-charcoal-950 p-8 flex flex-col relative shadow-2xl shadow-alert-900/20">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-alert-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-sm">Insuperável</div>
-                    <h3 class="text-2xl font-serif font-bold text-white mb-2">Escola + Canais</h3>
-                    <p class="text-alert-500 text-[10px] font-bold uppercase mb-6 tracking-widest">Acesso Vitalício ao Conhecimento</p>
+                <!-- DESTAQUE: Oferta 3 Anos -->
+                <div class="border-2 border-amber-500 bg-gradient-to-b from-amber-900/20 via-charcoal-950 to-charcoal-950 p-8 flex flex-col relative shadow-2xl shadow-amber-500/15 md:scale-105 z-10">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-amber-400 text-charcoal-950 text-[10px] font-black uppercase tracking-widest px-5 py-1.5 rounded-sm shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                        <i data-lucide="flame" class="w-3 h-3"></i> 3 Anos
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-6">Canais + Escola</h3>
                     <ul class="space-y-4 mb-8 flex-1 text-sm text-slate-300">
-                        <li class="flex items-center gap-3 font-bold text-white"><i data-lucide="crown" class="text-alert-500 w-5 h-5"></i> Escola Danuzio Neto</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-alert-500 w-4 h-4"></i> Todos os Canais (1 ano)</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-alert-500 w-4 h-4"></i> Aulas de História e Política</li>
+                        <li class="flex items-center gap-3 font-bold text-white"><i data-lucide="crown" class="text-amber-400 w-5 h-5"></i> Escola Danuzio Neto</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-amber-400 w-4 h-4"></i> Todos os Canais</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-amber-400 w-4 h-4"></i> 3 Anos de Acesso</li>
                     </ul>
-                    <button onclick="openModal()" class="w-full py-4 bg-alert-600 text-white text-xs font-bold uppercase tracking-widest hover:bg-alert-500 transition-all shadow-lg shadow-alert-600/30">Garantir Acesso Total</button>
+                    <button onclick="openModal()" class="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-400 text-charcoal-950 text-xs font-black uppercase tracking-widest hover:from-amber-400 hover:to-amber-300 transition-all shadow-lg shadow-amber-500/25 text-center cursor-pointer">
+                        Ver Detalhes
+                    </button>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- CTA Final com oferta destaque -->
+    <section class="py-20 bg-charcoal-900 border-t border-amber-500/10 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-amber-900/10 via-charcoal-900 to-charcoal-900"></div>
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-serif font-black text-white mb-4">Ainda está pensando?</h2>
+            <p class="text-slate-400 text-lg mb-8">3 anos de acesso total a todos os canais + Escola Danuzio Neto.</p>
+            <button onclick="openModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-charcoal-950 py-4 px-10 text-sm font-black uppercase tracking-widest shadow-xl shadow-amber-500/25 transition-all hover:scale-105 transform cursor-pointer">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                Garantir 3 Anos Agora
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <p class="text-[10px] text-slate-600 mt-4">Preencha seus dados para liberar o acesso</p>
         </div>
     </section>
 
