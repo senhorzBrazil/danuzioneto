@@ -112,6 +112,435 @@
       animation: pulseGlow 12s ease-in-out infinite reverse;
     }
 
+    /* ─── COUNTDOWN BANNER ─── */
+    .countdown-banner {
+      position: sticky;
+      top: 0;
+      z-index: 220;
+      padding: 10px clamp(16px,4vw,40px);
+      background: linear-gradient(90deg, #0a0a0c 0%, #16161a 50%, #0a0a0c 100%);
+      border-bottom: 1px solid rgba(201,242,81,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .countdown-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--lime);
+      animation: pulseGlow 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .countdown-label {
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--lime-soft);
+      font-weight: 600;
+    }
+    .countdown-timer { display: inline-flex; align-items: center; gap: 6px; }
+    .countdown-unit { display: flex; flex-direction: column; align-items: center; min-width: 36px; }
+    .countdown-num {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .countdown-unit-label {
+      font-size: 8.5px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .countdown-sep { font-size: 16px; color: rgba(201,242,81,.4); margin-bottom: 9px; }
+    .countdown-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #03110a;
+      background: var(--lime);
+      padding: 7px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: filter .2s;
+    }
+    .countdown-cta:hover { filter: brightness(1.08); }
+    @media (max-width: 640px) {
+      .countdown-banner { gap: 10px; padding: 9px 14px; }
+      .countdown-label { font-size: 10px; letter-spacing: .1em; }
+      .countdown-num { font-size: 16px; }
+      .countdown-cta { padding: 6px 11px; font-size: 10px; }
+    }
+
+    /* ─── TRÍADE HISTÓRICA ─── */
+    .triade-section { max-width: 1100px; margin: 0 auto; padding: 96px clamp(20px,5vw,64px) 0; position: relative; z-index: 2; }
+    .triade-intro { max-width: 700px; margin-bottom: 56px; }
+    .triade-intro p { font-size: 17px; line-height: 1.85; color: var(--text-mute); font-weight: 400; }
+    .triade-intro p strong { color: var(--text); font-weight: 600; }
+    .triade-grid { display: flex; flex-direction: column; }
+    .triade-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      padding: 44px 0;
+    }
+    .triade-item:last-child { border-bottom: 1px solid var(--line); }
+    .triade-item.ao-vivo {
+      background: rgba(201,242,81,.03);
+      margin: 0 calc(clamp(20px,5vw,64px) * -1);
+      padding: 44px clamp(20px,5vw,64px);
+      border-top: 1px solid rgba(201,242,81,.25);
+      border-bottom: 1px solid rgba(201,242,81,.25);
+    }
+    .triade-ano { padding-right: 36px; padding-top: 4px; }
+    .triade-ano-num {
+      font-family: var(--display);
+      font-size: 44px;
+      font-weight: 800;
+      color: rgba(201,242,81,.22);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -.03em;
+    }
+    .triade-item.ao-vivo .triade-ano-num { color: rgba(201,242,81,.6); }
+    .triade-ano-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+    .triade-aovivo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,255,136,.1);
+      border: 1px solid rgba(0,255,136,.35);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-top: 10px;
+    }
+    .triade-aovivo-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+      animation: ping 1.8s ease-out infinite;
+    }
+    .triade-aovivo-text { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); font-weight: 700; }
+    .triade-evento {
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.3;
+      letter-spacing: -.01em;
+    }
+    .triade-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 18px;
+    }
+    .triade-col-label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; opacity: .8; font-weight: 700; }
+    .triade-col-text { font-size: 14px; line-height: 1.75; color: var(--text-mute); font-weight: 400; }
+    .triade-col-text.destaque { color: var(--text); }
+    .triade-col-text strong { color: var(--text); font-weight: 600; }
+    .triade-conclusao {
+      margin-top: 22px;
+      padding: 16px 20px;
+      background: rgba(201,242,81,.05);
+      border-left: 2px solid rgba(201,242,81,.45);
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-mute);
+      font-style: italic;
+      border-radius: 0 8px 8px 0;
+    }
+    .triade-conclusao strong { color: var(--lime); font-style: normal; font-weight: 600; }
+
+    .padrao-box {
+      margin-top: 56px;
+      padding: 38px 40px;
+      background: var(--bg-card);
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .padrao-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 1px;
+      background: linear-gradient(to right, rgba(201,242,81,.15), rgba(201,242,81,.45) 30%, rgba(201,242,81,.45) 70%, rgba(201,242,81,.15));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .padrao-box::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--lime) 30%, var(--lime) 70%, transparent);
+      z-index: 6;
+    }
+    .padrao-box-title { font-family: var(--display); font-size: clamp(22px, 2.6vw, 28px); font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.25; letter-spacing: -.02em; }
+    .padrao-box-title em { font-style: italic; color: var(--lime); font-weight: 500; }
+    .padrao-box-text { font-size: 15px; line-height: 1.85; color: var(--text-mute); max-width: 760px; }
+    .padrao-box-text strong { color: var(--text); font-weight: 600; }
+
+    @media (max-width: 720px) {
+      .triade-item { grid-template-columns: 1fr; gap: 14px; padding: 36px 0; }
+      .triade-item.ao-vivo { margin: 0 -20px; padding: 36px 20px; }
+      .triade-cols { grid-template-columns: 1fr; gap: 22px; }
+      .triade-ano { padding-right: 0; }
+      .padrao-box { padding: 28px 24px; margin-top: 40px; }
+    }
+
+    /* ─── O QUE ENTRA NA SEMANA ─── */
+    .week-section { padding-top: 64px; }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .week-item {
+      position: relative;
+      padding: 26px 22px;
+      border-radius: 14px;
+      background: var(--bg-card);
+      z-index: 1;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .week-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      z-index: 5;
+      transition: background .25s;
+    }
+    .week-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.4), 0 0 18px rgba(201,242,81,.06);
+    }
+    .week-item:hover::before {
+      background: linear-gradient(135deg, rgba(201,242,81,.4), rgba(201,242,81,.08));
+    }
+    .week-num {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: rgba(201,242,81,.22);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .week-title {
+      font-family: var(--display);
+      font-size: 15px; font-weight: 700; color: var(--text);
+      letter-spacing: -.005em;
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .week-title-tag {
+      font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--lime); font-weight: 700;
+      background: rgba(201,242,81,.1);
+      border: 1px solid rgba(201,242,81,.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .week-cadence {
+      font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 12px; opacity: .75; font-weight: 700;
+    }
+    .week-desc {
+      font-size: 13px; line-height: 1.7; color: var(--text-mute); font-weight: 400;
+    }
+
+    /* ─── PLAN — launch pricing extensions ─── */
+    .plan-launch-tag {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #03110a;
+      background: var(--lime);
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .plan-price-from {
+      font-size: 13px;
+      color: var(--text-faint);
+      text-decoration: line-through;
+      font-weight: 400;
+      margin-bottom: 2px;
+    }
+    .plan-monthly {
+      font-size: 13px;
+      color: var(--lime);
+      opacity: .8;
+      font-weight: 500;
+      margin-top: -2px;
+      margin-bottom: 4px;
+    }
+    .plan-renews {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+    .plan-section-label {
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin: 4px 0 10px;
+      font-weight: 700;
+    }
+    .plan-feat.addon {
+      color: var(--lime);
+    }
+    .plan-feat.addon .feat-check {
+      background: rgba(201,242,81,.18);
+    }
+    .plan-feat.addon .feat-check span {
+      background: var(--lime);
+    }
+
+    /* ─── ADD-ONS ─── */
+    .addons-section { padding-top: 56px; padding-bottom: 0; }
+    .addons-intro {
+      max-width: 660px;
+      margin-bottom: 36px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-mute);
+    }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 720px) { .addons-grid { grid-template-columns: 1fr; } }
+    .addon-card {
+      position: relative;
+      padding: 30px 28px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      z-index: 1;
+      overflow: hidden;
+    }
+    .addon-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,242,81,.45) 30%, rgba(201,242,81,.45) 70%, transparent);
+      z-index: 6;
+    }
+    .addon-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .addon-tag {
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .addon-title {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: -.01em;
+    }
+    .addon-desc {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text-mute);
+      margin-bottom: 22px;
+    }
+    .addon-pricing {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .addon-price-from {
+      font-size: 13px;
+      color: var(--text-faint);
+      text-decoration: line-through;
+    }
+    .addon-price {
+      font-family: var(--display);
+      font-size: 30px;
+      color: var(--lime);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .addon-price-period {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+    .addon-note {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    .addon-btn {
+      display: inline-block;
+      padding: 11px 22px;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 1px solid rgba(201,242,81,.4);
+      color: var(--lime);
+      border-radius: 999px;
+      text-decoration: none;
+      background: rgba(201,242,81,.05);
+      transition: background .2s;
+    }
+    .addon-btn:hover { background: rgba(201,242,81,.14); }
+    .addon-included-note {
+      font-size: 11px;
+      color: rgba(201,242,81,.6);
+      margin-top: 10px;
+    }
+
     /* ─── NAV ─── */
     .nav {
       position: sticky;
@@ -1630,14 +2059,37 @@
   <div class="bg-orb orb-2"></div>
 
 
+  <!-- COUNTDOWN BANNER -->
+  <div class="countdown-banner">
+    <div class="countdown-dot"></div>
+    <div class="countdown-label">Oferta de lançamento encerra em</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-hours">47</div>
+        <div class="countdown-unit-label">horas</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-minutes">59</div>
+        <div class="countdown-unit-label">min</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-seconds">59</div>
+        <div class="countdown-unit-label">seg</div>
+      </div>
+    </div>
+    <a href="#planos" class="countdown-cta">Ver preços →</a>
+  </div>
+
   <!-- NAV -->
   <nav class="nav">
     <div class="logo">
       <span class="logo-main">Geopolítica para Investidores</span>
-      <span class="logo-sub">Formação + Terminal Geopolítico</span>
+      <span class="logo-sub">Plataforma de inteligência geopolítica</span>
     </div>
     <a href="#planos" class="nav-pill">
-      Quero me inscrever
+      Quero entrar
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </nav>
@@ -1648,34 +2100,34 @@
       <div class="hero-left">
         <div class="hero-badge fade-in delay-1">
           <svg class="badge-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span>Formação + Terminal Geopolítico</span>
+          <span>Plataforma de inteligência geopolítica aplicada</span>
         </div>
 
         <h1 class="hero-h1 fade-in delay-2">
-          Leia o tabuleiro <span class="g1">antes da manchete.</span>
+          O mundo não para. <span class="g1">E você não pode</span> ficar para trás.
         </h1>
 
         <p class="hero-desc fade-in delay-3">
-          Um método de análise geopolítica para investidores. Mais um <strong style="color:var(--text);font-weight:600;">terminal de inteligência</strong> com mapa de calor global, radar de eleições, dossiês de países e biblioteca de briefings. Você aprende a ler o tabuleiro e ganha a mesa para operar nele todo dia.
+          Enquanto a maioria lê manchetes, uma minoria entende o que está por trás delas, e age antes que o resto perceba. <strong style="color:var(--text);font-weight:600;">Geopolítica para Investidores</strong> existe para quem quer estar nessa minoria.
         </p>
 
         <div class="hero-ctas fade-in delay-4">
           <a href="#planos" class="bnt1">
-            <span>Quero aprender o método →</span>
+            <span>Quero entender o jogo →</span>
           </a>
-          <a href="#modulos" class="bnt-ghost">
-            Ver módulos
+          <a href="#plataforma" class="bnt-ghost">
+            Ver a plataforma
           </a>
         </div>
 
         <div class="check-row fade-in delay-4">
           <span class="check-item">
             <span class="check-square"><svg viewBox="0 0 24 24"><polyline points="5 12.5 10 17.5 19 7.5"/></svg></span>
-            Método aplicado
+            Briefing diário
           </span>
           <span class="check-item">
             <span class="check-square"><svg viewBox="0 0 24 24"><polyline points="5 12.5 10 17.5 19 7.5"/></svg></span>
-            Casos reais ao vivo
+            Alertas por IA
           </span>
           <span class="check-item">
             <span class="check-square"><svg viewBox="0 0 24 24"><polyline points="5 12.5 10 17.5 19 7.5"/></svg></span>
@@ -1690,46 +2142,98 @@
 
   <!-- NARRATIVE -->
   <section class="section">
-    <div class="s-label">O problema não é o que você lê</div>
+    <div class="s-label">Por que isso importa</div>
     <div class="narrative">
-      <div class="n-lead">Você já tem acesso às mesmas informações que os analistas. O que os separa de você <span class="g1">não é a fonte. É o método.</span></div>
-      <p class="n-body">Existe uma diferença fundamental entre acompanhar geopolítica e analisá-la. Acompanhar é consumir eventos em sequência. <strong>Analisar é entender os interesses por trás deles, os padrões históricos que os moldaram e as consequências econômicas que eles vão gerar, antes de todo mundo.</strong></p>
-      <p class="n-body">A maioria das pessoas consome geopolítica como notícia: um fato depois do outro, sem estrutura, sem contexto, sem uma lente clara. O resultado é familiaridade superficial com os eventos e paralisia na hora de agir. <strong>Informação sem método não gera clareza. Gera ruído com nome de cultura geral.</strong></p>
-      <div class="n-punch">Um programa em duas camadas: de um lado, <strong style="color:var(--lime);font-weight:600;">o método</strong> que ensina a construir sua própria leitura do tabuleiro. De outro, <strong style="color:var(--lime);font-weight:600;">o Terminal Geopolítico</strong>, sua mesa de inteligência para aplicar essa leitura todo dia, sobre eventos reais, com dados em tempo real.</div>
+      <div class="n-lead">Toda grande virada econômica começou como um evento geopolítico que <span class="g1">a maioria subestimou.</span></div>
+      <p class="n-body">A pandemia não foi só uma crise de saúde, foi o maior stress test da globalização em cem anos. A invasão da Ucrânia não foi só uma guerra, foi o fim de uma ordem energética que durou décadas. E a Guerra do Irã, que começou em 28 de fevereiro de 2026, não é só um conflito militar, <strong>é uma reorganização do fluxo de energia e alimentos que o mundo inteiro vai sentir.</strong></p>
+      <p class="n-body">O problema não é falta de informação. <strong>É excesso de ruído e escassez de contexto.</strong> Você lê, você acompanha, você se informa, mas no fim do dia ainda não sabe o que fazer com tudo isso.</p>
+      <div class="n-punch">Uma plataforma que transforma <strong style="color:var(--lime);font-weight:600;">o caos geopolítico em contexto claro</strong>, e contexto claro em <strong style="color:var(--lime);font-weight:600;">vantagem para quem pensa antes de agir.</strong></div>
     </div>
   </section>
 
   <div class="section-hr"><hr></div>
 
-  <!-- TEMAS — quatro setores que aterrissam no mercado -->
-  <section class="themes-section">
-    <div class="themes-copy">
-      <div class="s-label">Tudo aterrissa no mesmo lugar</div>
-      <div class="n-lead">Todo evento geopolítico <span class="g1">vira preço de ativo.</span></div>
-      <p>Energia, tecnologia, indústria, commodities. Cada peça do tabuleiro se move e <strong>chega ao seu portfólio</strong>: em câmbio, em juros, em margem, em cadeia de suprimentos. O método te ensina a ver as conexões antes que o preço se mova.</p>
+  <!-- TRÍADE HISTÓRICA -->
+  <section class="triade-section">
+    <div class="s-label">Quando o mapa muda, o dinheiro se move</div>
+    <div class="triade-intro">
+      <p>Não é teoria. <strong>É o padrão que se repete, e que você viveu nos últimos cinco anos.</strong> Cada vez que o tabuleiro geopolítico se reorganiza, uma janela se abre. Quem tem o contexto certo a vê antes de todo mundo. Quem não tem, descobre tarde demais. Sempre.</p>
     </div>
 
-    <div class="themes-grid">
-      <div class="theme-card">
-        <img src="icone%201.png" alt="Energia, Estreito de Ormuz" loading="lazy">
-        <div class="theme-card-overlay"></div>
-        <div class="theme-card-label"><span class="theme-card-tag">Setor 01</span>Energia</div>
+    <div class="triade-grid">
+
+      <div class="triade-item">
+        <div class="triade-ano">
+          <div class="triade-ano-num">2020</div>
+          <div class="triade-ano-label">Pandemia de Covid-19</div>
+        </div>
+        <div class="triade-content">
+          <div class="triade-evento">O mundo parou. Mas o poder não parou com ele.</div>
+          <div class="triade-cols">
+            <div>
+              <div class="triade-col-label">O que a maioria viu</div>
+              <div class="triade-col-text">Uma crise de saúde global sem precedentes. Lockdowns, mortes, vacinas. A cobertura era médica e humanitária: curvas de contágio, leitos de UTI, corrida por respiradores.</div>
+            </div>
+            <div>
+              <div class="triade-col-label">O que o contexto revelava</div>
+              <div class="triade-col-text destaque">Quem entendia a dimensão geopolítica viu outra coisa: <strong>a guerra das vacinas entre EUA e China como instrumento de influência diplomática, o colapso das cadeias de suprimento globais como vulnerabilidade estratégica e o início de uma era de desglobalização</strong> que reconfigurou o comércio mundial até hoje.</div>
+            </div>
+          </div>
+          <div class="triade-conclusao">Países que entenderam a dimensão geopolítica da pandemia antes redirecionaram cadeias produtivas e garantiram acesso a insumos críticos. <strong>Quem só viu a crise sanitária ficou para trás na corrida por posicionamento estratégico.</strong></div>
+        </div>
       </div>
-      <div class="theme-card">
-        <img src="icone%202.png" alt="Tecnologia: semicondutores e 5G" loading="lazy">
-        <div class="theme-card-overlay"></div>
-        <div class="theme-card-label"><span class="theme-card-tag">Setor 02</span>Tecnologia</div>
+
+      <div class="triade-item">
+        <div class="triade-ano">
+          <div class="triade-ano-num">2022</div>
+          <div class="triade-ano-label">Invasão da Ucrânia</div>
+        </div>
+        <div class="triade-content">
+          <div class="triade-evento">Uma guerra na Europa. Uma ordem energética global destruída em semanas.</div>
+          <div class="triade-cols">
+            <div>
+              <div class="triade-col-label">O que a maioria viu</div>
+              <div class="triade-col-text">Tanques cruzando fronteiras. Refugiados. Sanções. Um conflito militar num continente que não via guerra em décadas.</div>
+            </div>
+            <div>
+              <div class="triade-col-label">O que o contexto revelava</div>
+              <div class="triade-col-text destaque">Quem acompanhava os movimentos geopolíticos desde 2021 não foi surpreendido. Entendeu antes: <strong>que o gás natural viraria arma geopolítica, que o trigo ucraniano alimentava 400 milhões de pessoas e que sua interrupção seria um choque alimentar global.</strong></div>
+            </div>
+          </div>
+          <div class="triade-conclusao">O gás natural europeu subiu mais de 400% em 2022. O trigo bateu recordes históricos. <strong>Nada disso foi surpresa para quem tinha o contexto certo com antecedência.</strong></div>
+        </div>
       </div>
-      <div class="theme-card">
-        <img src="icone%203.png" alt="Indústria automotiva" loading="lazy">
-        <div class="theme-card-overlay"></div>
-        <div class="theme-card-label"><span class="theme-card-tag">Setor 03</span>Indústria</div>
+
+      <div class="triade-item ao-vivo">
+        <div class="triade-ano">
+          <div class="triade-ano-num">2026</div>
+          <div class="triade-ano-label">Guerra do Irã</div>
+          <div class="triade-aovivo-badge">
+            <div class="triade-aovivo-dot"></div>
+            <div class="triade-aovivo-text">Acontecendo agora</div>
+          </div>
+        </div>
+        <div class="triade-content">
+          <div class="triade-evento">O Estreito de Ormuz fechado. Uma fatia significativa do petróleo mundial bloqueada.</div>
+          <div class="triade-cols">
+            <div>
+              <div class="triade-col-label">O que a maioria viu</div>
+              <div class="triade-col-text">Em 28 de fevereiro de 2026, EUA e Israel lançaram ataques coordenados contra o Irã. Para a maioria, foi surpresa total.</div>
+            </div>
+            <div>
+              <div class="triade-col-label">O que o contexto revelava</div>
+              <div class="triade-col-text destaque">Para quem acompanhava o tabuleiro, os sinais estavam todos lá. <strong>O Irã respondeu fechando o Estreito de Ormuz. Fertilizantes dispararam. O Brasil, maior exportador agrícola do mundo, sentiu nos custos de produção.</strong></div>
+            </div>
+          </div>
+          <div class="triade-conclusao"><strong>Este conflito está acontecendo enquanto você lê esta página.</strong> É a prova mais concreta de que entender geopolítica antes que vire manchete não é luxo intelectual. É necessidade prática.</div>
+        </div>
       </div>
-      <div class="theme-card">
-        <img src="icone%204.png" alt="Commodities: petróleo" loading="lazy">
-        <div class="theme-card-overlay"></div>
-        <div class="theme-card-label"><span class="theme-card-tag">Setor 04</span>Commodities</div>
-      </div>
+
+    </div>
+
+    <div class="padrao-box">
+      <div class="padrao-box-title">O padrão não mudou. <em>Só o cenário muda.</em></div>
+      <div class="padrao-box-text">2020, 2022, 2026: três choques em seis anos, um padrão idêntico. <strong>Eventos geopolíticos que a maioria leu como notícia, mas que eram reorganizações de poder com consequências econômicas profundas e antecipáveis.</strong> O próximo choque já está em formação. A questão não é se ele vai acontecer. É se você vai estar preparado para lê-lo antes que vire manchete.</div>
     </div>
   </section>
 
@@ -1737,86 +2241,104 @@
 
   <!-- MÓDULOS -->
   <section id="modulos" class="section tight" style="padding-top:80px;">
-    <div class="s-label">O que entra na sua formação</div>
+    <div class="s-label">Uma plataforma. Não um canal.</div>
+    <div class="narrative" style="max-width:720px;margin-bottom:8px;">
+      <p class="n-body">O Geopolítica para Investidores deixou de ser um canal de Telegram e se tornou uma <strong>plataforma completa de inteligência geopolítica</strong>, com dados em tempo real, IA preditiva e ferramentas que nenhum terminal financeiro oferece com foco no Brasil.</p>
+    </div>
     <div class="bento-grid">
 
       <div class="bx col2">
         <div class="bento-header">
-          <div class="bento-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-          <div class="bento-status">Base do programa</div>
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 9 12 3 18"/><line x1="13" y1="6" x2="21" y2="6"/><line x1="13" y1="12" x2="21" y2="12"/><line x1="13" y1="18" x2="21" y2="18"/></svg></div>
+          <div class="bento-status">Tempo real</div>
         </div>
         <div class="bento-num">01</div>
-        <div class="bento-title">Como funciona o tabuleiro geopolítico</div>
-        <div class="bento-desc">Atores, interesses, instrumentos de poder. Como ler um conflito sem se perder em narrativa. O que separa geopolítica de geopolítica econômica.</div>
+        <div class="bento-title">Feed de tensões em tempo real</div>
+        <div class="bento-desc">Eventos geopolíticos coletados e analisados por IA a cada hora, com score de impacto e relevância para o Brasil.</div>
         <div class="bento-footer">
           <div class="bento-tags">
-            <span class="bento-tag">#Atores</span>
-            <span class="bento-tag">#Poder</span>
-            <span class="bento-tag lime">#Método</span>
+            <span class="bento-tag">#Feed</span>
+            <span class="bento-tag">#IA</span>
+            <span class="bento-tag lime">#TempoReal</span>
           </div>
         </div>
       </div>
 
       <div class="bx">
         <div class="bento-header">
-          <div class="bento-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div class="bento-status">Parte 1</div>
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="bento-status">Visual</div>
         </div>
         <div class="bento-num">02</div>
-        <div class="bento-title">Padrões históricos que se repetem</div>
-        <div class="bento-desc">Os ciclos que estruturam a ordem mundial e como eles se manifestam diferente em cada era.</div>
+        <div class="bento-title">Mapa de calor interativo</div>
+        <div class="bento-desc">Veja onde o mundo está tenso. Clique em qualquer país e abra os eventos ativos.</div>
         <div class="bento-footer">
           <div class="bento-tags">
-            <span class="bento-tag">#História</span>
-            <span class="bento-tag">#Ciclos</span>
+            <span class="bento-tag">#Mapa</span>
+            <span class="bento-tag">#Risco</span>
           </div>
         </div>
       </div>
 
       <div class="bx">
         <div class="bento-header">
-          <div class="bento-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <div class="bento-status">Parte 2</div>
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
+          <div class="bento-status">Mercados</div>
         </div>
         <div class="bento-num">03</div>
-        <div class="bento-title">Energia, alimentos e fluxos de capital</div>
-        <div class="bento-desc">As três dimensões que mais conectam geopolítica à economia real. Como identificar a janela antes que feche.</div>
+        <div class="bento-title">Indicadores de risco</div>
+        <div class="bento-desc">Petróleo Brent, câmbio, gás, soja, trigo e minério. Sempre visíveis no topo da tela.</div>
         <div class="bento-footer">
           <div class="bento-tags">
-            <span class="bento-tag">#Energia</span>
-            <span class="bento-tag">#Capital</span>
+            <span class="bento-tag">#Commodities</span>
+            <span class="bento-tag">#Câmbio</span>
           </div>
         </div>
       </div>
 
       <div class="bx col2">
         <div class="bento-header">
-          <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20l-2-12 7 4 4-8 4 8 7-4-2 12"/></svg></div>
-          <div class="bento-status">Plano Pro</div>
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <div class="bento-status">Preditivo</div>
         </div>
         <div class="bento-num">04</div>
-        <div class="bento-title">Leitura de cenários e antecipação de riscos</div>
-        <div class="bento-desc">Como construir um cenário a partir de sinais fracos. Quais variáveis monitorar, como ponderá-las e como comunicar uma leitura com clareza e convicção.</div>
+        <div class="bento-title">Alertas preditivos por IA</div>
+        <div class="bento-desc">O sistema identifica padrões que precederam crises históricas e te avisa quando estão se repetindo. Antes da manchete.</div>
         <div class="bento-footer">
           <div class="bento-tags">
-            <span class="bento-tag">#Cenários</span>
-            <span class="bento-tag">#Risco</span>
-            <span class="bento-tag lime">#Pro</span>
+            <span class="bento-tag">#Alertas</span>
+            <span class="bento-tag">#Padrões</span>
+            <span class="bento-tag lime">#IA</span>
           </div>
         </div>
       </div>
 
-      <div class="bx col3">
+      <div class="bx">
         <div class="bento-header">
-          <div class="bento-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-          <div class="bento-status">Reservado</div>
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg></div>
+          <div class="bento-status">História</div>
         </div>
         <div class="bento-num">05</div>
-        <div class="bento-title">Sessões ao vivo com análise de casos reais</div>
-        <div class="bento-desc">Aplicação do método em conflitos acontecendo agora. Raciocínio em tempo real.</div>
+        <div class="bento-title">Linha do tempo de crises</div>
+        <div class="bento-desc">25 crises históricas com impacto econômico documentado, na mesma linha do tempo dos eventos de hoje.</div>
         <div class="bento-footer">
           <div class="bento-tags">
-            <span class="bento-tag lime">#AoVivo</span>
+            <span class="bento-tag">#Histórico</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bx">
+        <div class="bento-header">
+          <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="bento-status">IA</div>
+        </div>
+        <div class="bento-num">06</div>
+        <div class="bento-title">Chat com IA</div>
+        <div class="bento-desc">Pergunte qualquer coisa sobre o conteúdo. A IA busca a resposta nos briefings, no feed, nos perfis de países e nas crises históricas.</div>
+        <div class="bento-footer">
+          <div class="bento-tags">
+            <span class="bento-tag lime">#Chat</span>
           </div>
         </div>
       </div>
@@ -1824,14 +2346,14 @@
     </div>
   </section>
 
-  <!-- TERMINAL GEOPOLÍTICO -->
+  <!-- PLATAFORMA EM AÇÃO -->
   <div class="bg-pitch">
-  <section id="terminal" class="section tight" style="padding-top:80px;">
-    <div class="s-label">O Terminal Geopolítico</div>
+  <section id="plataforma" class="section tight" style="padding-top:80px;">
+    <div class="s-label">A plataforma em ação</div>
 
     <div class="terminal-intro">
-      <div class="n-lead">A mesa de inteligência que <span class="g1">você precisa para operar</span> em um mundo que se reorganiza toda semana.</div>
-      <p>O método te ensina a <strong>ler o tabuleiro</strong>. O Terminal te dá os <strong>instrumentos</strong>: mapa de calor de risco geopolítico global, radar de eleições, dossiês de países que você acompanha, biblioteca de briefings analíticos e linha do tempo de crises, atualizados continuamente. Tudo no mesmo painel.</p>
+      <div class="n-lead">Tudo o que move o mundo, <span class="g1">na mesma tela.</span></div>
+      <p>Mapa de calor global, indicadores de risco, feed em tempo real e alertas preditivos por IA. <strong>Nenhum terminal financeiro entrega isso com foco no Brasil.</strong> Você opera o tabuleiro inteiro a partir de um painel só.</p>
     </div>
 
     <!-- Laptop mockup (hero visual) -->
@@ -1866,63 +2388,47 @@
       </div>
     </div>
 
-    <!-- 6 modules -->
-    <div class="modules-grid">
+    <!-- O QUE ENTRA NA SUA SEMANA -->
+    <div class="week-section">
+      <div class="s-label">O que entra na sua semana</div>
+      <div class="week-grid">
 
-      <div class="mod-card">
-        <div class="mod-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 12c2-3 5-5 9-5s7 2 9 5c-2 3-5 5-9 5s-7-2-9-5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+        <div class="week-item">
+          <div class="week-num">01</div>
+          <div class="week-title">Briefing diário</div>
+          <div class="week-cadence">Toda segunda a sexta</div>
+          <div class="week-desc">O fato do dia, o que está por trás dele e as implicações econômicas para o Brasil. Leitura de 4 minutos que vale uma tarde de pesquisa.</div>
         </div>
-        <span class="mod-label">Mapa de Calor</span>
-        <div class="mod-title">Intensidade geopolítica global</div>
-        <div class="mod-desc">Onde a temperatura do tabuleiro está subindo agora. E onde está esfriando.</div>
-      </div>
 
-      <div class="mod-card">
-        <div class="mod-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+        <div class="week-item">
+          <div class="week-num">02</div>
+          <div class="week-title">Mapa da Semana</div>
+          <div class="week-cadence">Todo sábado</div>
+          <div class="week-desc">Um raio-x das tensões ativas no mundo. O que escalou, o que esfriou, o que está se movendo em silêncio. Para entrar na semana seguinte com visão de conjunto.</div>
         </div>
-        <span class="mod-label">Radar de Eleições</span>
-        <div class="mod-title">Calendário global com impacto</div>
-        <div class="mod-desc">Cada eleição relevante por país, mês e nível de impacto sobre o Brasil.</div>
-      </div>
 
-      <div class="mod-card">
-        <div class="mod-icon">
-          <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>
+        <div class="week-item">
+          <div class="week-num">03</div>
+          <div class="week-title">Alertas preditivos</div>
+          <div class="week-cadence">Quando o padrão se repete</div>
+          <div class="week-desc">A IA monitora convergências de sinais geopolíticos 24h por dia. Quando identifica um padrão que precedeu crises anteriores, você recebe um alerta direto no dashboard e por e-mail.</div>
         </div>
-        <span class="mod-label">Linha do Tempo</span>
-        <div class="mod-title">Crises históricas e ativas</div>
-        <div class="mod-desc">Conexões entre eventos do passado e o que está em curso agora.</div>
-      </div>
 
-      <div class="mod-card">
-        <div class="mod-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3"/><path d="M12 22s-7-5-7-13a7 7 0 0 1 14 0c0 8-7 13-7 13z"/></svg>
+        <div class="week-item">
+          <div class="week-num">04</div>
+          <div class="week-title">A Tese <span class="week-title-tag">Pro</span></div>
+          <div class="week-cadence">Último dia do mês</div>
+          <div class="week-desc">Para onde o tabuleiro está se movendo. Quais regiões estão em ponto de inflexão. Quais pressões econômicas isso vai gerar no próximo ciclo.</div>
         </div>
-        <span class="mod-label">Meus Países</span>
-        <div class="mod-title">Dossiês personalizados</div>
-        <div class="mod-desc">Liderança, contexto e indicadores (PIB, Selic, IPCA, câmbio) dos países que você escolhe.</div>
-      </div>
 
-      <div class="mod-card">
-        <div class="mod-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4V4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
+        <div class="week-item">
+          <div class="week-num">05</div>
+          <div class="week-title">Videochamada ao vivo <span class="week-title-tag">Reservado</span></div>
+          <div class="week-cadence">Toda terça-feira</div>
+          <div class="week-desc">Acesso direto. Você traz suas dúvidas, seus cenários, suas hipóteses, e discute ao vivo com quem analisa esse tabuleiro todo dia.</div>
         </div>
-        <span class="mod-label">Biblioteca</span>
-        <div class="mod-title">Briefings, mapas e teses</div>
-        <div class="mod-desc">Conteúdo analítico organizado por região, tema e data, com filtros e busca.</div>
-      </div>
 
-      <div class="mod-card">
-        <div class="mod-icon">
-          <svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
-        </div>
-        <span class="mod-label">Mercados</span>
-        <div class="mod-title">Commodities e câmbio em tempo real</div>
-        <div class="mod-desc">Petróleo, gás, soja, trigo, minério, BRL/USD. Leitura cruzada com cada evento geopolítico.</div>
       </div>
-
     </div>
 
     <div class="painel-features">
@@ -1957,45 +2463,45 @@
 
     <div class="plan-callout">
       <div class="plan-callout-text">
-        🔓 Acesso ao Terminal Geopolítico incluído nos planos <strong>Pro</strong> e <strong>Reservado</strong>.
+        🔓 Acesso à plataforma + briefings incluído em <strong>todos os planos</strong>.
       </div>
       <a href="#planos">Ver planos →</a>
     </div>
   </section>
   </div><!-- /.bg-pitch -->
 
-  <!-- CASE STUDY -->
+  <!-- EXEMPLO DE BRIEFING -->
   <section class="section tight" style="padding-top:80px;">
-    <div class="s-label">Veja o método + terminal aplicados</div>
+    <div class="s-label">Veja como é na prática</div>
     <div class="case-outer">
       <div class="case-header">
-        <div class="case-header-title">Geopolítica para Investidores | Análise de Caso</div>
+        <div class="case-header-title">Geopolítica para Investidores | Briefing diário</div>
         <div class="case-header-meta">
-          Módulo 3 · Energia e Fluxos de Capital
+          Quarta-feira, 19 mar 2025
           <div class="live-badge">
             <div class="live-dot"></div>
-            <span class="live-text">Acontecendo agora</span>
+            <span class="live-text">Edição publicada</span>
           </div>
         </div>
       </div>
       <div class="case-body">
         <div class="case-full">
-          <div class="case-tag">O evento</div>
-          <div class="case-text">Em fevereiro de 2026, EUA e Israel lançaram operações coordenadas contra infraestrutura militar iraniana. O Irã respondeu encerrando o tráfego pelo Estreito de Ormuz, por onde passa aproximadamente 20% do petróleo mundial.</div>
+          <div class="case-tag">O fato</div>
+          <div class="case-text">Washington ampliou o escopo das sanções sobre exportações de alumínio russo, expandindo restrições aprovadas em fevereiro sobre o setor de metais industriais.</div>
         </div>
         <div class="case-hr"></div>
         <div>
-          <div class="case-tag">A leitura estrutural</div>
-          <div class="case-text">Este não foi um evento isolado. Foi o ponto de chegada de um processo que durou meses: colapso das negociações nucleares, acúmulo de forças americanas no Golfo Pérsico, escalada de retórica. <strong>Quem aplicava o método via os sinais. Quem consumia manchetes foi surpreendido.</strong></div>
+          <div class="case-tag">O que está por trás</div>
+          <div class="case-text">Isso não é punição. É sinalização. <strong>Washington está mandando recado para os aliados europeus que ainda compram de Moscou:</strong> o custo de neutralidade está subindo. O timing coincide com eleições-chave na Alemanha e na França. Não é coincidência.</div>
         </div>
         <div>
-          <div class="case-tag">Implicações econômicas</div>
-          <div class="case-text">O fechamento do Estreito não afeta só petróleo. <strong>Fertilizantes, petroquímicos, fretes</strong>. Toda a cadeia que depende do Golfo sentiu. O Brasil, maior exportador agrícola do mundo, absorveu choques de custo nas safras seguintes.</div>
+          <div class="case-tag">Implicações para o Brasil</div>
+          <div class="case-text">Restrições sobre metais industriais criam pressão nas cadeias de manufatura pesada da Europa, especialmente onde o alumínio russo ainda entra pelas bordas do sistema. <strong>O quanto isso se propaga depende da resposta de Berlim e Paris nas próximas 72h.</strong></div>
         </div>
         <div class="case-hr"></div>
         <div class="case-full">
-          <div class="case-tag">O que o método ensina aqui</div>
-          <div class="case-text">Identificar o ponto de inflexão antes que vire manchete. Mapear as cadeias de impacto além do setor óbvio. Construir um cenário de dois ou três passos à frente. Não uma previsão, mas uma leitura estruturada de probabilidades.</div>
+          <div class="case-tag">O que monitorar agora</div>
+          <div class="case-text">O posicionamento público da UE nas próximas 48 horas. Silêncio europeu = absorção silenciosa do choque. Declaração de adesão = amplificação. <strong>Esse é o dado que importa hoje.</strong></div>
         </div>
       </div>
     </div>
@@ -2005,31 +2511,47 @@
 
   <!-- MANIFESTO -->
   <div class="manifesto">
-    <h2>Não ensinamos geopolítica.<br>Ensinamos <span class="g1">a capacidade<br>de analisá-la.</span></h2>
-    <p>O que diferencia quem entende o mundo de quem apenas o acompanha é ter um método. Uma forma consistente de ler o que está por trás das notícias, mapear os interesses em jogo e antecipar as consequências antes que cheguem.</p>
+    <h2>Não vendemos notícias.<br>Vendemos <span class="g1">a capacidade<br>de lê-las.</span></h2>
+    <p>Qualquer pessoa acessa as manchetes. O que separa quem entende o mundo de quem apenas o observa é a camada de análise: o contexto histórico, os interesses em jogo, as consequências que ainda não chegaram. É isso que entregamos, todo dia útil, com consistência e sem ruído.</p>
   </div>
 
   <div class="section-hr"><hr></div>
 
   <!-- PLANOS -->
   <section id="planos" class="section tight" style="padding-top:80px;">
-    <div class="s-label">Escolha o seu nível de formação</div>
+    <div class="s-label">Escolha o seu nível de acesso</div>
+
+    <div class="plan-callout" style="margin-top:0;margin-bottom:32px;">
+      <div class="plan-callout-text">
+        <strong>Oferta de lançamento, 48 horas.</strong> Os preços abaixo são exclusivos para quem entrar agora. Após o encerramento, voltam ao valor normal. Quem entrar neste período mantém o preço de lançamento na renovação.
+      </div>
+    </div>
+
     <div class="plans-grid">
 
       <!-- ESSENCIAL -->
       <div class="plan-card">
         <div class="plan-name">Essencial</div>
-        <div class="plan-price"><span class="plan-cur">R$</span>497</div>
-        <div class="plan-period">acesso por 6 meses</div>
-        <div class="plan-pitch">Só a formação. Para quem quer dominar o método no próprio ritmo.</div>
+        <span class="plan-launch-tag">Lançamento</span>
+        <div class="plan-price-from">de R$ 497</div>
+        <div class="plan-price"><span class="plan-cur">R$</span>297</div>
+        <div class="plan-period">por ano · oferta de 48h</div>
+        <div class="plan-monthly">R$ 24,75/mês</div>
+        <div class="plan-renews">Renova a R$ 497/ano</div>
+        <div class="plan-pitch">Para quem quer o contexto certo, todo dia, na palma da mão.</div>
         <div class="plan-divider"></div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Módulos 1, 2 e 3 com acesso completo</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Materiais de apoio e frameworks</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Biblioteca de casos históricos</div>
-        <div class="plan-feat dim"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Acesso ao Terminal Geopolítico</div>
-        <div class="plan-feat dim"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Módulo 4: Cenários e antecipação</div>
-        <div class="plan-feat dim"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Grupo exclusivo de discussão</div>
-        <div class="plan-feat dim"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Sessões ao vivo com análise em tempo real</div>
+        <div class="plan-section-label">Plataforma</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Feed de tensões em tempo real</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Mapa de calor interativo</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Indicadores de risco (6 commodities)</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Alertas preditivos por IA</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Perfis dos países que você escolhe</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Linha do tempo de crises</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Chat com IA, 5 perguntas/dia</div>
+        <div class="plan-divider"></div>
+        <div class="plan-section-label">Conteúdo editorial</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Briefing diário (seg a sex)</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Mapa da Semana (sábados)</div>
         <div class="plan-btn"><a href="#" class="b-ghost">Começar agora</a></div>
       </div>
 
@@ -2037,17 +2559,22 @@
       <div class="plan-card featured">
         <div class="plan-badge badge-lime">Mais escolhido</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price"><span class="plan-cur">R$</span>997</div>
-        <div class="plan-period">acesso por 12 meses</div>
-        <div class="plan-pitch">Formação completa <strong style="color:var(--lime);font-weight:600;">+ Terminal Geopolítico</strong>. Para aplicar todo dia.</div>
+        <span class="plan-launch-tag">Lançamento</span>
+        <div class="plan-price-from">de R$ 1.497</div>
+        <div class="plan-price"><span class="plan-cur">R$</span>797</div>
+        <div class="plan-period">por ano · oferta de 48h</div>
+        <div class="plan-monthly">R$ 66,42/mês</div>
+        <div class="plan-renews">Renova a R$ 1.497/ano</div>
+        <div class="plan-pitch">Para quem quer profundidade. E chegar na frente.</div>
         <div class="plan-divider"></div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Módulos 1, 2, 3 e 4 da formação completa</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Materiais de apoio e frameworks</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Biblioteca de casos históricos</div>
-        <div class="plan-feat sp"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div><span><strong>Terminal Geopolítico</strong>: mapa de calor, radar de eleições, dossiês e biblioteca de briefings</span></div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Alertas dos países que você acompanha</div>
+        <div class="plan-section-label">Tudo do Essencial, mais</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div><strong>A Tese</strong>, cenário mensal estratégico</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Biblioteca completa com busca</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Chat com IA, 20 perguntas/dia</div>
         <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Grupo exclusivo de discussão</div>
-        <div class="plan-feat dim"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Sessões ao vivo com análise em tempo real</div>
+        <div class="plan-divider"></div>
+        <div class="plan-section-label">Vertical incluída</div>
+        <div class="plan-feat addon"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Monitor Eleitoral, eleições globais</div>
         <div class="plan-btn"><a href="#" class="b-orange">Quero o Pro →</a></div>
       </div>
 
@@ -2055,23 +2582,66 @@
       <div class="plan-card reservado">
         <div class="plan-badge badge-green">Acesso direto</div>
         <div class="plan-name">Reservado</div>
-        <div class="plan-price"><span class="plan-cur">R$</span>2.497</div>
-        <div class="plan-period">acesso por 12 meses · vagas limitadas</div>
-        <div class="plan-pitch">Tudo do Pro <strong style="color:var(--green);font-weight:600;">+ sessões ao vivo</strong> e leitura semanal de cenário.</div>
+        <div class="plan-price"><span class="plan-cur">R$</span>2.997</div>
+        <div class="plan-period">por ano · vagas limitadas</div>
+        <div class="plan-monthly">R$ 249,75/mês</div>
+        <div class="plan-renews">Sem desconto de lançamento, preço único</div>
+        <div class="plan-pitch">Para quem não quer só ler a análise. Quer debatê-la.</div>
         <div class="plan-divider"></div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Módulos 1, 2, 3 e 4 da formação completa</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Materiais de apoio e frameworks</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Biblioteca de casos históricos</div>
-        <div class="plan-feat sp"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div><span><strong>Terminal Geopolítico</strong>: todos os módulos liberados</span></div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Alertas prioritários e conteúdo exclusivo Reservado</div>
-        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Grupo exclusivo de discussão</div>
-        <div class="plan-feat sp"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Sessões ao vivo toda terça, com análise em tempo real</div>
+        <div class="plan-section-label">Tudo do Pro, mais</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Arquivo histórico ilimitado</div>
+        <div class="plan-feat hi"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Chat com IA, ilimitado</div>
+        <div class="plan-feat sp"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Videochamada ao vivo, toda terça</div>
+        <div class="plan-divider"></div>
+        <div class="plan-section-label">Verticais incluídas</div>
+        <div class="plan-feat addon"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Monitor Eleitoral, eleições globais</div>
+        <div class="plan-feat addon"><div class="feat-check"><svg viewBox="0 0 24 25"><path d="M7 13L10 16L17 9"/></svg></div>Monitor de Guerra, conflitos ativos</div>
         <div class="plan-btn"><a href="#" class="b-green">Entrar no Reservado →</a></div>
       </div>
     </div>
 
+    <!-- ADD-ONS -->
+    <div class="addons-section">
+      <div class="s-label" style="margin-bottom:18px;">Verticais avulsas, adicione ao seu plano</div>
+      <p class="addons-intro">Produtos independentes que podem ser adicionados a qualquer plano. Cada vertical tem seu próprio feed, suas análises e seu acesso à plataforma.</p>
+
+      <div class="addons-grid">
+
+        <!-- MONITOR ELEITORAL -->
+        <div class="addon-card">
+          <div class="addon-tag">Vertical · Add-on</div>
+          <div class="addon-title">Monitor Eleitoral</div>
+          <div class="addon-desc">Acompanhe todas as eleições globais que movem mercados. Briefings eleitorais diários e radar visual dos próximos 12 meses. Eleições presidenciais, parlamentares e referendos com análise de relevância para o Brasil, de forma permanente, não só em ano eleitoral.</div>
+          <div class="addon-pricing">
+            <div class="addon-price-from">R$ 297/ano</div>
+            <div class="addon-price">R$ 147</div>
+          </div>
+          <div class="addon-price-period">por ano · oferta de 48h</div>
+          <div class="addon-note">Já incluído nos planos Pro e Reservado.</div>
+          <a href="#" class="addon-btn">Adicionar ao Essencial →</a>
+          <div class="addon-included-note">Assinantes Pro e Reservado já têm acesso.</div>
+        </div>
+
+        <!-- MONITOR DE GUERRA -->
+        <div class="addon-card">
+          <div class="addon-tag">Vertical · Add-on</div>
+          <div class="addon-title">Monitor de Guerra</div>
+          <div class="addon-desc">Feed exclusivo sobre conflitos armados, movimentações militares e escaladas geopolíticas, atualizado em tempo real. Para quem acompanha de perto o impacto das guerras nos mercados de energia, defesa e commodities estratégicas.</div>
+          <div class="addon-pricing">
+            <div class="addon-price-from">R$ 497/ano</div>
+            <div class="addon-price">R$ 247</div>
+          </div>
+          <div class="addon-price-period">por ano · oferta de 48h</div>
+          <div class="addon-note">Já incluído no plano Reservado.</div>
+          <a href="#" class="addon-btn">Adicionar ao meu plano →</a>
+          <div class="addon-included-note">Assinantes Reservado já têm acesso.</div>
+        </div>
+
+      </div>
+    </div>
+
     <div class="disclaimer">
-      <strong>Aviso importante:</strong> O conteúdo de <em>Geopolítica para Investidores</em> tem caráter exclusivamente analítico e educacional. Os casos e análises apresentados têm finalidade formativa. Não constituem recomendação de investimento, consultoria financeira ou indicação de compra e venda de ativos de qualquer natureza. Cada aluno é responsável por suas próprias decisões financeiras.
+      <strong>Aviso importante:</strong> O conteúdo de <em>Geopolítica para Investidores</em> tem caráter exclusivamente analítico e informativo. As análises tratam de contexto geopolítico e suas possíveis implicações econômicas, não constituem recomendação de investimento, consultoria financeira ou indicação de compra e venda de ativos de qualquer natureza. Cada assinante é responsável por suas próprias decisões financeiras.
     </div>
   </section>
 
@@ -2248,13 +2818,35 @@
 
   <!-- FINAL CTA -->
   <div class="final-cta">
-    <h2>O tabuleiro não espera.<br><span class="g1">Você vai continuar<br>só observando?</span></h2>
-    <p>Garantia de 7 dias. Se o método não mudar a forma como você lê o mundo, devolvemos cada centavo. Sem perguntas.</p>
+    <h2>O tabuleiro já está em movimento.<br><span class="g1">Você está vendo?</span></h2>
+    <p>Cancele quando quiser. Sem fidelidade. Sem letras miúdas. Com garantia de 7 dias, se não agregar, devolvemos cada centavo.</p>
     <a href="#planos" class="bnt1" style="margin:0 auto;">
       <span>Escolher meu plano →</span>
     </a>
-    <p class="guarantee">Formação desenvolvida por quem analisa esse tabuleiro todo dia, há mais de dois anos.</p>
+    <p class="guarantee">Mais de dois anos formando leitores que entendem o mundo antes de todo mundo.</p>
   </div>
+
+  <!-- COUNTDOWN SCRIPT -->
+  <script>
+    // Em produção, troque por uma data fixa: new Date('2026-04-30T18:00:00-03:00').getTime()
+    const cdEnd = Date.now() + (48 * 60 * 60 * 1000);
+    function tickCountdown() {
+      const diff = cdEnd - Date.now();
+      const banner = document.querySelector('.countdown-banner');
+      if (diff <= 0) { if (banner) banner.style.display = 'none'; return; }
+      const h = Math.floor(diff / 3.6e6);
+      const m = Math.floor((diff % 3.6e6) / 6e4);
+      const s = Math.floor((diff % 6e4) / 1e3);
+      const eh = document.getElementById('cd-hours');
+      const em = document.getElementById('cd-minutes');
+      const es = document.getElementById('cd-seconds');
+      if (eh) eh.textContent = String(h).padStart(2, '0');
+      if (em) em.textContent = String(m).padStart(2, '0');
+      if (es) es.textContent = String(s).padStart(2, '0');
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+  </script>
 
 </body>
 </html>
